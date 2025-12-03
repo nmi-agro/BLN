@@ -7,7 +7,7 @@
 ind_workability(D_WO, B_LU_BRP)
 }
 \arguments{
-\item{D_WO}{(numeric) The value of the relative (workable) season length calculated by \code{\link{OBIC::calc_workability}}}
+\item{D_WO}{(numeric) The value of the relative (workable) season length calculated by \code{\link[OBIC]{calc_workability}}}
 
 \item{B_LU_BRP}{(numeric) The crop code from the BRP}
 }
