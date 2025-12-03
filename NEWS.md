@@ -1,4 +1,4 @@
-# BLN 0.9.4 2025-xx-xx
+# BLN 0.1.0 2025-xx-xx
 ## Added
 * examples and return descriptions to `bln_clim_*` and RothC functions
 * DeepWiki link to the README
@@ -9,6 +9,25 @@
 
 ## Fixed
 * potential bug when running RothC in parrallel if there is only one core available fixes https://github.com/AgroCares/BLN/issues/20
+
+# BLN 0.10.0 2025-xx-xx
+## Changed
+* the format of groundwater class values (B_GWL_CLASS) that are accepted by BLN 
+functions and recorded in BLN tables. Acceptable input values for B_GWL_CLASS are now:
+"I", "Ia", "Ic", "II", "IIa", "IIb", "IIc", "III", "IIIa", "IIIb", "IV",
+"IVc", "IVu", "sV", "sVb", "V", "Va", "Vad", "Vao", "Vb", "Vbd", "Vbo", "VI", 
+"VId", "VII", "VIId", "VIII", "VIIId", "VIIIo", "VIIo", "VIo".
+* BLN no longer supports B_GWL_CLASS value "-". For fields with groundwater class "-", the user is advised to use expert judgment on
+what the most suitable groundwater class is. Fields with "-" are typically found 
+in locations with very variable or very deep groundwater levels such as flood plains
+or hills.
+* reclassified crop_cat1 for "sloot" from arable to nature
+* reclassified B_LU_WATERSTRESS_OBIC for "boomgroep" from boomteelt to natuur
+
+## Added
+* function `bln_format_gtclass()` which can be used to determine a value for B_GWL_CLASS using B_GWL_GHG and B_GWL_GLG
+* Dutch crop codes from BRP 2025: "Riet in een subsidiabele sloot" (7135),
+"Riet in water, anders dan een subsidiabele sloot" (7134), "Bonen, overig" (7137), and "Palmkool" (7138)
 
 # BLN 0.9.3 2025-04-10
 ## Deprecated
