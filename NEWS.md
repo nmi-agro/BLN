@@ -1,3 +1,15 @@
+# BLN 0.1.0 2025-xx-xx
+## Added
+* examples and return descriptions to `bln_clim_*` and RothC functions
+* DeepWiki link to the README
+
+## Changed
+* increased minimum value for A_SOM_LOI in functions from 0.1 to 0.5
+* decreased maximum value for A_SOM_LOI in functions from 100 to 75
+
+## Fixed
+* potential bug when running RothC in parrallel if there is only one core available fixes https://github.com/AgroCares/BLN/issues/20
+
 # BLN 0.10.0 2025-xx-xx
 ## Changed
 * the format of groundwater class values (B_GWL_CLASS) that are accepted by BLN 
