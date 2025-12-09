@@ -6,6 +6,7 @@
 * New helper function `funArgs`  to retrieve unique argument names from function names
 * New helper function `funArgsV` to retrieve unique argument names from a vector of function names
 * New helper functions `blnAssertLower` and `blnAssertUpper` to aid in function argument assertions
+* more variables to table `bln_parms`
 
 # BLN 0.10.0 2025-xx-xx
 ## Changed
