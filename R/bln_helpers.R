@@ -469,3 +469,31 @@ funArgsV <- function(functionNameVector, whichArgs = 'all'){
   # unlist and return unique arguments
   return(unique(unlist(args_list)))
 }
+
+#' Aid to assert upper values
+#'
+#' Checks whether x is numeric and not NA. If so, returns x, else returns Inf
+#'
+#' @param x a value obtained by `bln_parms[code == 'variable_name', value_max]`
+#'
+#' @return x when it is numeric and not NA, else returns Inf
+#'
+#' @examples
+#' blnAssertUpper(2)
+#' blnAssertUpper('')
+#' blnAssertUpper(NA_real_)
+#'
+#' # example in context
+#' A_SOM_LOI <- 5
+#' checkmate::assert_numeric(A_SOM_LOI,
+#' any.missing = FALSE, len = arg.length,
+#' lower = BLN::bln_parms[code == 'A_SOM_LOI', value_min],
+#' upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI', value_max])
+#' )
+#'
+#' @export
+blnAssertUpper <- function(x){
+  out <- NULL
+  if(is.numeric(x) & !is.na(x)){out <- x} else{out <- Inf}
+  return(out)
+}

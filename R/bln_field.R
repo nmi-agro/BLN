@@ -122,7 +122,15 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   i_nut_n = i_nut_p = i_nut_k = i_nut_nue = . = crop_code = crop_category = value = indicator = NULL
   cat1 = cat2 = crop_cat = weight = cf = value.w = ncat = cf_yr = code = choices = NULL
 
-  # check inputs
+  # check function inputs -----
+  if(!identical(output, 'all')){
+    checkmate::assert_character(output,len=1)
+    checkmate::assert_subset(output,choices = c('indicators','all','scores'))
+  }
+
+  # decide which functions will be used
+  # to be done
+
   requiredFunctionArguments <- funArgsV(
     c('bln_format_aer', 'bln_add_management', 'bln_c_nitrogen', 'bln_c_posphor',
       'bln_c_potassium', 'bln_c_magnesium', 'bln_c_sulfur', 'bln_c_ph',
@@ -138,7 +146,87 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
       'bln_nut_potassium', 'bln_nut_nue',
       'calc_bulk_density'),
     whichArgs = 'required')
-  arg.length <- length(ID)
+
+  arg.length <- max(c(
+    length(ID),
+    length(B_LU_BRP),
+    length(B_SC_WENR),
+    length(B_GWL_CLASS),
+    length(B_SOILTYPE_AGR),
+    length(B_HELP_WENR),
+    length(B_AER_CBS),
+    length(B_GWL_GLG),
+    length(B_GWL_GHG),
+    length(B_GWL_ZCRIT),
+    length(B_DRAIN),
+    length(B_FERT_NORM_FR),
+    length(B_SLOPE_DEGREE),
+    length(B_GWP),
+    length(B_AREA_DROUGHT),
+    length(B_CT_PSW),
+    length(B_CT_NSW),
+    length(B_CT_PSW_MAX),
+    length(B_CT_NSW_MAX),
+    length(B_SOMERS_BC),
+    length(B_DRAIN_SP),
+    length(B_DRAIN_WP),
+    length(A_SOM_LOI),
+    length(A_SOM_LOI_MLMAX),
+    length(A_CLAY_MI),
+    length(A_SAND_MI),
+    length(A_SILT_MI),
+    length(A_DENSITY_SA),
+    length(A_FE_OX),
+    length(A_AL_OX),
+    length(A_PH_CC),
+    length(A_N_RT),
+    length(A_CN_FR),
+    length(A_S_RT),
+    length(A_N_PMN),
+    length(A_P_AL),
+    length(A_P_CC),
+    length(A_P_WA),
+    length(A_P_SG),
+    length(A_CEC_CO),
+    length(A_CA_CO_PO),
+    length(A_MG_CO_PO),
+    length(A_K_CO_PO),
+    length(A_K_CC),
+    length(A_MG_CC),
+    length(A_MN_CC),
+    length(A_ZN_CC),
+    length(A_CU_CC),
+    length(A_EW_BCS),
+    length(A_SC_BCS),
+    length(A_GS_BCS),
+    length(A_P_BCS),
+    length(A_C_BCS),
+    length(A_RT_BCS),
+    length(A_RD_BCS),
+    length(A_SS_BCS),
+    length(A_CC_BCS),
+    length(D_SA_W),
+    length(D_RO_R),
+    length(M_COMPOST),
+    length(M_GREEN),
+    length(M_NONBARE),
+    length(M_EARLYCROP),
+    length(M_SLEEPHOSE),
+    length(M_DRAIN),
+    length(M_DITCH),
+    length(M_UNDERSEED),
+    length(M_LIME),
+    length(M_NONINVTILL),
+    length(M_SSPM),
+    length(M_SOLIDMANURE),
+    length(M_STRAWRESIDUE),
+    length(M_MECHWEEDS),
+    length(M_PESTICIDES_DST),
+    length(B_LSW_ID),
+    length(i_clim_rothc)
+  ), na.rm = TRUE)
+
+  ## check required function argument =====
   if('ID' %in% requiredFunctionArguments){
     checkmate::assert_character(ID, any.missing = FALSE, min.len = 1)
   }
@@ -147,39 +235,51 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
     checkmate::assert_subset(B_LU_BRP, choices = unique(OBIC::crops.obic$crop_code), empty.ok = FALSE)
   }
   if('B_SC_WENR' %in% requiredFunctionArguments){
-    checkmate::assert_character(B_SC_WENR, any.missing = FALSE, len = arg.length)
+    checkmate::assert_integerish(B_SC_WENR, any.missing = FALSE, len = arg.length)
+    checkmate::assert_subset(B_SC_WENR, choices = unlist(BLN::bln_parms[code == 'B_SC_WENR', choices]))
   }
   if('B_GWL_CLASS' %in% requiredFunctionArguments){
     checkmate::assert_character(B_GWL_CLASS, any.missing = FALSE, len = arg.length)
-    checkmate::assert_subset(B_GWL_CLASS, choices = unlist(BLN::bln_parms[code == "B_GWL_CLASS", choices]))
+    checkmate::assert_subset(B_GWL_CLASS, choices = unlist(BLN::bln_parms[code == 'B_GWL_CLASS', choices]))
   }
   if('B_SOILTYPE_AGR' %in% requiredFunctionArguments){
       checkmate::assert_character(B_SOILTYPE_AGR, any.missing = FALSE, len = arg.length)
-      checkmate::assert_subset(B_SOILTYPE_AGR, choices = unlist(BLN::bln_parms[code == "B_SOILTYPE_AGR", choices]))
+      checkmate::assert_subset(B_SOILTYPE_AGR, choices = unlist(BLN::bln_parms[code == 'B_SOILTYPE_AGR', choices]))
   }
   if('B_HELP_WENR' %in% requiredFunctionArguments){
       checkmate::assert_character(B_HELP_WENR, any.missing = FALSE, len = arg.length)
+      checkmate::assert_subset(B_HELP_WENR, choices = unlist(BLN::bln_parms[code == 'B_HELP_WENR', choices]))
   }
   if('B_AER_CBS' %in% requiredFunctionArguments){
       checkmate::assert_character(B_AER_CBS, any.missing = FALSE, len = arg.length)
   }
   if('B_GWL_GLG' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_GWL_GLG, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(B_GWL_GLG, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_GWL_GLG', value_min],
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_GWL_GLG', value_max]))
   }
   if('B_GWL_GHG' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_GWL_GHG, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(B_GWL_GHG, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_GWL_GHG', value_min],
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_GWL_GHG', value_max]))
   }
   if('B_GWL_ZCRIT' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_GWL_ZCRIT, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(B_GWL_ZCRIT, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_GWL_ZCRIT', value_min],
+                                upper = BLN::bln_parms[code == 'B_GWL_ZCRIT', value_max])
   }
   if('B_DRAIN' %in% requiredFunctionArguments){
       checkmate::assert_logical(B_DRAIN, any.missing = FALSE, len = arg.length)
   }
   if('B_FERT_NORM_FR' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_FERT_NORM_FR, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(B_FERT_NORM_FR, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_FERT_NORM_FR', value_min],
+                                upper = BLN::bln_parms[code == 'B_FERT_NORM_FR', value_max])
   }
   if('B_SLOPE_DEGREE' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_SLOPE_DEGREE, any.missing = FALSE, len = arg.length, lower = 0, upper = 90)
+      checkmate::assert_numeric(B_SLOPE_DEGREE, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_min],
+                                upper = BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_max])
   }
   if('B_GWP' %in% requiredFunctionArguments){
       checkmate::assert_logical(B_GWP, any.missing = FALSE, len = arg.length)
@@ -188,103 +288,324 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
       checkmate::assert_logical(B_AREA_DROUGHT, any.missing = FALSE, len = arg.length)
   }
   if('B_CT_PSW' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_CT_PSW, any.missing = FALSE, len = arg.length)
+      checkmate::assert_numeric(B_CT_PSW, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_CT_PSW', value_min],
+                                upper = BLN::bln_parms[code == 'B_CT_PSW', value_max])
   }
   if('B_CT_NSW' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_CT_NSW, any.missing = FALSE, len = arg.length)
+      checkmate::assert_numeric(B_CT_NSW, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_CT_NSW', value_min],
+                                upper = BLN::bln_parms[code == 'B_CT_NSW', value_max])
   }
   if('B_SOMERS_BC' %in% requiredFunctionArguments){
-      checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length, lower = 1, upper = 290)
+      checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length,
+                                   lower = BLN::bln_parms[code == 'B_SOMERS_BC', value_min],
+                                   upper = BLN::bln_parms[code == 'B_SOMERS_BC', value_max])
   }
   if('B_DRAIN_SP' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_DRAIN_SP, any.missing = FALSE, len = arg.length)
+      checkmate::assert_numeric(B_DRAIN_SP, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_DRAIN_SP', value_min],
+                                upper = BLN::bln_parms[code == 'B_DRAIN_SP', value_max])
   }
   if('B_DRAIN_WP' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(B_DRAIN_WP, any.missing = FALSE, len = arg.length)
+      checkmate::assert_numeric(B_DRAIN_WP, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_DRAIN_WP', value_min],
+                                upper = BLN::bln_parms[code == 'B_DRAIN_WP', value_max])
   }
   if('A_SOM_LOI' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_SOM_LOI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_SOM_LOI, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_SOM_LOI', value_min],
+                                upper = BLN::bln_parms[code == 'A_SOM_LOI', value_max])
   }
   if('A_CLAY_MI' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_CLAY_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_CLAY_MI, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_CLAY_MI', value_min],
+                                upper = BLN::bln_parms[code == 'A_CLAY_MI', value_max])
   }
   if('A_SAND_MI' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_SAND_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_SAND_MI, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_SAND_MI', value_min],
+                                upper = BLN::bln_parms[code == 'A_SAND_MI', value_max])
   }
   if('A_SILT_MI' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_SILT_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_SILT_MI, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_SILT_MI', value_min],
+                                upper = BLN::bln_parms[code == 'A_SILT_MI', value_max])
   }
   if('A_DENSITY_SA' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_DENSITY_SA, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_DENSITY_SA, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_DENSITY_SA', value_min],
+                                upper = BLN::bln_parms[code == 'A_DENSITY_SA', value_max])
   }
   if('A_FE_OX' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_FE_OX, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_FE_OX, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_FE_OX', value_min],
+                                upper = BLN::bln_parms[code == 'A_FE_OX', value_max])
   }
   if('A_AL_OX' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_AL_OX, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_AL_OX, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_AL_OX', value_min],
+                                upper = BLN::bln_parms[code == 'A_AL_OX', value_max])
   }
   if('A_PH_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_PH_CC, any.missing = FALSE, len = arg.length, lower = 1, upper = 14)
+      checkmate::assert_numeric(A_PH_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_PH_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_PH_CC', value_max])
   }
   if('A_N_RT' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_N_RT, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_N_RT, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_N_RT', value_min],
+                                upper = BLN::bln_parms[code == 'A_N_RT', value_max])
   }
   if('A_CN_FR' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_CN_FR, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_CN_FR, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_CN_FR', value_min],
+                                upper = BLN::bln_parms[code == 'A_CN_FR', value_max])
   }
   if('A_S_RT' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_S_RT, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_S_RT, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_S_RT', value_min],
+                                upper = BLN::bln_parms[code == 'A_S_RT', value_max])
   }
   if('A_N_PMN' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_N_PMN, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_N_PMN, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_N_PMN', value_min],
+                                upper = BLN::bln_parms[code == 'A_N_PMN', value_max])
   }
   if('A_P_AL' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_P_AL, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_P_AL, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_P_AL', value_min],
+                                upper = BLN::bln_parms[code == 'A_P_AL', value_max])
   }
   if('A_P_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_P_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_P_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_P_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_P_CC', value_max])
   }
   if('A_P_WA' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_P_WA, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_P_WA, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_P_WA', value_min],
+                                upper = BLN::bln_parms[code == 'A_P_WA', value_max])
   }
   if('A_P_SG' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_P_SG, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_P_SG, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_P_SG', value_min],
+                                upper = BLN::bln_parms[code == 'A_P_SG', value_max])
   }
   if('A_CEC_CO' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_CEC_CO, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_CEC_CO, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_CEC_CO', value_min],
+                                upper = BLN::bln_parms[code == 'A_CEC_CO', value_max])
   }
   if('A_CA_CO_PO' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_CA_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_CA_CO_PO, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_CA_CO_PO', value_min],
+                                upper = BLN::bln_parms[code == 'A_CA_CO_PO', value_max])
   }
   if('A_MG_CO_PO' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_MG_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_MG_CO_PO, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_MG_CO_PO', value_min],
+                                upper = BLN::bln_parms[code == 'A_MG_CO_PO', value_max])
   }
   if('A_K_CO_PO' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_K_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+      checkmate::assert_numeric(A_K_CO_PO, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_K_CO_PO', value_min],
+                                upper = BLN::bln_parms[code == 'A_K_CO_PO', value_max])
   }
   if('A_K_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_K_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_K_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_K_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_K_CC', value_max])
   }
   if('A_MG_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_MG_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_MG_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_MG_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_MG_CC', value_max])
   }
   if('A_MN_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_MN_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_MN_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_MN_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_MN_CC', value_max])
   }
   if('A_ZN_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_ZN_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_ZN_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_ZN_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_ZN_CC', value_max])
   }
   if('A_CU_CC' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_CU_CC, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(A_CU_CC, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'A_CU_CC', value_min],
+                                upper = BLN::bln_parms[code == 'A_CU_CC', value_max])
   }
   if('D_SA_W' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(D_SA_W, any.missing = FALSE, len = arg.length, lower = 0, upper = 1) 
+      checkmate::assert_numeric(D_SA_W, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'D_SA_W', value_min],
+                                upper = BLN::bln_parms[code == 'D_SA_W', value_max])
   }
   if('D_RO_R' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(D_RO_R, any.missing = FALSE, len = arg.length, lower = 0)
+      checkmate::assert_numeric(D_RO_R, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'D_RO_R', value_min],
+                                upper = BLN::bln_parms[code == 'D_RO_R', value_max])
   }
 
-  # make internal table
+  ## assertions for arguments with default values ====
+  if(!identical(B_CT_PSW_MAX, 0.5)){
+    checkmate::assert_numeric(B_CT_PSW_MAX, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_CT_PSW_MAX', value_min],
+                                upper = BLN::bln_parms[code == 'B_CT_PSW_MAX', value_max])
+  }
+  if(!identical(B_CT_NSW_MAX, 5.0)){
+    checkmate::assert_numeric(B_CT_NSW_MAX, any.missing = FALSE, len = arg.length,
+                                lower = BLN::bln_parms[code == 'B_CT_NSW_MAX', value_min],
+                                upper = BLN::bln_parms[code == 'B_CT_NSW_MAX', value_max])
+  }
+  if(!is.na(A_SOM_LOI_MLMAX)){
+    checkmate::assert_numeric(A_SOM_LOI_MLMAX, any.missing = FALSE, len = arg.length,
+                              lower = BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_min],
+                              upper = BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_max])
+  }
+  if(!is.na(A_EW_BCS)){
+    checkmate::assert_integerish(A_EW_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_EW_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_EW_BCS', value_max])
+  }
+  if(!is.na(A_SC_BCS)){
+    checkmate::assert_integerish(A_SC_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_SC_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_SC_BCS', value_max])
+  }
+  if(!is.na(A_GS_BCS)){
+    checkmate::assert_integerish(A_GS_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_GS_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_GS_BCS', value_max])
+  }
+  if(!is.na(A_P_BCS)){
+    checkmate::assert_integerish(A_P_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_P_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_P_BCS', value_max])
+  }
+  if(!is.na(A_C_BCS)){
+    checkmate::assert_integerish(A_C_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_C_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_C_BCS', value_max])
+  }
+  if(!is.na(A_RT_BCS)){
+    checkmate::assert_integerish(A_RT_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_RT_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_RT_BCS', value_max])
+  }
+  if(!is.na(A_RD_BCS)){
+    checkmate::assert_integerish(A_RD_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_RD_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_RD_BCS', value_max])
+  }
+  if(!is.na(A_SS_BCS)){
+    checkmate::assert_integerish(A_SS_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_SS_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_SS_BCS', value_max])
+  }
+  if(!is.na(A_CC_BCS)){
+    checkmate::assert_integerish(A_CC_BCS, any.missing = FALSE, len = arg.length,
+                                 lower = BLN::bln_parms[code == 'A_CC_BCS', value_min],
+                                 upper = BLN::bln_parms[code == 'A_CC_BCS', value_max])
+  }
+  if(!is.na(M_COMPOST)){
+    checkmate::assert_numeric(M_COMPOST, any.missing = FALSE, len = arg.length,
+                              lower = BLN::bln_parms[code == 'M_COMPOST', value_min],
+                              upper = BLN::bln_parms[code == 'M_COMPOST', value_max])
+  }
+  if(!is.na(M_GREEN)){
+    checkmate::assert_logical(M_GREEN, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_NONBARE)){
+    checkmate::assert_logical(M_NONBARE, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_EARLYCROP)){
+    checkmate::assert_logical(M_EARLYCROP, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_SLEEPHOSE)){
+    checkmate::assert_logical(M_SLEEPHOSE, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_DRAIN)){
+    checkmate::assert_logical(M_DRAIN, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_DITCH)){
+    checkmate::assert_logical(M_DITCH, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_UNDERSEED)){
+    checkmate::assert_logical(M_UNDERSEED, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_LIME)){
+    checkmate::assert_logical(M_LIME, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_NONINVTILL)){
+    checkmate::assert_logical(M_NONINVTILL, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_SSPM)){
+    checkmate::assert_logical(M_SSPM, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_SOLIDMANURE)){
+    checkmate::assert_logical(M_SOLIDMANURE, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_STRAWRESIDUE)){
+    checkmate::assert_logical(M_STRAWRESIDUE, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_MECHWEEDS)){
+    checkmate::assert_logical(M_MECHWEEDS, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(M_PESTICIDES_DST)){
+    checkmate::assert_logical(M_PESTICIDES_DST, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.na(B_LSW_ID)){
+    checkmate::assert_character(B_LSW_ID, any.missing = FALSE, len = arg.length)
+  }
+  if(!is.null(LSW)){
+    checkmate::assert_data_table(LSW)
+  }
+  if(!identical(runrothc, FALSE)){
+    checkmate::assert_flag(runrothc)
+  }
+  if(!is.na(i_clim_rothc)){
+    checkmate::assert_numeric(i_clim_rothc, any.missing = FALSE, len = arg.length)
+  }
+  if(!identical(mc, FALSE)){
+    checkmate::assert_flag(mc)
+  }
+  if(!identical(quiet, TRUE)){
+    checkmate::assert_flag(quiet)
+  }
+
+  # add LSW properties if missing, check if not missing
+  if(is.null(LSW)){
+
+    LSW <- BLN::bln_lsw
+    dt[,B_LSW_ID := 'lsw_nlmean']
+
+  } else {
+
+    # desired column names in LSW
+    cols <- c("B_LSW_ID","B_SOM_LOI","B_CLAY_MI","B_SAND_MI","B_SILT_MI","B_N_RT","B_P_AL","B_P_CC","B_P_WA","B_P_SG",
+              "B_FE_OX","B_AL_OX","B_SA_W","B_RO_R","B_SOM_LOI_SD", "B_CLAY_MI_SD", "B_SAND_MI_SD", "B_SILT_MI_SD", "B_N_RT_SD","B_P_AL_SD","B_P_CC_SD",
+              "B_P_WA_SD","B_P_SG_SD","B_FE_OX_SD","B_AL_OX_SD","B_SA_W_SD","B_RO_R_SD")
+
+    # replace oow_id with B_LSW_ID
+    setnames(LSW,old = c('oow_id'),new = 'B_LSW_ID',skip_absent = TRUE)
+
+    # get all B_LSW_ID
+    this.lsw <- B_LSW_ID
+
+    # remove all ids from LSW when not present in B_LSW_ID
+    LSW <- LSW[B_LSW_ID %in% this.lsw]
+
+    # check LSW format and column names
+    checkmate::assert_data_table(LSW,nrow = length(unique(B_LSW_ID)))
+    checkmate::assert_subset(colnames(LSW),choices = cols)
+
+    # check if all B_LSW_ID are in the LSW data.table
+    checkmate::assert_subset(LSW$B_LSW_ID,choices = unique(B_LSW_ID))
+  }
+
+  # make internal table -----
   dt <- data.table(ID = ID,
                    B_LU_BRP = B_LU_BRP,
                    B_SC_WENR = B_SC_WENR,
@@ -361,44 +682,10 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   # add year, assuming that first year is the most recent ones
   dt[,year := 1:.N,by=ID]
 
-  # add LSW properties if missing
-  if(is.null(LSW)){
-
-    LSW <- BLN::bln_lsw
-    dt[,B_LSW_ID := 'lsw_nlmean']
-
-  } else {
-
-    # desired column names in LSW
-    cols <- c("B_LSW_ID","B_SOM_LOI","B_CLAY_MI","B_SAND_MI","B_SILT_MI","B_N_RT","B_P_AL","B_P_CC","B_P_WA","B_P_SG",
-              "B_FE_OX","B_AL_OX","B_SA_W","B_RO_R","B_SOM_LOI_SD", "B_CLAY_MI_SD", "B_SAND_MI_SD", "B_SILT_MI_SD", "B_N_RT_SD","B_P_AL_SD","B_P_CC_SD",
-              "B_P_WA_SD","B_P_SG_SD","B_FE_OX_SD","B_AL_OX_SD","B_SA_W_SD","B_RO_R_SD")
-
-    # replace oow_id with B_LSW_ID
-    setnames(LSW,old = c('oow_id'),new = 'B_LSW_ID',skip_absent = TRUE)
-
-    # get all B_LSW_ID
-    this.lsw <- B_LSW_ID
-
-    # remove all ids from LSW when not present in B_LSW_ID
-    LSW <- LSW[B_LSW_ID %in% this.lsw]
-
-    # check LSW format and column names
-    checkmate::assert_data_table(LSW,nrow = length(unique(B_LSW_ID)))
-    checkmate::assert_subset(colnames(LSW),choices = cols)
-
-    # check if all B_LSW_ID are in the LSW data.table
-    checkmate::assert_subset(LSW$B_LSW_ID,choices = unique(B_LSW_ID))
-
-
-  }
 
   # set internal data.table
   dt <- merge(dt, LSW, by = 'B_LSW_ID',all.x = TRUE)
 
-  # set checks
-  checkmate::assert_character(output,len=1)
-  checkmate::assert_subset(output,choices = c('indicators','all','scores'))
 
 # --- step 2. calculate BLN indicators ----
 
