@@ -497,3 +497,23 @@ blnAssertUpper <- function(x){
   if(is.numeric(x) & !is.na(x)){out <- x} else{out <- Inf}
   return(out)
 }
+
+#' Aid to assert lower values
+#'
+#' Checks whether x is numeric and not NA. If so, returns x, else returns -Inf
+#'
+#' @param x a value obtained by `bln_parms[code == 'variable_name', value_min]`
+#'
+#' @return x when it is numeric and not NA, else returns -Inf
+#'
+#' @examples
+#' blnAssertLower(2)
+#' blnAssertLower('')
+#' blnAssertLower(NA_real_)
+#'
+#' @export
+blnAssertLower <- function(x){
+  out <- NULL
+  if(is.numeric(x) & !is.na(x)){out <- x} else{out <- -Inf}
+  return(out)
+}

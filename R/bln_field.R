@@ -255,31 +255,31 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   }
   if('B_GWL_GLG' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_GWL_GLG, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_GWL_GLG', value_min],
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_GWL_GLG', value_min]),
                                 upper = blnAssertUpper(BLN::bln_parms[code == 'B_GWL_GLG', value_max]))
   }
   if('B_GWL_GHG' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_GWL_GHG, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_GWL_GHG', value_min],
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_GWL_GHG', value_min]),
                                 upper = blnAssertUpper(BLN::bln_parms[code == 'B_GWL_GHG', value_max]))
   }
   if('B_GWL_ZCRIT' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_GWL_ZCRIT, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_GWL_ZCRIT', value_min],
-                                upper = BLN::bln_parms[code == 'B_GWL_ZCRIT', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_GWL_ZCRIT', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_GWL_ZCRIT', value_max]))
   }
   if('B_DRAIN' %in% requiredFunctionArguments){
       checkmate::assert_logical(B_DRAIN, any.missing = FALSE, len = arg.length)
   }
   if('B_FERT_NORM_FR' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_FERT_NORM_FR, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_FERT_NORM_FR', value_min],
-                                upper = BLN::bln_parms[code == 'B_FERT_NORM_FR', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_FERT_NORM_FR', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_FERT_NORM_FR', value_max]))
   }
   if('B_SLOPE_DEGREE' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_SLOPE_DEGREE, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_min],
-                                upper = BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_SLOPE_DEGREE', value_max]))
   }
   if('B_GWP' %in% requiredFunctionArguments){
       checkmate::assert_logical(B_GWP, any.missing = FALSE, len = arg.length)
@@ -289,230 +289,230 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   }
   if('B_CT_PSW' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_CT_PSW, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_CT_PSW', value_min],
-                                upper = BLN::bln_parms[code == 'B_CT_PSW', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_CT_PSW', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_PSW', value_max]))
   }
   if('B_CT_NSW' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_CT_NSW, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_CT_NSW', value_min],
-                                upper = BLN::bln_parms[code == 'B_CT_NSW', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_CT_NSW', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_NSW', value_max]))
   }
   if('B_SOMERS_BC' %in% requiredFunctionArguments){
       checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length,
-                                   lower = BLN::bln_parms[code == 'B_SOMERS_BC', value_min],
-                                   upper = BLN::bln_parms[code == 'B_SOMERS_BC', value_max])
+                                   lower = blnAssertLower(BLN::bln_parms[code == 'B_SOMERS_BC', value_min]),
+                                   upper = blnAssertUpper(BLN::bln_parms[code == 'B_SOMERS_BC', value_max]))
   }
   if('B_DRAIN_SP' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_DRAIN_SP, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_DRAIN_SP', value_min],
-                                upper = BLN::bln_parms[code == 'B_DRAIN_SP', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_DRAIN_SP', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_DRAIN_SP', value_max]))
   }
   if('B_DRAIN_WP' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_DRAIN_WP, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_DRAIN_WP', value_min],
-                                upper = BLN::bln_parms[code == 'B_DRAIN_WP', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_DRAIN_WP', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_DRAIN_WP', value_max]))
   }
   if('A_SOM_LOI' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_SOM_LOI, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_SOM_LOI', value_min],
-                                upper = BLN::bln_parms[code == 'A_SOM_LOI', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_SOM_LOI', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI', value_max]))
   }
   if('A_CLAY_MI' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_CLAY_MI, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_CLAY_MI', value_min],
-                                upper = BLN::bln_parms[code == 'A_CLAY_MI', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_CLAY_MI', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_CLAY_MI', value_max]))
   }
   if('A_SAND_MI' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_SAND_MI, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_SAND_MI', value_min],
-                                upper = BLN::bln_parms[code == 'A_SAND_MI', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_SAND_MI', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_SAND_MI', value_max]))
   }
   if('A_SILT_MI' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_SILT_MI, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_SILT_MI', value_min],
-                                upper = BLN::bln_parms[code == 'A_SILT_MI', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_SILT_MI', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_SILT_MI', value_max]))
   }
   if('A_DENSITY_SA' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_DENSITY_SA, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_DENSITY_SA', value_min],
-                                upper = BLN::bln_parms[code == 'A_DENSITY_SA', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_DENSITY_SA', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_DENSITY_SA', value_max]))
   }
   if('A_FE_OX' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_FE_OX, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_FE_OX', value_min],
-                                upper = BLN::bln_parms[code == 'A_FE_OX', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_FE_OX', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_FE_OX', value_max]))
   }
   if('A_AL_OX' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_AL_OX, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_AL_OX', value_min],
-                                upper = BLN::bln_parms[code == 'A_AL_OX', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_AL_OX', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_AL_OX', value_max]))
   }
   if('A_PH_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_PH_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_PH_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_PH_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_PH_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_PH_CC', value_max]))
   }
   if('A_N_RT' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_N_RT, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_N_RT', value_min],
-                                upper = BLN::bln_parms[code == 'A_N_RT', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_N_RT', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_N_RT', value_max]))
   }
   if('A_CN_FR' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_CN_FR, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_CN_FR', value_min],
-                                upper = BLN::bln_parms[code == 'A_CN_FR', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_CN_FR', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_CN_FR', value_max]))
   }
   if('A_S_RT' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_S_RT, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_S_RT', value_min],
-                                upper = BLN::bln_parms[code == 'A_S_RT', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_S_RT', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_S_RT', value_max]))
   }
   if('A_N_PMN' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_N_PMN, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_N_PMN', value_min],
-                                upper = BLN::bln_parms[code == 'A_N_PMN', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_N_PMN', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_N_PMN', value_max]))
   }
   if('A_P_AL' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_P_AL, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_P_AL', value_min],
-                                upper = BLN::bln_parms[code == 'A_P_AL', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_P_AL', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_AL', value_max]))
   }
   if('A_P_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_P_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_P_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_P_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_P_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_CC', value_max]))
   }
   if('A_P_WA' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_P_WA, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_P_WA', value_min],
-                                upper = BLN::bln_parms[code == 'A_P_WA', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_P_WA', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_WA', value_max]))
   }
   if('A_P_SG' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_P_SG, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_P_SG', value_min],
-                                upper = BLN::bln_parms[code == 'A_P_SG', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_P_SG', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_SG', value_max]))
   }
   if('A_CEC_CO' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_CEC_CO, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_CEC_CO', value_min],
-                                upper = BLN::bln_parms[code == 'A_CEC_CO', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_CEC_CO', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_CEC_CO', value_max]))
   }
   if('A_CA_CO_PO' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_CA_CO_PO, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_CA_CO_PO', value_min],
-                                upper = BLN::bln_parms[code == 'A_CA_CO_PO', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_CA_CO_PO', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_CA_CO_PO', value_max]))
   }
   if('A_MG_CO_PO' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_MG_CO_PO, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_MG_CO_PO', value_min],
-                                upper = BLN::bln_parms[code == 'A_MG_CO_PO', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_MG_CO_PO', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_MG_CO_PO', value_max]))
   }
   if('A_K_CO_PO' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_K_CO_PO, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_K_CO_PO', value_min],
-                                upper = BLN::bln_parms[code == 'A_K_CO_PO', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_K_CO_PO', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_K_CO_PO', value_max]))
   }
   if('A_K_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_K_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_K_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_K_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_K_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_K_CC', value_max]))
   }
   if('A_MG_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_MG_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_MG_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_MG_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_MG_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_MG_CC', value_max]))
   }
   if('A_MN_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_MN_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_MN_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_MN_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_MN_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_MN_CC', value_max]))
   }
   if('A_ZN_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_ZN_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_ZN_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_ZN_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_ZN_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_ZN_CC', value_max]))
   }
   if('A_CU_CC' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_CU_CC, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'A_CU_CC', value_min],
-                                upper = BLN::bln_parms[code == 'A_CU_CC', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'A_CU_CC', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_CU_CC', value_max]))
   }
   if('D_SA_W' %in% requiredFunctionArguments){
       checkmate::assert_numeric(D_SA_W, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'D_SA_W', value_min],
-                                upper = BLN::bln_parms[code == 'D_SA_W', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'D_SA_W', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'D_SA_W', value_max]))
   }
   if('D_RO_R' %in% requiredFunctionArguments){
       checkmate::assert_numeric(D_RO_R, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'D_RO_R', value_min],
-                                upper = BLN::bln_parms[code == 'D_RO_R', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'D_RO_R', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'D_RO_R', value_max]))
   }
 
   ## assertions for arguments with default values ====
   if(!identical(B_CT_PSW_MAX, 0.5)){
     checkmate::assert_numeric(B_CT_PSW_MAX, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_CT_PSW_MAX', value_min],
-                                upper = BLN::bln_parms[code == 'B_CT_PSW_MAX', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_CT_PSW_MAX', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_PSW_MAX', value_max]))
   }
   if(!identical(B_CT_NSW_MAX, 5.0)){
     checkmate::assert_numeric(B_CT_NSW_MAX, any.missing = FALSE, len = arg.length,
-                                lower = BLN::bln_parms[code == 'B_CT_NSW_MAX', value_min],
-                                upper = BLN::bln_parms[code == 'B_CT_NSW_MAX', value_max])
+                                lower = blnAssertLower(BLN::bln_parms[code == 'B_CT_NSW_MAX', value_min]),
+                                upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_NSW_MAX', value_max]))
   }
   if(!is.na(A_SOM_LOI_MLMAX)){
     checkmate::assert_numeric(A_SOM_LOI_MLMAX, any.missing = FALSE, len = arg.length,
-                              lower = BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_min],
-                              upper = BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_max])
+                              lower = blnAssertLower(BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_min]),
+                              upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_max]))
   }
   if(!is.na(A_EW_BCS)){
     checkmate::assert_integerish(A_EW_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_EW_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_EW_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_EW_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_EW_BCS', value_max]))
   }
   if(!is.na(A_SC_BCS)){
     checkmate::assert_integerish(A_SC_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_SC_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_SC_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_SC_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_SC_BCS', value_max]))
   }
   if(!is.na(A_GS_BCS)){
     checkmate::assert_integerish(A_GS_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_GS_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_GS_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_GS_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_GS_BCS', value_max]))
   }
   if(!is.na(A_P_BCS)){
     checkmate::assert_integerish(A_P_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_P_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_P_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_P_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_BCS', value_max]))
   }
   if(!is.na(A_C_BCS)){
     checkmate::assert_integerish(A_C_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_C_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_C_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_C_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_C_BCS', value_max]))
   }
   if(!is.na(A_RT_BCS)){
     checkmate::assert_integerish(A_RT_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_RT_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_RT_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_RT_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_RT_BCS', value_max]))
   }
   if(!is.na(A_RD_BCS)){
     checkmate::assert_integerish(A_RD_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_RD_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_RD_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_RD_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_RD_BCS', value_max]))
   }
   if(!is.na(A_SS_BCS)){
     checkmate::assert_integerish(A_SS_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_SS_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_SS_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_SS_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_SS_BCS', value_max]))
   }
   if(!is.na(A_CC_BCS)){
     checkmate::assert_integerish(A_CC_BCS, any.missing = FALSE, len = arg.length,
-                                 lower = BLN::bln_parms[code == 'A_CC_BCS', value_min],
-                                 upper = BLN::bln_parms[code == 'A_CC_BCS', value_max])
+                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_CC_BCS', value_min]),
+                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_CC_BCS', value_max]))
   }
   if(!is.na(M_COMPOST)){
     checkmate::assert_numeric(M_COMPOST, any.missing = FALSE, len = arg.length,
-                              lower = BLN::bln_parms[code == 'M_COMPOST', value_min],
-                              upper = BLN::bln_parms[code == 'M_COMPOST', value_max])
+                              lower = blnAssertLower(BLN::bln_parms[code == 'M_COMPOST', value_min]),
+                              upper = blnAssertUpper(BLN::bln_parms[code == 'M_COMPOST', value_max]))
   }
   if(!is.na(M_GREEN)){
     checkmate::assert_logical(M_GREEN, any.missing = FALSE, len = arg.length)
