@@ -401,3 +401,38 @@ bln_format_aer <- function(B_AER_CBS,type='name') {
   # Return B_AER_CBS
   return(B_AER_CBS)
 }
+
+#' Get vector of function arguments
+#'
+#' @param functionName Quoted name of a function
+#' @param whichArgs Select whether you want to return all arguments ('all'),
+#' arguments without defaults ('required') or arguments with defaults ('optional'). Default is 'all'.
+#'
+#' @examples
+#' funArgs('sd')
+#' funArgs('sd', whichArgs = 'required')
+#' funArgs('sd', whichArgs = 'optional')
+#'
+#' @return a character vector of function argument names
+funArgs <- function(functionName, whichArgs = 'all'){
+  checkmate::assert_character(functionName)
+  checkmate::assert_true(existsFunction(functionName))
+  checkmate::assert_subset(whichArgs,
+                           choices = c('all', 'required', 'optional'))
+
+  arg.list <- formals(functionName)
+  functionArguments <- character(0)
+
+  if (whichArgs == 'all') {
+    functionArguments <- names(arg.list)
+  } else {
+    has_default <- sapply(arg.list, function(arg) !identical(arg, substitute()))
+    if (whichArgs == 'optional') {
+      functionArguments <- names(arg.list)[has_default]
+    } else { # 'required'
+      functionArguments <- names(arg.list)[!has_default]
+    }
+  }
+
+  return(functionArguments)
+}
