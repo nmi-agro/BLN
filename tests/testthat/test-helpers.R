@@ -121,3 +121,15 @@ test_that('funArgs returns a list of function arguments',{
   )
 })
 
+test_that('funArgsV works with a vector of function names as input',{
+  expect_equal(
+    object = funArgsV(c('colSums', 'exists'), 'required'),
+    expected = c('x', 'frame')
+  )
+
+  expect_equal(
+    object = funArgsV(c('colSums', 'exists'), 'all'),
+    expected = c('x', 'na.rm', 'dims', "where", "envir", "frame", "mode", "inherits")
+  )
+})
+

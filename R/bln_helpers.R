@@ -414,6 +414,7 @@ bln_format_aer <- function(B_AER_CBS,type='name') {
 #' funArgs('sd', whichArgs = 'optional')
 #'
 #' @return a character vector of function argument names
+#' @export
 funArgs <- function(functionName, whichArgs = 'all'){
   checkmate::assert_character(functionName)
   checkmate::assert_true(existsFunction(functionName))
@@ -435,4 +436,36 @@ funArgs <- function(functionName, whichArgs = 'all'){
   }
 
   return(functionArguments)
+}
+
+#' Get a vector of function arguments for multiple functions
+#'
+#' @description This function is a wrapper around funArgs. It takes a vector of
+#' function names and returns a single character vector with unique argument names.
+#'
+#' @param functionNameVector A character vector of function names.
+#' @param whichArgs Select whether you want to return all arguments ('all'),
+#' arguments without defaults ('required') or arguments with defaults ('optional').
+#' Default is 'all'.
+#'
+#' @return A character vector of unique function argument names.
+#'
+#' @examples
+#' funArgsV(c('sd', 'mean'))
+#' funArgsV(c('sd', 'mean'), whichArgs = 'required')
+#'
+#' @export
+funArgsV <- function(functionNameVector, whichArgs = 'all'){
+
+  # check inputs
+  checkmate::assert_character(functionNameVector, any.missing = FALSE, min.len = 1)
+  checkmate::assert_subset(whichArgs, choices = c('all', 'required', 'optional'))
+
+  # get arguments for all functions in the vector
+  args_list <- lapply(functionNameVector,
+                      FUN = funArgs,
+                      whichArgs = whichArgs)
+
+  # unlist and return unique arguments
+  return(unique(unlist(args_list)))
 }
