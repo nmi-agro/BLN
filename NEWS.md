@@ -1,3 +1,12 @@
+# BLN 0.11.0 2025-xx-xx
+## Changed
+* Made function argument checking for bln_field more strict.
+
+## Added
+* New helper function `funArgs`  to retrieve unique argument names from function names
+* New helper function `funArgsV` to retrieve unique argument names from a vector of function names
+* New helper functions `blnAssertLower` and `blnAssertUpper` to aid in function argument assertions
+
 # BLN 0.10.0 2025-xx-xx
 ## Changed
 * the format of groundwater class values (B_GWL_CLASS) that are accepted by BLN 
