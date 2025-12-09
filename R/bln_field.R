@@ -122,6 +122,168 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   i_nut_n = i_nut_p = i_nut_k = i_nut_nue = . = crop_code = crop_category = value = indicator = NULL
   cat1 = cat2 = crop_cat = weight = cf = value.w = ncat = cf_yr = code = choices = NULL
 
+  # check inputs
+  requiredFunctionArguments <- funArgsV(
+    c('bln_format_aer', 'bln_add_management', 'bln_c_nitrogen', 'bln_c_posphor',
+      'bln_c_potassium', 'bln_c_magnesium', 'bln_c_sulfur', 'bln_c_ph',
+      'bln_p_crumbleability', 'bln_p_sealing', 'bln_p_droughtstress',
+      'bln_p_wetnessstress', 'bln_p_windererosion', 'bln_p_compaction',
+      'bln_p_whc', 'bln_p_aggstability', 'bln_p_workability', 'bln_p_density',
+      'bln_b_diseaseresistance', 'bln_b_pmn', 'bln_wat_groundwater_recharge',
+      'bln_bbwp_bw', 'bln_bbwp_ngw', 'bln_wat_pesticide',
+      'bln_wat_nretention_gw', 'bln_wat_nrisk_gw', 'bln_wat_nrunoff',
+      'bln_wat_nretention_sw', 'bln_bbwp_nsw', 'bln_bbwp_psw',
+      'bln_clim_cbalance', 'bln_clim_rothc', 'bln_clim_csat',
+      'bln_clim_somers', 'bln_nut_nitrogen', 'bln_nut_phosphorus',
+      'bln_nut_potassium', 'bln_nut_nue',
+      'calc_bulk_density'),
+    whichArgs = 'required')
+  arg.length <- length(ID)
+  if('ID' %in% requiredFunctionArguments){
+    checkmate::assert_character(ID, any.missing = FALSE, min.len = 1)
+  }
+  if('B_LU_BRP' %in% requiredFunctionArguments){
+    checkmate::assert_numeric(B_LU_BRP, any.missing = FALSE, min.len = 1, len = arg.length)
+    checkmate::assert_subset(B_LU_BRP, choices = unique(OBIC::crops.obic$crop_code), empty.ok = FALSE)
+  }
+  if('B_SC_WENR' %in% requiredFunctionArguments){
+    checkmate::assert_character(B_SC_WENR, any.missing = FALSE, len = arg.length)
+  }
+  if('B_GWL_CLASS' %in% requiredFunctionArguments){
+    checkmate::assert_character(B_GWL_CLASS, any.missing = FALSE, len = arg.length)
+    checkmate::assert_subset(B_GWL_CLASS, choices = unlist(BLN::bln_parms[code == "B_GWL_CLASS", choices]))
+  }
+  if('B_SOILTYPE_AGR' %in% requiredFunctionArguments){
+      checkmate::assert_character(B_SOILTYPE_AGR, any.missing = FALSE, len = arg.length)
+      checkmate::assert_subset(B_SOILTYPE_AGR, choices = unlist(BLN::bln_parms[code == "B_SOILTYPE_AGR", choices]))
+  }
+  if('B_HELP_WENR' %in% requiredFunctionArguments){
+      checkmate::assert_character(B_HELP_WENR, any.missing = FALSE, len = arg.length)
+  }
+  if('B_AER_CBS' %in% requiredFunctionArguments){
+      checkmate::assert_character(B_AER_CBS, any.missing = FALSE, len = arg.length)
+  }
+  if('B_GWL_GLG' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_GWL_GLG, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('B_GWL_GHG' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_GWL_GHG, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('B_GWL_ZCRIT' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_GWL_ZCRIT, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('B_DRAIN' %in% requiredFunctionArguments){
+      checkmate::assert_logical(B_DRAIN, any.missing = FALSE, len = arg.length)
+  }
+  if('B_FERT_NORM_FR' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_FERT_NORM_FR, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('B_SLOPE_DEGREE' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_SLOPE_DEGREE, any.missing = FALSE, len = arg.length, lower = 0, upper = 90)
+  }
+  if('B_GWP' %in% requiredFunctionArguments){
+      checkmate::assert_logical(B_GWP, any.missing = FALSE, len = arg.length)
+  }
+  if('B_AREA_DROUGHT' %in% requiredFunctionArguments){
+      checkmate::assert_logical(B_AREA_DROUGHT, any.missing = FALSE, len = arg.length)
+  }
+  if('B_CT_PSW' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_CT_PSW, any.missing = FALSE, len = arg.length)
+  }
+  if('B_CT_NSW' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_CT_NSW, any.missing = FALSE, len = arg.length)
+  }
+  if('B_SOMERS_BC' %in% requiredFunctionArguments){
+      checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length, lower = 1, upper = 290)
+  }
+  if('B_DRAIN_SP' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_DRAIN_SP, any.missing = FALSE, len = arg.length)
+  }
+  if('B_DRAIN_WP' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(B_DRAIN_WP, any.missing = FALSE, len = arg.length)
+  }
+  if('A_SOM_LOI' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_SOM_LOI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_CLAY_MI' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_CLAY_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_SAND_MI' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_SAND_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_SILT_MI' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_SILT_MI, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_DENSITY_SA' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_DENSITY_SA, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_FE_OX' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_FE_OX, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_AL_OX' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_AL_OX, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_PH_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_PH_CC, any.missing = FALSE, len = arg.length, lower = 1, upper = 14)
+  }
+  if('A_N_RT' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_N_RT, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_CN_FR' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_CN_FR, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_S_RT' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_S_RT, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_N_PMN' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_N_PMN, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_P_AL' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_P_AL, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_P_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_P_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_P_WA' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_P_WA, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_P_SG' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_P_SG, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_CEC_CO' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_CEC_CO, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_CA_CO_PO' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_CA_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_MG_CO_PO' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_MG_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_K_CO_PO' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_K_CO_PO, any.missing = FALSE, len = arg.length, lower = 0, upper = 100)
+  }
+  if('A_K_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_K_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_MG_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_MG_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_MN_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_MN_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_ZN_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_ZN_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('A_CU_CC' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(A_CU_CC, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+  if('D_SA_W' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(D_SA_W, any.missing = FALSE, len = arg.length, lower = 0, upper = 1) 
+  }
+  if('D_RO_R' %in% requiredFunctionArguments){
+      checkmate::assert_numeric(D_RO_R, any.missing = FALSE, len = arg.length, lower = 0)
+  }
+
   # make internal table
   dt <- data.table(ID = ID,
                    B_LU_BRP = B_LU_BRP,
@@ -184,9 +346,7 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                    i_clim_rothc = i_clim_rothc)
 
   # check formats B_SC_WENR and B_GWL_CLASS
-  #dt[, B_SC_WENR := OBIC::format_soilcompaction(B_SC_WENR)]
-  checkmate::assert_subset(B_GWL_CLASS, choices = unlist(BLN::bln_parms[code == "B_GWL_CLASS", choices]))
-  dt[, B_AER_CBS := bln_format_aer(B_AER_CBS,type='name')]
+    dt[, B_AER_CBS := bln_format_aer(B_AER_CBS,type='name')]
 
   # estimate missing data
   dt[is.na(A_DENSITY_SA), A_DENSITY_SA := OBIC::calc_bulk_density(B_SOILTYPE_AGR, A_SOM_LOI, A_CLAY_MI)]
