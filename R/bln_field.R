@@ -569,37 +569,6 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   checkmate::assert_flag(mc)
   checkmate::assert_flag(quiet)
 
-
-  # add LSW properties if missing, check if not missing
-  if(is.null(LSW)){
-
-    LSW <- BLN::bln_lsw
-    dt[,B_LSW_ID := 'lsw_nlmean']
-
-  } else {
-
-    # desired column names in LSW
-    cols <- c("B_LSW_ID","B_SOM_LOI","B_CLAY_MI","B_SAND_MI","B_SILT_MI","B_N_RT","B_P_AL","B_P_CC","B_P_WA","B_P_SG",
-              "B_FE_OX","B_AL_OX","B_SA_W","B_RO_R","B_SOM_LOI_SD", "B_CLAY_MI_SD", "B_SAND_MI_SD", "B_SILT_MI_SD", "B_N_RT_SD","B_P_AL_SD","B_P_CC_SD",
-              "B_P_WA_SD","B_P_SG_SD","B_FE_OX_SD","B_AL_OX_SD","B_SA_W_SD","B_RO_R_SD")
-
-    # replace oow_id with B_LSW_ID
-    setnames(LSW,old = c('oow_id'),new = 'B_LSW_ID',skip_absent = TRUE)
-
-    # get all B_LSW_ID
-    this.lsw <- B_LSW_ID
-
-    # remove all ids from LSW when not present in B_LSW_ID
-    LSW <- LSW[B_LSW_ID %in% this.lsw]
-
-    # check LSW format and column names
-    checkmate::assert_data_table(LSW,nrow = length(unique(B_LSW_ID)))
-    checkmate::assert_subset(colnames(LSW),choices = cols)
-
-    # check if all B_LSW_ID are in the LSW data.table
-    checkmate::assert_subset(LSW$B_LSW_ID,choices = unique(B_LSW_ID))
-  }
-
   # make internal table -----
   dt <- data.table(ID = ID,
                    B_LU_BRP = B_LU_BRP,
@@ -661,7 +630,38 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                    B_LSW_ID = as.character(B_LSW_ID),
                    i_clim_rothc = i_clim_rothc)
 
-  # check formats B_SC_WENR and B_GWL_CLASS
+  # check or add LSW =====
+  # add LSW properties if missing, check if not missing
+  if(is.null(LSW)){
+
+    LSW <- BLN::bln_lsw
+    dt[,B_LSW_ID := 'lsw_nlmean']
+
+  } else {
+
+    # desired column names in LSW
+    cols <- c("B_LSW_ID","B_SOM_LOI","B_CLAY_MI","B_SAND_MI","B_SILT_MI","B_N_RT","B_P_AL","B_P_CC","B_P_WA","B_P_SG",
+              "B_FE_OX","B_AL_OX","B_SA_W","B_RO_R","B_SOM_LOI_SD", "B_CLAY_MI_SD", "B_SAND_MI_SD", "B_SILT_MI_SD", "B_N_RT_SD","B_P_AL_SD","B_P_CC_SD",
+              "B_P_WA_SD","B_P_SG_SD","B_FE_OX_SD","B_AL_OX_SD","B_SA_W_SD","B_RO_R_SD")
+
+    # replace oow_id with B_LSW_ID
+    setnames(LSW,old = c('oow_id'),new = 'B_LSW_ID',skip_absent = TRUE)
+
+    # get all B_LSW_ID
+    this.lsw <- B_LSW_ID
+
+    # remove all ids from LSW when not present in B_LSW_ID
+    LSW <- LSW[B_LSW_ID %in% this.lsw]
+
+    # check LSW format and column names
+    checkmate::assert_data_table(LSW,nrow = length(unique(B_LSW_ID)))
+    checkmate::assert_subset(colnames(LSW),choices = cols)
+
+    # check if all B_LSW_ID are in the LSW data.table
+    checkmate::assert_subset(LSW$B_LSW_ID,choices = unique(B_LSW_ID))
+  }
+
+  # check formats
     dt[, B_AER_CBS := bln_format_aer(B_AER_CBS,type='name')]
 
   # estimate missing data
