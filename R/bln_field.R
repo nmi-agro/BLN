@@ -83,6 +83,7 @@
 #' @param i_clim_rothc (numeric) the soil indicator for carbon saturation derived via rothc.
 #' @param mc (boolean) option to run rothc in parallel on multicores
 #' @param quiet (boolean) showing progress bar for calculation RothC C-saturation for each field
+#' @param indicator_selection (character) a vector of indicators, ecosystem service themes, and or sub_groups to determine which indicators must be calculated, see \code{\link{bln_variable_grouping}}
 #'
 #' @import OBIC
 #'
@@ -109,7 +110,8 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                       M_LIME = NA,M_NONINVTILL = NA,M_SSPM = NA,M_SOLIDMANURE = NA,
                       M_STRAWRESIDUE = NA,M_MECHWEEDS = NA,M_PESTICIDES_DST = NA,
                       B_LSW_ID = NA_character_,LSW = NULL,output ='all',
-                      runrothc = FALSE, i_clim_rothc = NA_real_, mc = FALSE,quiet=TRUE){
+                      runrothc = FALSE, i_clim_rothc = NA_real_, mc = FALSE,quiet=TRUE,
+                      indicator_selection = c('prod', 'water', 'nutcycle')){
 
 # --- step 1. preprocessing input data ----
 
@@ -123,29 +125,20 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   cat1 = cat2 = crop_cat = weight = cf = value.w = ncat = cf_yr = code = choices = NULL
 
   # check function inputs -----
-  if(!identical(output, 'all')){
     checkmate::assert_character(output,len=1)
     checkmate::assert_subset(output,choices = c('indicators','all','scores'))
-  }
+    checkmate::assert_subset(indicator_selection, choices = c(bln_variable_grouping$variable,
+                                                              bln_variable_grouping$ess_theme,
+                                                              bln_variable_grouping$sub_group))
 
   # decide which functions will be used
-  # to be done
+  requiredFunctions <- bln_variable_grouping[variable %in% indicator_selection|
+                                              ess_theme %in% indicator_selection|
+                                              sub_group %in% indicator_selection,
+                                            bln_function]
 
   requiredFunctionArguments <- funArgsV(
-    c('bln_format_aer', 'bln_add_management', 'bln_c_nitrogen', 'bln_c_posphor',
-      'bln_c_potassium', 'bln_c_magnesium', 'bln_c_sulfur', 'bln_c_ph',
-      'bln_p_crumbleability', 'bln_p_sealing', 'bln_p_droughtstress',
-      'bln_p_wetnessstress', 'bln_p_windererosion', 'bln_p_compaction',
-      'bln_p_whc', 'bln_p_aggstability', 'bln_p_workability', 'bln_p_density',
-      'bln_b_diseaseresistance', 'bln_b_pmn', 'bln_wat_groundwater_recharge',
-      'bln_bbwp_bw', 'bln_bbwp_ngw', 'bln_wat_pesticide',
-      'bln_wat_nretention_gw', 'bln_wat_nrisk_gw', 'bln_wat_nrunoff',
-      'bln_wat_nretention_sw', 'bln_bbwp_nsw', 'bln_bbwp_psw',
-      'bln_clim_cbalance', 'bln_clim_rothc', 'bln_clim_csat',
-      # 'bln_clim_somers',
-      'bln_nut_nitrogen', 'bln_nut_phosphorus',
-      'bln_nut_potassium', 'bln_nut_nue',
-      'calc_bulk_density'),
+    requiredFunctions,
     whichArgs = 'required')
 
   arg.length <- max(c(
@@ -699,7 +692,7 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
     dt[, i_p_se := bln_p_sealing(B_LU_BRP, A_SOM_LOI, A_CLAY_MI)]
     dt[, i_p_ds := bln_p_droughtstress(B_HELP_WENR, B_LU_BRP, B_GWL_CLASS, WSI = "droughtstress")]
     dt[, i_p_ws := bln_p_wetnessstress(B_HELP_WENR, B_LU_BRP, B_GWL_CLASS, WSI = "wetnessstress")]
-    dt[, i_p_du := bln_p_windererosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
+    dt[, i_p_du := bln_p_winderosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
     dt[, i_p_co := bln_p_compaction(B_SC_WENR)]
     dt[, i_p_whc := bln_p_whc(A_CLAY_MI, A_SAND_MI, A_SILT_MI, A_SOM_LOI, type = "whc")]
     dt[, i_p_as := bln_p_aggstability(B_SOILTYPE_AGR, A_SOM_LOI, A_K_CO_PO, A_CA_CO_PO, A_MG_CO_PO)]

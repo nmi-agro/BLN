@@ -617,9 +617,9 @@ Sealing is the process whereby soil aggregates disintegrate under the influence 
 
 The vulnerability of soils to sealing and wind erosion is derived from those properties controlling the susceptibility for both risks. These include the clay content as well as the organic matter content, where the vulnerability for sealing is derived from field expert-based observations and associated yield depression in particular for some arable crops. Wind erosion is highly controlled by the mineralogical composition and texture as well as the presence of growing crops. Using laboratory experiments from wind tunnels, a exponential function has been developed to estimate the erodibility risk for soils, given the clay and silt content of a field. Grasslands are not susceptible for these two risks.
 
-The risk for soil sealing can be assessed via the function `bln_p_sealing` whereas the risk for soil erosion due to wind is assessed via the function `bln_p_windererosion`. The wind erodibility can be estimated from the inputs land use, clay and silt content of the topsoil whereas the risk for sealing depends on the clay content as well as the organic matter content of the soil.
+The risk for soil sealing can be assessed via the function `bln_p_sealing` whereas the risk for soil erosion due to wind is assessed via the function `bln_p_winderosion`. The wind erodibility can be estimated from the inputs land use, clay and silt content of the topsoil whereas the risk for sealing depends on the clay content as well as the organic matter content of the soil.
 
-For more details, see `?bln_p_sealing` and `?bln_p_windererosion`. 
+For more details, see `?bln_p_sealing` and `?bln_p_winderosion`. 
 
 An example of these functions is illustrated below for an arable soil with variable clay content for both an cropland (with organic matter levels of 3.5%) and a grassland soil (with organic matter levels of 5%). 
 
@@ -646,7 +646,7 @@ An example of these functions is illustrated below for an arable soil with varia
   
   # estimate the presence / risk for surface sealing and wind erodibility
   dt.test[, i_p_se := bln_p_sealing(B_LU_BRP, A_SOM_LOI, A_CLAY_MI)]
-  dt.test[, i_p_du := bln_p_windererosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
+  dt.test[, i_p_du := bln_p_winderosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
    
   # set land use
   dt.test[,luse := fifelse(B_LU_BRP==265,'grass','cropland')]

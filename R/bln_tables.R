@@ -208,3 +208,13 @@
 #'   \item{value_max}{Maximum value for a numeric or integer parameter}
 #' }
 "bln_input_description"
+
+#' Grouping of indicators and BLN functions used for aggregation
+#'
+#' \describe{
+#'   \item{bln_function}{Name of a function in BLN to calculate an indicator}
+#'   \item{variable}{Name of a variable for a specific indicator}
+#'   \item{ess_theme}{Highest order grouping of indicators}
+#'   \item{sub_group}{Second order grouping of indicators}
+#' }
+"bln_variable_grouping"

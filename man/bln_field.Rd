@@ -85,7 +85,8 @@ bln_field(
   runrothc = FALSE,
   i_clim_rothc = NA_real_,
   mc = FALSE,
-  quiet = TRUE
+  quiet = TRUE,
+  indicator_selection = c("prod", "water", "nutcycle")
 )
 }
 \arguments{
@@ -250,6 +251,8 @@ bln_field(
 \item{mc}{(boolean) option to run rothc in parallel on multicores}
 
 \item{quiet}{(boolean) showing progress bar for calculation RothC C-saturation for each field}
+
+\item{indicator_selection}{(character) a vector of indicators, ecosystem service themes, and or sub_groups to determine which indicators must be calculated, see \code{\link{bln_variable_grouping}}}
 }
 \description{
 This functions wraps the functions of the BLN2 into one main function to calculate the soil quality score for a single field.

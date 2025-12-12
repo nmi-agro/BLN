@@ -417,7 +417,7 @@ bln_format_aer <- function(B_AER_CBS,type='name') {
 #' @export
 funArgs <- function(functionName, whichArgs = 'all'){
   checkmate::assert_character(functionName)
-  checkmate::assert_true(existsFunction(functionName))
+  checkmate::assert_true(existsFunction(functionName), .var.name = paste0('existsFunction(',functionName, ')'))
   checkmate::assert_subset(whichArgs,
                            choices = c('all', 'required', 'optional'))
 
