@@ -158,7 +158,7 @@ An example of both wrapper functions are illustrated below. The soil has an BLN 
   
   # select the data for de Marke farm
   dt <- copy(BLN::bln_farm_hf)
-  dt <- dt[id==1]
+  dt <- dt[id=='1']
   
   # run the bln_field with default management measures and no visual assessment data
   o1 <- bln_field(ID = dt$id,B_LU_BRP = dt$B_LU_BRP,B_SC_WENR = dt$B_SC_WENR,
@@ -576,13 +576,13 @@ An example of this function is illustrated below for six different soils varying
 ```{r,fig.width = 7, fig.height = 4,fig.fullwidth = TRUE,echo=FALSE}
   
   # subset a series of agricultural fields
-  dt.test <- data.table(ID = 1:6,
+  dt.test <- data.table(ID = as.character(1:6),
                         B_HELP_WENR = c("Rd10A","zEZ21","Rd90A","pZg23","pZg21","U40Tnr007"),
                         B_LU_BRP = c(265,265,259,259,233,175)
                         )
 
   # add different Gt levels
-  dt.test <- merge(dt.test,CJ(ID=1:6,B_GWL_CLASS = c('I','III','VI','VIII')),by='ID')
+  dt.test <- merge(dt.test,CJ(ID=as.character(1:6),B_GWL_CLASS = c('I','III','VI','VIII')),by='ID')
   
   # calculate drought stress and wetness stress
   dt.test[, i_p_ds := bln_p_droughtstress(B_HELP_WENR, B_LU_BRP, B_GWL_CLASS, WSI = "droughtstress")]

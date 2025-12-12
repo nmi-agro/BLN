@@ -142,7 +142,8 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
       'bln_wat_nretention_gw', 'bln_wat_nrisk_gw', 'bln_wat_nrunoff',
       'bln_wat_nretention_sw', 'bln_bbwp_nsw', 'bln_bbwp_psw',
       'bln_clim_cbalance', 'bln_clim_rothc', 'bln_clim_csat',
-      'bln_clim_somers', 'bln_nut_nitrogen', 'bln_nut_phosphorus',
+      # 'bln_clim_somers',
+      'bln_nut_nitrogen', 'bln_nut_phosphorus',
       'bln_nut_potassium', 'bln_nut_nue',
       'calc_bulk_density'),
     whichArgs = 'required')
@@ -298,9 +299,8 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                                 upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_NSW', value_max]))
   }
   if('B_SOMERS_BC' %in% requiredFunctionArguments){
-      checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length,
-                                   lower = blnAssertLower(BLN::bln_parms[code == 'B_SOMERS_BC', value_min]),
-                                   upper = blnAssertUpper(BLN::bln_parms[code == 'B_SOMERS_BC', value_max]))
+      checkmate::assert_integerish(B_SOMERS_BC, any.missing = FALSE, len = arg.length)
+      checkmate::assert_subset(B_SOMERS_BC, choices = unlist(BLN::bln_parms[code == 'B_SOMERS_BC', choices]))
   }
   if('B_DRAIN_SP' %in% requiredFunctionArguments){
       checkmate::assert_numeric(B_DRAIN_SP, any.missing = FALSE, len = arg.length,
@@ -459,121 +459,116 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                                 lower = blnAssertLower(BLN::bln_parms[code == 'B_CT_NSW_MAX', value_min]),
                                 upper = blnAssertUpper(BLN::bln_parms[code == 'B_CT_NSW_MAX', value_max]))
   }
-  if(!is.na(A_SOM_LOI_MLMAX)){
-    checkmate::assert_numeric(A_SOM_LOI_MLMAX, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_SOM_LOI_MLMAX))){
+    checkmate::assert_numeric(A_SOM_LOI_MLMAX, any.missing = TRUE, len = arg.length,
                               lower = blnAssertLower(BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_min]),
                               upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI_MLMAX', value_max]))
   }
-  if(!is.na(A_EW_BCS)){
-    checkmate::assert_integerish(A_EW_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_EW_BCS))){
+    checkmate::assert_integerish(A_EW_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_EW_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_EW_BCS', value_max]))
   }
-  if(!is.na(A_SC_BCS)){
-    checkmate::assert_integerish(A_SC_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_SC_BCS))){
+    checkmate::assert_integerish(A_SC_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_SC_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_SC_BCS', value_max]))
   }
-  if(!is.na(A_GS_BCS)){
-    checkmate::assert_integerish(A_GS_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_GS_BCS))){
+    checkmate::assert_integerish(A_GS_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_GS_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_GS_BCS', value_max]))
   }
-  if(!is.na(A_P_BCS)){
-    checkmate::assert_integerish(A_P_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_P_BCS))){
+    checkmate::assert_integerish(A_P_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_P_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_P_BCS', value_max]))
   }
-  if(!is.na(A_C_BCS)){
-    checkmate::assert_integerish(A_C_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_C_BCS))){
+    checkmate::assert_integerish(A_C_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_C_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_C_BCS', value_max]))
   }
-  if(!is.na(A_RT_BCS)){
-    checkmate::assert_integerish(A_RT_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_RT_BCS))){
+    checkmate::assert_integerish(A_RT_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_RT_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_RT_BCS', value_max]))
   }
-  if(!is.na(A_RD_BCS)){
-    checkmate::assert_integerish(A_RD_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_RD_BCS))){
+    checkmate::assert_integerish(A_RD_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_RD_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_RD_BCS', value_max]))
   }
-  if(!is.na(A_SS_BCS)){
-    checkmate::assert_integerish(A_SS_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_SS_BCS))){
+    checkmate::assert_integerish(A_SS_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_SS_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_SS_BCS', value_max]))
   }
-  if(!is.na(A_CC_BCS)){
-    checkmate::assert_integerish(A_CC_BCS, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(A_CC_BCS))){
+    checkmate::assert_integerish(A_CC_BCS, any.missing = TRUE, len = arg.length,
                                  lower = blnAssertLower(BLN::bln_parms[code == 'A_CC_BCS', value_min]),
                                  upper = blnAssertUpper(BLN::bln_parms[code == 'A_CC_BCS', value_max]))
   }
-  if(!is.na(M_COMPOST)){
-    checkmate::assert_numeric(M_COMPOST, any.missing = FALSE, len = arg.length,
+  if(!all(is.na(M_COMPOST))){
+    checkmate::assert_numeric(M_COMPOST, any.missing = TRUE, len = arg.length,
                               lower = blnAssertLower(BLN::bln_parms[code == 'M_COMPOST', value_min]),
                               upper = blnAssertUpper(BLN::bln_parms[code == 'M_COMPOST', value_max]))
   }
-  if(!is.na(M_GREEN)){
-    checkmate::assert_logical(M_GREEN, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_GREEN))){
+    checkmate::assert_logical(M_GREEN, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_NONBARE)){
-    checkmate::assert_logical(M_NONBARE, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_NONBARE))){
+    checkmate::assert_logical(M_NONBARE, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_EARLYCROP)){
-    checkmate::assert_logical(M_EARLYCROP, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_EARLYCROP))){
+    checkmate::assert_logical(M_EARLYCROP, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_SLEEPHOSE)){
-    checkmate::assert_logical(M_SLEEPHOSE, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_SLEEPHOSE))){
+    checkmate::assert_logical(M_SLEEPHOSE, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_DRAIN)){
-    checkmate::assert_logical(M_DRAIN, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_DRAIN))){
+    checkmate::assert_logical(M_DRAIN, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_DITCH)){
-    checkmate::assert_logical(M_DITCH, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_DITCH))){
+    checkmate::assert_logical(M_DITCH, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_UNDERSEED)){
-    checkmate::assert_logical(M_UNDERSEED, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_UNDERSEED))){
+    checkmate::assert_logical(M_UNDERSEED, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_LIME)){
-    checkmate::assert_logical(M_LIME, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_LIME))){
+    checkmate::assert_logical(M_LIME, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_NONINVTILL)){
-    checkmate::assert_logical(M_NONINVTILL, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_NONINVTILL))){
+    checkmate::assert_logical(M_NONINVTILL, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_SSPM)){
-    checkmate::assert_logical(M_SSPM, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_SSPM))){
+    checkmate::assert_logical(M_SSPM, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_SOLIDMANURE)){
-    checkmate::assert_logical(M_SOLIDMANURE, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_SOLIDMANURE))){
+    checkmate::assert_logical(M_SOLIDMANURE, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_STRAWRESIDUE)){
-    checkmate::assert_logical(M_STRAWRESIDUE, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_STRAWRESIDUE))){
+    checkmate::assert_logical(M_STRAWRESIDUE, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_MECHWEEDS)){
-    checkmate::assert_logical(M_MECHWEEDS, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_MECHWEEDS))){
+    checkmate::assert_logical(M_MECHWEEDS, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(M_PESTICIDES_DST)){
-    checkmate::assert_logical(M_PESTICIDES_DST, any.missing = FALSE, len = arg.length)
+  if(!all(is.na(M_PESTICIDES_DST))){
+    checkmate::assert_logical(M_PESTICIDES_DST, any.missing = TRUE, len = arg.length)
   }
-  if(!is.na(B_LSW_ID)){
+  if(!all(is.na(B_LSW_ID))){
     checkmate::assert_character(B_LSW_ID, any.missing = FALSE, len = arg.length)
   }
   if(!is.null(LSW)){
     checkmate::assert_data_table(LSW)
   }
-  if(!identical(runrothc, FALSE)){
-    checkmate::assert_flag(runrothc)
-  }
-  if(!is.na(i_clim_rothc)){
+  if(!all(is.na(i_clim_rothc))){
     checkmate::assert_numeric(i_clim_rothc, any.missing = FALSE, len = arg.length)
   }
-  if(!identical(mc, FALSE)){
-    checkmate::assert_flag(mc)
-  }
-  if(!identical(quiet, TRUE)){
-    checkmate::assert_flag(quiet)
-  }
+  checkmate::assert_flag(runrothc)
+  checkmate::assert_flag(mc)
+  checkmate::assert_flag(quiet)
+
 
   # add LSW properties if missing, check if not missing
   if(is.null(LSW)){

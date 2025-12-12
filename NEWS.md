@@ -1,6 +1,8 @@
 # BLN 0.11.0 2025-xx-xx
 ## Changed
 * Made function argument checking for bln_field more strict.
+* Changed type of columns 'id' and 'B_LSW_ID' of table `bln_farm_hf` from type
+integer to type character in line with function documentation.
 
 ## Added
 * New helper function `funArgs`  to retrieve unique argument names from function names
