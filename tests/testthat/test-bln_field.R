@@ -83,7 +83,7 @@ test_that("bln_field works", {
   dt.farm <- BLN::bln_farm_hf
 
   # sselect five fields
-  dt.farm <- dt.farm[id <6]
+  dt.farm <- dt.farm[id %in% as.character(1:5)]
 
   # run BLN
   d1 <- bln_field(ID = dt.farm$ref_id_2022,
