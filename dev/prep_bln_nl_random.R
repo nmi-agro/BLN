@@ -280,7 +280,7 @@ readBRP <- function(years,sf.sel){
   saveRDS(dt.aer,'D:/DATA/18 bln/brp24_aer.rds')
   rm(tmp1,dt.aer);gc()
 
-  # Load the GWLdata from rasters LHM
+  # Load the GWLdata from rasters grondwaterspiegelmodel (preferred over LHM due to recency but does not cover entire NL)
   require(terra)
   r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/grondwaterspiegelmodel/raw/ghg-mediaan.tif'))
   r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/grondwaterspiegelmodel/raw/glg-mediaan.tif'))
@@ -290,8 +290,22 @@ readBRP <- function(years,sf.sel){
   dt.gwl <- terra::extract(tmp2,vect.sel)
   dt.gwl <- as.data.table(dt.gwl)
   setnames(dt.gwl,c('id','B_GWL_GHG','B_GWL_GLG','B_GWL_CLASS_int'))
-  print(paste0('dataset merged with GWL maps ',dt.gwl[is.na(B_GWL_GHG),length(unique(ref_id))],' samples are missing'))
+  print(paste0('dataset merged with GWL maps ',dt.gwl[is.na(B_GWL_GHG),length(unique(id))],' samples are missing'))
   rm(tmp2, r.gwl.ghg, r.gwl.glg, r.gwl.class)gc()
+
+  # Load GWLdata from LHM rasters
+  r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/LHM GHG_2011-2018_L1.tif'))
+  r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/LHM GLG_2011-2018_L1.tif'))
+  tmp1 <- c(r.gwl.ghg,r.gwl.glg)
+  vect.sel <- terra::vect(sf.sel)
+  dt.gwl.lhm <- terra::extract(tmp1,vect.sel,method='bilinear') # for shapes bilinear otherwise simple
+  dt.gwl.lhm <- as.data.table(dt.gwl.lhm)
+  dt.gwl.lhm <- dt.gwl.lhm[,lapply(.SD,mean),by='ID']
+  dt.gwl.lhm[,ID := vect.sel$id]
+  setnames(dt.gwl.lhm,c('ID','B_GWL_GHG_lhm','B_GWL_GLG_lhm'))
+  saveRDS(dt.gwl.lhm,'D:/DATA/18 bln/brp24_gwl_lhm.rds')
+
+  rm(tmp1,dt.gwl.lhm,r.gwl.ghg,r.gwl.glg,vect.sel);gc()
 
   # load SOMERS
   tmp1 <- st_read('D:/ROSG/2057.N.24 Bodemkwaliteit RVB/01 data/parcels_rekenregels_nobv_website.shp')
@@ -388,6 +402,7 @@ readBRP <- function(years,sf.sel){
   dt.bs <- readRDS('D:/DATA/18 bln/brp24_bs.rds')
   dt.cs <- readRDS('D:/DATA/18 bln/brp24_cs.rds')
   dt.gwl <- readRDS('D:/DATA/18 bln/brp24_gwl.rds')
+  dt.gwl.lhm <- readRDS('D:/DATA/18 bln/brp24_gwl_lhm.rds')
   dt.gwpz <- readRDS('D:/DATA/18 bln/brp24_gwpz.rds')
   dt.help <- readRDS('D:/DATA/18 bln/brp24_help.rds')
   dt.lsw <- readRDS('D:/DATA/18 bln/brp24_lsw.rds')
@@ -448,10 +463,12 @@ readBRP <- function(years,sf.sel){
 
   # add groundwater levels, zcrit and B_GWP and LSW
   dt.out <- merge(dt.out,
-                  dt.gwl[,.(id,B_GWL_GHG = B_GWL_GHG *100,B_GWL_GLG = B_GWL_GLG * 100, B_GWL_CLASS_int)], by= 'id',all.x=TRUE)
+                  dt.gwl[,.(id,B_GWL_GHG ,B_GWL_GLG, B_GWL_CLASS_int)], by= 'id',all.x=TRUE)
   rm(dt.gwl);gc()
+  dt.out <- merge(dt.out,
+                  dt.gwl.lhm[,.(ID,B_GWL_GHG_lhm = B_GWL_GHG_lhm *100,B_GWL_GLG_lhm = B_GWL_GLG_lhm * 100)], by.x= 'id', by.y = 'ID',all.x=TRUE)
   dt.out <- merge(dt.out,dt.zcrit[,.(id,B_GWL_ZCRIT = B_Z_TWO)], by= 'id',all.x=TRUE)
-  rm(dt.zcrit);gc()
+  rm(dt.zcrit, dt.gwl.lhm);gc()
   dt.out <- merge(dt.out,dt.gwpz[,.(id,B_GWP)], by= 'id',all.x=TRUE)
   rm(dt.gwpz);gc()
   dt.out <- merge(dt.out,
@@ -483,6 +500,7 @@ readBRP <- function(years,sf.sel){
   dt.out[,B_AREA_DROUGHT := TRUE]
   dt.out[, B_FERT_NORM_FR := 1]
 
+  # GWL data
   dt.out[B_GWL_CLASS_int == 1, B_GWL_CLASS := 'Ia']
   dt.out[B_GWL_CLASS_int == 2, B_GWL_CLASS := 'Ic']
   dt.out[B_GWL_CLASS_int == 3, B_GWL_CLASS := 'IIa']
@@ -504,7 +522,60 @@ readBRP <- function(years,sf.sel){
   dt.out[B_GWL_CLASS_int == 19, B_GWL_CLASS := 'VIIId']
   dt.out[,B_GWL_CLASS_int := NULL]
 
-  # add crop categories
+# classify lhm data
+dt.out[B_GWL_GHG_lhm >= 140 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VIIId']
+dt.out[B_GWL_GHG_lhm >= 140 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_CLASS_lhm := 'VIIIo']
+dt.out[B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < 140 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VIId']
+dt.out[B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < 140 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_CLASS_lhm := 'VIIo']
+dt.out[B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VId']
+dt.out[B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_CLASS_lhm := 'VIo']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'Vbd']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_CLASS_lhm := 'Vbo']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'Vad']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_GLG_lhm := 'Vao']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'Vb']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'Va']
+dt.out[B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IVc']
+dt.out[B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IVu']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IIIb']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IIIa']
+dt.out[B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm >= 50 & B_GWL_GLG_lhm < 80, B_GWL_CLASS_lhm := 'IIc']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 50 & B_GWL_GLG_lhm < 80, B_GWL_CLASS_lhm := 'IIb']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 50 & B_GWL_GLG_lhm < 80, B_GWL_CLASS_lhm := 'IIa']
+dt.out[B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm < 50, B_GWL_CLASS_lhm := 'Ic']
+dt.out[B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm < 50, B_GWL_CLASS_lhm := 'Ia']
+# classify with infite maximum
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 140 & B_GWL_GHG_lhm < Inf & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'VIIId']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 140 & B_GWL_GHG_lhm < Inf & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 180, B_GWL_CLASS_lhm := 'VIIIo']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < 140 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'VIId']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'VId']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'Vbd']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 180 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'Vad']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'Vb']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm < 25 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < Inf, B_GWL_CLASS_lhm := 'Va']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < Inf & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IVc']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < Inf & B_GWL_GLG_lhm >= 50 & B_GWL_GLG_lhm < 80, B_GWL_CLASS_lhm := 'IIc']
+dt.out[is.na(B_GWL_CLASS_lhm) &B_GWL_GHG_lhm >= 25 & B_GWL_GHG_lhm < Inf & B_GWL_GLG_lhm < 50, B_GWL_CLASS_lhm := 'Ic']
+
+# non-suffix classes as fallback
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm >= 140 & B_GWL_GHG_lhm < 300 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VIII']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm >= 80 & B_GWL_GHG_lhm < 140 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VII']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'VI']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'V']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 120 & B_GWL_GLG_lhm < 300, B_GWL_CLASS_lhm := 'sV']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm >= 40 & B_GWL_GHG_lhm < 80 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'IV']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm < 40 & B_GWL_GLG_lhm >= 80 & B_GWL_GLG_lhm < 120, B_GWL_CLASS_lhm := 'III']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm < 30 & B_GWL_GLG_lhm >= 50 & B_GWL_GLG_lhm < 80, B_GWL_CLASS_lhm := 'II']
+dt.out[is.na(B_GWL_CLASS_lhm) & B_GWL_GHG_lhm < 20 & B_GWL_GLG_lhm < 50, B_GWL_CLASS_lhm := 'I']
+dt.out[is.na(B_GWL_CLASS) & is.na(B_GWL_GLG_lhm) & B_GWL_GHG_lhm <=30, B_GWL_CLASS := 'Ia']
+
+# use lhm GWL data if no grondwaterspiegelmodel data is available
+dt.out[is.na(B_GWL_GHG), B_GWL_GHG := B_GWL_GHG_lhm]
+dt.out[is.na(B_GWL_GLG), B_GWL_GLG := B_GWL_GLG_lhm]
+dt.out[is.na(B_GWL_CLASS), B_GWL_CLASS := B_GWL_CLASS_lhm]
+dt.out[,.(B_GWL_GLG_lhm, B_GWL_GHG_lhm, B_GWL_CLASS_lhm) := NULL]
+
+# add crop categories
   dt.out <- merge(dt.out,
                   pandex::b_lu[!is.na(B_LU_BRP),.(B_LU_BRP, B_LU_WATERSTRESS_OBIC, B_LU_BBWP, B_LU_CULTCAT4, B_LU_SEASON)],
                   by = 'B_LU_BRP',all.x=TRUE)
@@ -531,29 +602,6 @@ readBRP <- function(years,sf.sel){
   # add oow_nl for missing LSW
   dt.out[,B_LSW_ID := as.character(B_LSW_ID)]
   dt.out[is.na(B_LSW_ID),B_LSW_ID := 'lsw_nlmean']
-
-  # update all inputs for groundwater depth
-  dt.out[B_GWL_GLG > 300, B_GWL_GLG := B_GWL_GLG_WDM]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtI', B_GWL_GLG := 30]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtII', B_GWL_GLG := 65]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtIII', B_GWL_GLG := 100]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtIV', B_GWL_GLG := 100]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtV', B_GWL_GLG := 130]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtVI', B_GWL_GLG := 130]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtVII', B_GWL_GLG := 160]
-  dt.out[is.na(B_GWL_GLG) & B_GWL_CLASS == 'GtVIII', B_GWL_GLG := 160]
-
-  dt.out[B_GWL_GHG > 300, B_GWL_GHG := B_GWL_GHG_WDM]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtI', B_GWL_GHG := 15]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtII', B_GWL_GHG := 25]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtIII', B_GWL_GHG := 35]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtIV', B_GWL_GHG := 60]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtV', B_GWL_GHG := 35]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtVI', B_GWL_GHG := 60]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtVII', B_GWL_GHG := 120]
-  dt.out[is.na(B_GWL_GHG) & B_GWL_CLASS == 'GtVIII', B_GWL_GHG := 120]
-
-  dt.out[B_GWL_GHG > B_GWL_GLG, B_GWL_GLG :=  B_GWL_GHG + 25]
 
   # update soiltype and add variables
   dt.out[B_SOILTYPE_AGR == 'loss', B_SOILTYPE_AGR := 'loess']
