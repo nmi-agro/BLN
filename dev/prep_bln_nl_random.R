@@ -74,8 +74,21 @@ nmi.site<- Sys.getenv('NMI_SITE')
     return(out)
   }
 
-  # a helper function to read the brp
-  readBRP <- function(years,sf.sel){
+#' Read BRP files
+#'
+#' A helper function which reads basisregistratie gewaspercelen (brp) files and
+#' compares these with an input sf object. Overlapping brp parcels are returned
+#' in a data.table
+#'
+#' @param years vector of years of which you want to read the files
+#' @param sf.sel spatial object of which you want to know overlapping brp polygons
+#'
+#' @note you must have defined the global variable NMI_DATA for this to work
+#' As it takes a long time to read the brp files and join them, the function
+#' writes csv of individual years
+#'
+#'
+readBRP <- function(years,sf.sel){
 
     syear <- sort(years,decreasing = TRUE)
     syear <- as.character(syear)
