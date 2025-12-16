@@ -146,7 +146,7 @@ readBRP <- function(years,sf.sel){
 # -- step 1. prepare spatial file for data extraction ----
 
   # shape file to extract data for, and remove the bufferstrips and other fields that have no agricultural usage
-  s1.sel <- st_read(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',2024,'_concept.gpkg'))
+  s1.sel <- st_read(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',2024,'.gpkg'))
   s1.sel <- s1.sel[s1.sel$is_gewasperceel==TRUE,]
 
   # add unique id
