@@ -211,15 +211,6 @@ readBRP <- function(years,sf.sel){
   saveRDS(dt.sc,'D:/DATA/18 bln/brp24_sc.rds')
   rm(tmp1,dt.sc);gc()
 
-  # load data bodemkaart
-  tmp1 <- st_read(paste0(nmi.dat, 'bodem/alterra/Bodemkaart50/products/bodemkaart50.gpkg'))
-  tmp1 <- sf::st_set_crs(tmp1,28992)
-  dt.bk <- st_join(sf.sel,tmp1,largest = TRUE, left = TRUE, join = 'st_nearest_feature')
-  dt.bk <- as.data.table(dt.bk)
-  dt.bk <- extractwithbuffer(dtte = dt.bk,spo = sf.sel,dt.sf = tmp1, dbn = 'Bodemkaart',parm='bd50.hoofd')
-  saveRDS(dt.bk,'D:/DATA/18 bln/brp24_bk.rds')
-  rm(tmp1,dt.bk);gc()
-
   # load carbon saturation
   tmp1 <- st_read(paste0(nmi.proj, 'Carbon_Saturation_Potential/results/agg_2019_84703f52aa91e09d.gpkg'))
   tmp1 <- tmp1[,c('sc.id','a_som_loi_pred_mean_bau','a_som_loi_pred_mean_top','d_cs_bau','d_cs_top','geom')]
@@ -291,43 +282,17 @@ readBRP <- function(years,sf.sel){
 
   # Load the GWLdata from rasters LHM
   require(terra)
-  r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/LHM GHG_2011-2018_L1.tif'))
-  r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/LHM GLG_2011-2018_L1.tif'))
-  tmp1 <- c(r.gwl.ghg,r.gwl.glg)
+  r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/grondwaterspiegelmodel/raw/ghg-mediaan.tif'))
+  r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/grondwaterspiegelmodel/raw/glg-mediaan.tif'))
+  r.gwl.class <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/grondwaterspiegelmodel/raw/gt-modus.tif'))
+  tmp2 <- c(r.gwl.ghg,r.gwl.glg,r.gwl.class)
   vect.sel <- terra::vect(sf.sel)
-  dt.gwl <- terra::extract(tmp1,vect.sel,method='bilinear') # for shapes bilinear otherwis simple
+  dt.gwl <- terra::extract(tmp2,vect.sel)
   dt.gwl <- as.data.table(dt.gwl)
-  dt.gwl <- dt.gwl[,lapply(.SD,mean),by='ID']
-  dt.gwl[,id := vect.sel$id]
-  setnames(dt.gwl,c('ID','B_GWL_GHG','B_GWL_GLG','id'))
-  saveRDS(dt.gwl,'D:/DATA/18 bln/brp24_gwl.rds')
-  rm(tmp1,dt.gwl,r.gwl.ghg,r.gwl.glg,vect.sel);gc()
-
-  # load the GWL data from WDM
-  r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/wdm-ghg-mediaan.tif'))
-  r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/wdm-glg-mediaan.tif'))
-  tmp1 <- c(r.gwl.ghg,r.gwl.glg)
-  vect.sel <- terra::vect(sf.sel)
-  dt.gwl <- terra::extract(tmp1,vect.sel,method='bilinear') # for shapes bilinear otherwis simple
-  dt.gwl <- as.data.table(dt.gwl)
-  setnames(dt.gwl,c('id','B_GWL_GHG_WDM','B_GWL_GLG_WDM'))
-  dt.gwl <- dt.gwl[,lapply(.SD,mean),by='id']
-  dt.gwl[,id := vect.sel$id]
-  saveRDS(dt.gwl,'D:/DATA/18 bln/brp24_gwl_wdm.rds')
-  rm(tmp1,dt.gwl,r.gwl.ghg,r.gwl.glg,vect.sel);gc()
-
-  # load the GWL data from AGV
-  r.gwl.ghg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/GHG_AGV.tif'))
-  r.gwl.glg <- terra::rast(paste0(nmi.dat, 'watersysteem/Grondwaterniveau/raw/GLG_AGV.tif'))
-  tmp1 <- c(r.gwl.ghg,r.gwl.glg)
-  vect.sel <- terra::vect(sf.sel)
-  dt.gwl <- terra::extract(tmp1,vect.sel,method='simple') # for shapes bilinear otherwis simple
-  dt.gwl <- as.data.table(dt.gwl)
-  dt.gwl <- dt.gwl[,lapply(.SD,mean),by='ID']
-  dt.gwl[,id := vect.sel$id]
-  setnames(dt.gwl,c('ID','B_GWL_GHG_AGV','B_GWL_GLG_AGV','id'))
-  saveRDS(dt.gwl,'D:/DATA/18 bln/brp24_gwl_agv.rds')
-  rm(tmp1,dt.gwl,r.gwl.ghg,r.gwl.glg,vect.sel);gc()
+  dt.gwl[,ref_id := vect.sel$ref_id]
+  setnames(dt.gwl,c('ID','B_GWL_GHG','B_GWL_GLG','B_GWL_CLASS_int','ref_id'))
+  print(paste0('dataset merged with GWL maps ',dt.gwl[is.na(B_GWL_GHG),length(unique(ref_id))],' samples are missing'))
+  rm(tmp2, r.gwl.ghg, r.gwl.glg, r.gwl.class)gc()
 
   # load SOMERS
   tmp1 <- st_read('D:/ROSG/2057.N.24 Bodemkwaliteit RVB/01 data/parcels_rekenregels_nobv_website.shp')
@@ -421,12 +386,9 @@ readBRP <- function(years,sf.sel){
   # load in the spatial inputs
   dt.aer <- readRDS('D:/DATA/18 bln/brp24_aer.rds')
   dt.bb <- readRDS('D:/DATA/18 bln/brp24_bb.rds')
-  dt.bk <- readRDS('D:/DATA/18 bln/brp24_bk.rds')
   dt.bs <- readRDS('D:/DATA/18 bln/brp24_bs.rds')
   dt.cs <- readRDS('D:/DATA/18 bln/brp24_cs.rds')
   dt.gwl <- readRDS('D:/DATA/18 bln/brp24_gwl.rds')
-  dt.gwl.wdm <- readRDS('D:/DATA/18 bln/brp24_gwl_wdm.rds')
-  dt.gwl.agv <- readRDS('D:/DATA/18 bln/brp24_gwl_agv.rds')
   dt.gwpz <- readRDS('D:/DATA/18 bln/brp24_gwpz.rds')
   dt.help <- readRDS('D:/DATA/18 bln/brp24_help.rds')
   dt.lsw <- readRDS('D:/DATA/18 bln/brp24_lsw.rds')
@@ -478,8 +440,6 @@ readBRP <- function(years,sf.sel){
   # add soil compaction, Soil map and max C saturation
   dt.out <- merge(dt.out,dt.sc[,.(id,B_SC_WENR = VALUE)], by= 'id',all.x=TRUE)
   rm(dt.sc);gc()
-  dt.out <- merge(dt.out,dt.bk[,.(id,B_GWL_CLASS = bd50.gwt.org)], by= 'id',all.x=TRUE)
-  rm(dt.bk);gc()
   dt.out <- merge(dt.out,
                   dt.cs[,.(id,
                            a_som_loi_csat_bau = a_som_loi_pred_mean_bau,
@@ -489,14 +449,8 @@ readBRP <- function(years,sf.sel){
 
   # add groundwater levels, zcrit and B_GWP and LSW
   dt.out <- merge(dt.out,
-                  dt.gwl[,.(id,B_GWL_GHG = B_GWL_GHG *100,B_GWL_GLG = B_GWL_GLG * 100)], by= 'id',all.x=TRUE)
+                  dt.gwl[,.(id,B_GWL_GHG = B_GWL_GHG *100,B_GWL_GLG = B_GWL_GLG * 100, B_GWL_CLASS_int)], by= 'id',all.x=TRUE)
   rm(dt.gwl);gc()
-  dt.out <- merge(dt.out,
-                  dt.gwl.wdm[,.(id,B_GWL_GHG_WDM,B_GWL_GLG_WDM)], by= 'id',all.x=TRUE)
-  rm(dt.gwl.wdm);gc()
-  dt.out <- merge(dt.out,
-                  dt.gwl.agv[,.(id,B_GWL_GHG_AGV,B_GWL_GLG_AGV)], by= 'id',all.x=TRUE)
-  rm(dt.gwl.agv);gc()
   dt.out <- merge(dt.out,dt.zcrit[,.(id,B_GWL_ZCRIT = B_Z_TWO)], by= 'id',all.x=TRUE)
   rm(dt.zcrit);gc()
   dt.out <- merge(dt.out,dt.gwpz[,.(id,B_GWP)], by= 'id',all.x=TRUE)
@@ -529,30 +483,27 @@ readBRP <- function(years,sf.sel){
   dt.out[is.na(B_SLOPE_DEGREE), B_SLOPE_DEGREE := 0.1]
   dt.out[,B_AREA_DROUGHT := TRUE]
   dt.out[, B_FERT_NORM_FR := 1]
-  dt.out[,B_GWL_CLASS := OBIC::format_gwt(B_GWL_CLASS)]
 
-  # calculate GWL_CLASS_WDM
-  dt.out[B_GWL_GLG_WDM <= 50, B_GWL_CLASS_WDM := 'GtI']
-  dt.out[B_GWL_GLG_WDM > 50 & B_GWL_GLG_WDM <= 80 & B_GWL_GHG_WDM <= 40, B_GWL_CLASS_WDM := 'GtII']
-  dt.out[B_GWL_GLG_WDM > 80 & B_GWL_GLG_WDM <= 120 & B_GWL_GHG_WDM <= 40, B_GWL_CLASS_WDM := 'GtIII']
-  dt.out[B_GWL_GLG_WDM > 80 & B_GWL_GLG_WDM <= 120 & B_GWL_GHG_WDM > 40, B_GWL_CLASS_WDM := 'GtIV']
-  dt.out[B_GWL_GLG_WDM > 120 & B_GWL_GHG_WDM <= 40, B_GWL_CLASS_WDM := 'GtV']
-  dt.out[B_GWL_GLG_WDM > 120 & B_GWL_GHG_WDM > 40 & B_GWL_GHG_WDM <= 80, B_GWL_CLASS_WDM := 'GtVI']
-  dt.out[B_GWL_GLG_WDM > 120 & B_GWL_GHG_WDM > 80 & B_GWL_GHG_WDM <= 140, B_GWL_CLASS_WDM := 'GtVII']
-  dt.out[B_GWL_GLG_WDM > 120 & B_GWL_GHG_WDM > 140, B_GWL_CLASS_WDM := 'GtVII']
-  dt.out[B_GWL_GHG_WDM==B_GWL_GLG_WDM & B_GWL_GLG_WDM > 50 & B_GWL_GLG_WDM <= 80,B_GWL_CLASS_WDM := 'GtII']
-  dt.out[is.na(B_GWL_CLASS_WDM), B_GWL_CLASS_WDM := B_GWL_CLASS]
-
-  # calculate GWL_CLASS_AGV
-  dt.out[B_GWL_GLG_AGV <= 50, B_GWL_CLASS_AGV := 'GtI']
-  dt.out[B_GWL_GLG_AGV > 50 & B_GWL_GLG_AGV <= 80 & B_GWL_GHG_AGV <= 40, B_GWL_CLASS_AGV := 'GtII']
-  dt.out[B_GWL_GLG_AGV > 80 & B_GWL_GLG_AGV <= 120 & B_GWL_GHG_AGV <= 40, B_GWL_CLASS_AGV := 'GtIII']
-  dt.out[B_GWL_GLG_AGV > 80 & B_GWL_GLG_AGV <= 120 & B_GWL_GHG_AGV > 40, B_GWL_CLASS_AGV := 'GtIV']
-  dt.out[B_GWL_GLG_AGV > 120 & B_GWL_GHG_AGV <= 40, B_GWL_CLASS_AGV := 'GtV']
-  dt.out[B_GWL_GLG_AGV > 120 & B_GWL_GHG_AGV > 40 & B_GWL_GHG_AGV <= 80, B_GWL_CLASS_AGV := 'GtVI']
-  dt.out[B_GWL_GLG_AGV > 120 & B_GWL_GHG_AGV > 80 & B_GWL_GHG_AGV <= 140, B_GWL_CLASS_AGV := 'GtVII']
-  dt.out[B_GWL_GLG_AGV > 120 & B_GWL_GHG_AGV > 140, B_GWL_CLASS_AGV := 'GtVII']
-  dt.out[B_GWL_GHG_AGV==B_GWL_GLG_AGV & B_GWL_GLG_AGV > 50 & B_GWL_GLG_AGV <= 80,B_GWL_CLASS_AGV := 'GtII']
+  dt.out[B_GWL_CLASS_int == 1, B_GWL_CLASS := 'Ia']
+  dt.out[B_GWL_CLASS_int == 2, B_GWL_CLASS := 'Ic']
+  dt.out[B_GWL_CLASS_int == 3, B_GWL_CLASS := 'IIa']
+  dt.out[B_GWL_CLASS_int == 4, B_GWL_CLASS := 'IIb']
+  dt.out[B_GWL_CLASS_int == 5, B_GWL_CLASS := 'IIc']
+  dt.out[B_GWL_CLASS_int == 6, B_GWL_CLASS := 'IIIa']
+  dt.out[B_GWL_CLASS_int == 7, B_GWL_CLASS := 'IIIb']
+  dt.out[B_GWL_CLASS_int == 8, B_GWL_CLASS := 'IVu']
+  dt.out[B_GWL_CLASS_int == 9, B_GWL_CLASS := 'IVc']
+  dt.out[B_GWL_CLASS_int == 10, B_GWL_CLASS := 'Vao']
+  dt.out[B_GWL_CLASS_int == 11, B_GWL_CLASS := 'Vad']
+  dt.out[B_GWL_CLASS_int == 12, B_GWL_CLASS := 'Vbo']
+  dt.out[B_GWL_CLASS_int == 13, B_GWL_CLASS := 'Vbd']
+  dt.out[B_GWL_CLASS_int == 14, B_GWL_CLASS := 'VIo']
+  dt.out[B_GWL_CLASS_int == 15, B_GWL_CLASS := 'VId']
+  dt.out[B_GWL_CLASS_int == 16, B_GWL_CLASS := 'VIIo']
+  dt.out[B_GWL_CLASS_int == 17, B_GWL_CLASS := 'VIId']
+  dt.out[B_GWL_CLASS_int == 18, B_GWL_CLASS := 'VIIIo']
+  dt.out[B_GWL_CLASS_int == 19, B_GWL_CLASS := 'VIIId']
+  dt.out[,B_GWL_CLASS_int := NULL]
 
   # add crop categories
   dt.out <- merge(dt.out,
