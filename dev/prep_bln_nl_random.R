@@ -83,10 +83,12 @@ nmi.site<- Sys.getenv('NMI_SITE')
     for(i in syear){
 
       # read in the BRP for the selected years
-      if(i <= 2022){
+      if(file.exists(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',i,'.gpkg'))){
         tmp1 <- st_read(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',i,'.gpkg'))
-      } else {
+      } else if(file.exists(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',i,'_concept.gpkg'))){
         tmp1 <- st_read(paste0(nmi.dat, 'landgebruik/brp/products/brpgewaspercelen_',i,'_concept.gpkg'))
+      } else{
+        warning(paste0('cannot find brp file for year ', i))
       }
 
       # set the crs to Amersfoort new and join
