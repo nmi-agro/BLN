@@ -289,8 +289,7 @@ readBRP <- function(years,sf.sel){
   vect.sel <- terra::vect(sf.sel)
   dt.gwl <- terra::extract(tmp2,vect.sel)
   dt.gwl <- as.data.table(dt.gwl)
-  dt.gwl[,ref_id := vect.sel$ref_id]
-  setnames(dt.gwl,c('ID','B_GWL_GHG','B_GWL_GLG','B_GWL_CLASS_int','ref_id'))
+  setnames(dt.gwl,c('id','B_GWL_GHG','B_GWL_GLG','B_GWL_CLASS_int'))
   print(paste0('dataset merged with GWL maps ',dt.gwl[is.na(B_GWL_GHG),length(unique(ref_id))],' samples are missing'))
   rm(tmp2, r.gwl.ghg, r.gwl.glg, r.gwl.class)gc()
 
