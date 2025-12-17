@@ -314,6 +314,13 @@ readBRP <- function(years,sf.sel){
   dt.somers <- extractwithbuffer(dtte = dt.somers,spo = sf.sel,dt.sf = tmp1, dbn = 'somers',parm='Basiscomb',sbuffer=c(100,500))
   saveRDS(dt.somers,'D:/DATA/18 bln/brp24_somers1.rds')
 
+  # load hydrocat
+  tmp1 <- st_read(paste0(nmi.dat, 'topo/landschapscategorie/B_LSC_HYDROCAT.gpkg'))
+  dt.lsc <- st_join(sf.sel,tmp1,largest = TRUE, left = TRUE, join = st_nearest_feature)
+  dt.lsc <- as.data.table(dt.lsc)
+  dt.lsc <- extractwithbuffer(dtte = dt.lsc, spo = sf.sel, st.sf = tmp1, dbn = 'Hydrologisch landschaps categorie', parm = 'B_LSC_HYDROCAT')
+  saveRDS(dt.lsc, 'D:/DATA/18 bln/brp24_b_lsc_hydrocat.rds')
+
   # load peilgebieden
   # https://service.pdok.nl/hwh/waterbeheergebiedenimwa/atom/waterschappen_waterbeheergebieden_imwa.xml
   tmp1 <-  as.data.table(st_read('D:/ROSG/2057.N.24 Bodemkwaliteit RVB/01 data/peilgebieden_gecombineerd.gpkg'))
@@ -413,6 +420,7 @@ readBRP <- function(years,sf.sel){
   dt.zcrit <- readRDS('D:/DATA/18 bln/brp24_zcrit.rds')
   dt.somers <- readRDS('D:/DATA/18 bln/brp24_somers2.rds')
   dt.prov <- readRDS('D:/DATA/18 bln/brp24_prov.rds')
+  dt.lsc <- readRDS('D:/DATA/18 bln/brp24_b_lsc_hydrocat.rds')
 
   # merge collected data and estimate derivates
   dt.out <- copy(dt.brp[,.(id,ref_id_2024,B_LU_BRP)])
@@ -484,6 +492,9 @@ readBRP <- function(years,sf.sel){
   rm(dt.saw);gc()
   dt.out <- merge(dt.out,dt.somers, by= 'id',all.x=TRUE)
   rm(dt.somers);gc()
+  # add hydrocat
+  dt.out <- merge(dt.out,dt.lsc, by= 'id',all.x=TRUE)
+  rm(dt.lsc);gc()
 
   # remove files not needed any more
   rm(dt.sf,d1.sf,dt.brp,s1.sel,sf.sel,brp);gc()
