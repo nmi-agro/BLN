@@ -325,11 +325,6 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_SILT_MI', value_min]),
                                 upper = blnAssertUpper(BLN::bln_parms[code == 'A_SILT_MI', value_max]))
   }
-  if('A_DENSITY_SA' %in% requiredFunctionArguments){
-      checkmate::assert_numeric(A_DENSITY_SA, any.missing = FALSE, len = arg.length,
-                                lower = blnAssertLower(BLN::bln_parms[code == 'A_DENSITY_SA', value_min]),
-                                upper = blnAssertUpper(BLN::bln_parms[code == 'A_DENSITY_SA', value_max]))
-  }
   if('A_FE_OX' %in% requiredFunctionArguments){
       checkmate::assert_numeric(A_FE_OX, any.missing = FALSE, len = arg.length,
                                 lower = blnAssertLower(BLN::bln_parms[code == 'A_FE_OX', value_min]),
@@ -561,6 +556,9 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   checkmate::assert_flag(runrothc)
   checkmate::assert_flag(mc)
   checkmate::assert_flag(quiet)
+  checkmate::assert_numeric(A_DENSITY_SA, any.missing = TRUE, max.len = arg.length,
+                            lower = blnAssertLower(BLN::bln_parms[code == 'A_DENSITY_SA', value_min]),
+                            upper = blnAssertUpper(BLN::bln_parms[code == 'A_DENSITY_SA', value_max]))
 
   # make internal table -----
   dt <- data.table(ID = ID,
