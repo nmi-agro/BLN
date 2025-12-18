@@ -89,4 +89,47 @@ test_that("wf works", {
 
 })
 
+test_that('funArgs returns a list of function arguments',{
+  expect_equal(
+    object = funArgs('bln_p_density', 'all'),
+    expected = c('A_SOM_LOI', 'A_CLAY_MI','A_DENSITY_SA')
+  )
+
+  expect_equal(
+    object = funArgs('bln_p_density', 'optional'),
+    expected = c('A_DENSITY_SA')
+  )
+
+  expect_equal(
+    object = funArgs('bln_p_density', 'required'),
+    expected = c('A_SOM_LOI', 'A_CLAY_MI')
+  )
+
+  expect_equal(
+    object = funArgs('sd', 'all'),
+    expected = c('x', 'na.rm')
+  )
+
+  expect_equal(
+    object = funArgs('sd', 'required'),
+    expected = c('x')
+  )
+
+  expect_equal(
+    object = funArgs('sd', 'optional'),
+    expected = c('na.rm')
+  )
+})
+
+test_that('funArgsV works with a vector of function names as input',{
+  expect_equal(
+    object = funArgsV(c('colSums', 'exists'), 'required'),
+    expected = c('x', 'frame')
+  )
+
+  expect_equal(
+    object = funArgsV(c('colSums', 'exists'), 'all'),
+    expected = c('x', 'na.rm', 'dims', "where", "envir", "frame", "mode", "inherits")
+  )
+})
 

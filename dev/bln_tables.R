@@ -22,6 +22,9 @@
   bln_parms[, type := 'measurement']
   bln_parms[grepl('_BCS$', code), type := 'visual soil assessment']
   bln_parms[grepl('^B_', code), type := 'field property']
+  bln_parms[grepl('^M_', code), type := 'soil management measure']
+  bln_parms[grepl('^D_', code), type := 'characteristic derived from measurement']
+  bln_parms[grepl('^I_', code), type := 'indicator']
 
   # select columns
   setnames(bln_parms, 'parameter', 'description')

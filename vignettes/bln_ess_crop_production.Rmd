@@ -158,7 +158,7 @@ An example of both wrapper functions are illustrated below. The soil has an BLN 
   
   # select the data for de Marke farm
   dt <- copy(BLN::bln_farm_hf)
-  dt <- dt[id==1]
+  dt <- dt[id=='1']
   
   # run the bln_field with default management measures and no visual assessment data
   o1 <- bln_field(ID = dt$id,B_LU_BRP = dt$B_LU_BRP,B_SC_WENR = dt$B_SC_WENR,
@@ -576,13 +576,13 @@ An example of this function is illustrated below for six different soils varying
 ```{r,fig.width = 7, fig.height = 4,fig.fullwidth = TRUE,echo=FALSE}
   
   # subset a series of agricultural fields
-  dt.test <- data.table(ID = 1:6,
+  dt.test <- data.table(ID = as.character(1:6),
                         B_HELP_WENR = c("Rd10A","zEZ21","Rd90A","pZg23","pZg21","U40Tnr007"),
                         B_LU_BRP = c(265,265,259,259,233,175)
                         )
 
   # add different Gt levels
-  dt.test <- merge(dt.test,CJ(ID=1:6,B_GWL_CLASS = c('I','III','VI','VIII')),by='ID')
+  dt.test <- merge(dt.test,CJ(ID=as.character(1:6),B_GWL_CLASS = c('I','III','VI','VIII')),by='ID')
   
   # calculate drought stress and wetness stress
   dt.test[, i_p_ds := bln_p_droughtstress(B_HELP_WENR, B_LU_BRP, B_GWL_CLASS, WSI = "droughtstress")]
@@ -617,9 +617,9 @@ Sealing is the process whereby soil aggregates disintegrate under the influence 
 
 The vulnerability of soils to sealing and wind erosion is derived from those properties controlling the susceptibility for both risks. These include the clay content as well as the organic matter content, where the vulnerability for sealing is derived from field expert-based observations and associated yield depression in particular for some arable crops. Wind erosion is highly controlled by the mineralogical composition and texture as well as the presence of growing crops. Using laboratory experiments from wind tunnels, a exponential function has been developed to estimate the erodibility risk for soils, given the clay and silt content of a field. Grasslands are not susceptible for these two risks.
 
-The risk for soil sealing can be assessed via the function `bln_p_sealing` whereas the risk for soil erosion due to wind is assessed via the function `bln_p_windererosion`. The wind erodibility can be estimated from the inputs land use, clay and silt content of the topsoil whereas the risk for sealing depends on the clay content as well as the organic matter content of the soil.
+The risk for soil sealing can be assessed via the function `bln_p_sealing` whereas the risk for soil erosion due to wind is assessed via the function `bln_p_winderosion`. The wind erodibility can be estimated from the inputs land use, clay and silt content of the topsoil whereas the risk for sealing depends on the clay content as well as the organic matter content of the soil.
 
-For more details, see `?bln_p_sealing` and `?bln_p_windererosion`. 
+For more details, see `?bln_p_sealing` and `?bln_p_winderosion`. 
 
 An example of these functions is illustrated below for an arable soil with variable clay content for both an cropland (with organic matter levels of 3.5%) and a grassland soil (with organic matter levels of 5%). 
 
@@ -646,7 +646,7 @@ An example of these functions is illustrated below for an arable soil with varia
   
   # estimate the presence / risk for surface sealing and wind erodibility
   dt.test[, i_p_se := bln_p_sealing(B_LU_BRP, A_SOM_LOI, A_CLAY_MI)]
-  dt.test[, i_p_du := bln_p_windererosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
+  dt.test[, i_p_du := bln_p_winderosion(B_LU_BRP, A_CLAY_MI, A_SILT_MI)]
    
   # set land use
   dt.test[,luse := fifelse(B_LU_BRP==265,'grass','cropland')]

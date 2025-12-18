@@ -401,3 +401,119 @@ bln_format_aer <- function(B_AER_CBS,type='name') {
   # Return B_AER_CBS
   return(B_AER_CBS)
 }
+
+#' Get vector of function arguments
+#'
+#' @param functionName Quoted name of a function
+#' @param whichArgs Select whether you want to return all arguments ('all'),
+#' arguments without defaults ('required') or arguments with defaults ('optional'). Default is 'all'.
+#'
+#' @examples
+#' funArgs('sd')
+#' funArgs('sd', whichArgs = 'required')
+#' funArgs('sd', whichArgs = 'optional')
+#'
+#' @return a character vector of function argument names
+#' @export
+funArgs <- function(functionName, whichArgs = 'all'){
+  checkmate::assert_character(functionName)
+  checkmate::assert_true(existsFunction(functionName), .var.name = paste0('existsFunction(',functionName, ')'))
+  checkmate::assert_subset(whichArgs,
+                           choices = c('all', 'required', 'optional'))
+
+  arg.list <- formals(functionName)
+  functionArguments <- character(0)
+
+  if (whichArgs == 'all') {
+    functionArguments <- names(arg.list)
+  } else {
+    has_default <- sapply(arg.list, function(arg) !identical(arg, substitute()))
+    if (whichArgs == 'optional') {
+      functionArguments <- names(arg.list)[has_default]
+    } else { # 'required'
+      functionArguments <- names(arg.list)[!has_default]
+    }
+  }
+
+  return(functionArguments)
+}
+
+#' Get a vector of function arguments for multiple functions
+#'
+#' @description This function is a wrapper around funArgs. It takes a vector of
+#' function names and returns a single character vector with unique argument names.
+#'
+#' @param functionNameVector A character vector of function names.
+#' @param whichArgs Select whether you want to return all arguments ('all'),
+#' arguments without defaults ('required') or arguments with defaults ('optional').
+#' Default is 'all'.
+#'
+#' @return A character vector of unique function argument names.
+#'
+#' @examples
+#' funArgsV(c('sd', 'mean'))
+#' funArgsV(c('sd', 'mean'), whichArgs = 'required')
+#'
+#' @export
+funArgsV <- function(functionNameVector, whichArgs = 'all'){
+
+  # check inputs
+  checkmate::assert_character(functionNameVector, any.missing = FALSE, min.len = 1)
+  checkmate::assert_subset(whichArgs, choices = c('all', 'required', 'optional'))
+
+  # get arguments for all functions in the vector
+  args_list <- lapply(functionNameVector,
+                      FUN = funArgs,
+                      whichArgs = whichArgs)
+
+  # unlist and return unique arguments
+  return(unique(unlist(args_list)))
+}
+
+#' Aid to assert upper values
+#'
+#' Checks whether x is numeric and not NA. If so, returns x, else returns Inf
+#'
+#' @param x a value obtained by `bln_parms[code == 'variable_name', value_max]`
+#'
+#' @return x when it is numeric and not NA, else returns Inf
+#'
+#' @examples
+#' blnAssertUpper(2)
+#' blnAssertUpper('')
+#' blnAssertUpper(NA_real_)
+#'
+#' # example in context
+#' A_SOM_LOI <- 5
+#' checkmate::assert_numeric(A_SOM_LOI,
+#' any.missing = FALSE, len = arg.length,
+#' lower = BLN::bln_parms[code == 'A_SOM_LOI', value_min],
+#' upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI', value_max])
+#' )
+#'
+#' @export
+blnAssertUpper <- function(x){
+  out <- NULL
+  if(is.numeric(x) & !is.na(x)){out <- x} else{out <- Inf}
+  return(out)
+}
+
+#' Aid to assert lower values
+#'
+#' Checks whether x is numeric and not NA. If so, returns x, else returns -Inf
+#'
+#' @param x a value obtained by `bln_parms[code == 'variable_name', value_min]`
+#'
+#' @return x when it is numeric and not NA, else returns -Inf
+#'
+#' @examples
+#' blnAssertLower(2)
+#' blnAssertLower('')
+#' blnAssertLower(NA_real_)
+#'
+#' @export
+blnAssertLower <- function(x){
+  out <- NULL
+  if(is.numeric(x) & !is.na(x)){out <- x} else{out <- -Inf}
+  return(out)
+}

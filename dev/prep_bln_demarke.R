@@ -344,11 +344,14 @@ bln_farm_hf <- copy(dt.out)
 # rm Gt
 bln_farm_hf[, B_GWL_CLASS := gsub('Gt', '', B_GWL_CLASS)]
 
+# set id to character
+bln_farm_hf[, id := as.character(id)]
+bln_farm_hf[, B_LSW_ID := as.character(B_LSW_ID)]
+
 # save measures as bbwp table
 usethis::use_data(bln_farm_hf, overwrite = TRUE)
 
-
-# prepare LSW datafile for calculations BLN
+# prepare LSW datafile for calculations BLN=======
 
 # shape file to extract data for
 s1.sel <- st_read('dev/bln_demarke.gpkg')

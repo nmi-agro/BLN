@@ -12,7 +12,7 @@
 #' The vulnerability of the soil for wind erosion. A numeric value.
 #'
 #' @export
-bln_p_windererosion <- function(B_LU_BRP,A_CLAY_MI,A_SILT_MI) {
+bln_p_winderosion <- function(B_LU_BRP,A_CLAY_MI,A_SILT_MI) {
 
   # add visual bindings
   id = crop_code = crop_cat1 = loam = NULL

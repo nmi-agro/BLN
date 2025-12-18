@@ -88,7 +88,7 @@ test_that("bln_field works", {
   dt.farm <- BLN::bln_farm_hf
 
   # sselect five fields
-  dt.farm <- dt.farm[id ==1]
+  dt.farm <- dt.farm[id =='1']
 
   # run BLN
   d1 <- bln_field_optimiser(ID = dt.farm$ref_id_2022,
