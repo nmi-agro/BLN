@@ -79,7 +79,7 @@ bln_p_workability <- function(A_CLAY_MI, A_SILT_MI, B_LU_BRP, B_SOILTYPE_AGR,
 #' This function calculates the indicator for the workability of the soil expressed as the period in which the soil can be worked without
 #' inflicting structural damage that cannot be restored by the regular management on the farm.
 #'
-#' @param D_WO (numeric) The value of the relative (workable) season length calculated by \code{\link{calc_workability}}
+#' @param D_WO (numeric) The value of the relative (workable) season length calculated by \code{\link{OBIC::calc_workability}}
 #' @param B_LU_BRP (numeric) The crop code from the BRP
 #'
 #' @examples
