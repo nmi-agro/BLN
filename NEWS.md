@@ -1,4 +1,8 @@
-# BLN 0.10.0 2025-xx-xx
+# BLN 0.10.1 2025-12-19
+## Fixed
+* A function call with deprecated arguments OBIC::ind_gw_recharge()
+
+# BLN 0.10.0 2025-08-07
 ## Changed
 * the format of groundwater class values (B_GWL_CLASS) that are accepted by BLN 
 functions and recorded in BLN tables. Acceptable input values for B_GWL_CLASS are now:
