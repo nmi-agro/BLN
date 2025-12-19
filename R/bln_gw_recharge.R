@@ -79,12 +79,23 @@ bln_wat_groundwater_recharge <- function(ID,B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_DRA
   dt[, D_PSP := bln_calc_psp(ID = FIELD_ID, B_LU_BRP, M_GREEN)]
   dt[, D_WRI_K := OBIC::calc_permeability(A_CLAY_MI,A_SAND_MI,A_SILT_MI,A_SOM_LOI)]
 
-  # estimate distance to target for soil compaction and sealing
-  dt[, I_P_CO := OBIC::ind_compaction(B_SC_WENR)]
-  dt[, I_P_SE := OBIC::ind_sealing(D_SE, B_LU_BRP)]
-
   # calculate indicator for groundwater recharge
-  dt[, value := OBIC::ind_gw_recharge(B_LU_BRP, D_PSP, D_WRI_K, I_P_SE, I_P_CO, B_DRAIN, B_GWL_CLASS)]
+  if (utils::packageVersion("OBIC") >= "4.2.0") {
+    dt[, value := OBIC::ind_gw_recharge(B_LU_BRP = B_LU_BRP,
+                                        D_PSP = D_PSP,
+                                        D_WRI_K = D_WRI_K,
+                                        B_DRAIN = B_DRAIN,
+                                        B_GWL_CLASS = B_GWL_CLASS,
+                                        D_SE = D_SE,
+                                        B_SC_WENR = B_SC_WENR)]
+  } else {
+    # estimate distance to target for soil compaction and sealing
+    dt[, I_P_CO := OBIC::ind_compaction(B_SC_WENR)]
+    dt[, I_P_SE := OBIC::ind_sealing(D_SE, B_LU_BRP)]
+
+    # calculate indicator for groundwater recharge
+    dt[, value := OBIC::ind_gw_recharge(B_LU_BRP, D_PSP, D_WRI_K, I_P_SE, I_P_CO, B_DRAIN, B_GWL_CLASS)]
+  }
 
   # extract value I_H_GWR
   value <- dt[, value]
