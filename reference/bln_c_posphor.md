@@ -1,0 +1,56 @@
+# Calculate the phosphate availability index in the Netherlands
+
+This function calculates the phosphate availability.
+
+## Usage
+
+``` r
+bln_c_posphor(B_LU, A_P_AL = NA_real_, A_P_CC = NA_real_, A_P_WA = NA_real_)
+```
+
+## Arguments
+
+- B_LU:
+
+  (numeric) The crop code
+
+- A_P_AL:
+
+  (numeric) The P-content of the soil extracted with ammonium lactate
+
+- A_P_CC:
+
+  (numeric) The P-content of the soil extracted with CaCl2
+
+- A_P_WA:
+
+  (numeric) The P-content of the soil extracted with water
+
+## Value
+
+The phosphate availability index in the Netherlands estimated from
+extractable soil P fractions. A numeric value.
+
+## Details
+
+The category a cultivation supplied by B_LU belongs to determines which
+P extraction parameter are required. Not supplying the correct P
+parameter for a cultivation results in the function returning NA. The
+cultivation categories can be found in table bln_crops, column
+crop_cat1. Column crop_code in this table should correspond to the B_LU
+input of bln_c_posphor.
+
+There are four cultivation categories: grass, maize, arable, and nature.
+Grass and maize classified cultivations require the parameters A_P_AL
+and A_P_CC, arable cultivations require A_P_WA, and nature does not
+require any P parameter. The phosphate availability index for nature
+defaults to 0.
+
+## Examples
+
+``` r
+bln_c_posphor(B_LU = 265, A_P_AL = 45, A_P_CC = 2.5)
+#> [1] 0.9069136
+bln_c_posphor(B_LU = c(265,1019),A_P_AL = c(35,54),A_P_CC = c(2.5,4.5), A_P_WA = c(35,65))
+#> [1] 0.9180670 0.9966953
+```

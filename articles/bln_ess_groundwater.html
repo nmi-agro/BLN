@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BLN</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
       <h1>bln_ess_groundwater</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AgroCares/BLN/blob/v0.10.0/vignettes/bln_ess_groundwater.Rmd" class="external-link"><code>vignettes/bln_ess_groundwater.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AgroCares/BLN/blob/main/vignettes/bln_ess_groundwater.Rmd" class="external-link"><code>vignettes/bln_ess_groundwater.Rmd</code></a></small>
       <div class="d-none name"><code>bln_ess_groundwater.Rmd</code></div>
     </div>
 
@@ -141,7 +141,7 @@ relate to the water needs of types of landuse.</p>
 <span>      <span class="op">)</span></span></code></pre></div>
 <p>Below we illustrate how these indicators react to changes in soil
 texture, groundwater level, and crop type.</p>
-<p><img src="bln_ess_groundwater_files/figure-html/groundwater_recharge_sensitivity_figures-1.png" width="768"></p>
+<p><img src="bln_ess_groundwater_files/figure-html/groundwater_recharge_sensitivity_figures-1.png" class="r-plt" width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="nutrient-buffering">Nutrient buffering<a class="anchor" aria-label="anchor" href="#nutrient-buffering"></a>
@@ -160,18 +160,18 @@ ones, have higher risks and score lower if all else stays the same. See
 the differences for sand, peat, and clay when soil organic matter =
 1.7%, total nitrogen = 2500 mg N kg<sup>-1</sup>, and the C:N ratio is
 10.</p>
-<p><img src="bln_ess_groundwater_files/figure-html/nitrogen_retention_demo_soiltype-1.png" width="672"></p>
+<p><img src="bln_ess_groundwater_files/figure-html/nitrogen_retention_demo_soiltype-1.png" class="r-plt" width="672"></p>
 <p>The soil organic matter content, C:N ratio and total soil nitrogen
 can also affect the N retention score (i_gw_nret) and risk of N leaching
 to groundwater (i_gw_ngw and i_gw_nlea).</p>
-<p><img src="bln_ess_groundwater_files/figure-html/nitrogen_retention_demo_N_content-1.png" width="672"></p>
+<p><img src="bln_ess_groundwater_files/figure-html/nitrogen_retention_demo_N_content-1.png" class="r-plt" width="672"></p>
 <p>The risk of leaching nitrogen to groundwater (i_gw_nlea) is primarily
 determined by the soil type (as seen above) and crop (see below). The
 function used to calculate this indicator corrects for situations where
 supply of P and K and the pH are optimal. In such situations, the risk
 of leaching is reduced as crops are likely to take up more nitrogen
 under ideal conditions.</p>
-<p><img src="bln_ess_groundwater_files/figure-html/demo_nitrogen_leaching_for_different_crops-1.png" width="672"></p>
+<p><img src="bln_ess_groundwater_files/figure-html/demo_nitrogen_leaching_for_different_crops-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="contaminant-buffering">Contaminant buffering<a class="anchor" aria-label="anchor" href="#contaminant-buffering"></a>
@@ -190,7 +190,7 @@ soil organic matter content. <span class="citation">van den Dool et al.
 demonstration in practice. They based the development of the function on
 the formula described by <span class="citation">Tiktak et al.
 (2006)</span>.</p>
-<p><img src="bln_ess_groundwater_files/figure-html/pesticide_demo-1.png" width="672"></p>
+<p><img src="bln_ess_groundwater_files/figure-html/pesticide_demo-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -241,7 +241,7 @@ Y</strong>, &amp; <strong>Riechelman B</strong> (2023).
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
