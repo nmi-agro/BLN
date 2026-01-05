@@ -123,6 +123,7 @@ bln_field <- function(ID, B_LU_BRP,B_SC_WENR,B_GWL_CLASS,B_SOILTYPE_AGR,B_HELP_W
   B_RO_R = B_RO_R_SD = B_P_CC = B_P_CC_SD = B_P_SG = B_P_SG_SD = B_AL_OX = B_AL_OX_SD = B_FE_OX = B_FE_OX_SD = NULL
   i_nut_n = i_nut_p = i_nut_k = i_nut_nue = . = crop_code = crop_category = value = indicator = NULL
   cat1 = cat2 = crop_cat = weight = cf = value.w = ncat = cf_yr = code = choices = NULL
+  variable = ess_theme = sub_group = bln_function = value_min = value_max = NULL
 
   # check function inputs -----
     checkmate::assert_character(output,len=1)
