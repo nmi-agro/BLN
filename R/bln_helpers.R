@@ -414,6 +414,7 @@ bln_format_aer <- function(B_AER_CBS,type='name') {
 #' funArgs('sd', whichArgs = 'optional')
 #'
 #' @return a character vector of function argument names
+#' @importFrom methods existsFunction
 #' @export
 funArgs <- function(functionName, whichArgs = 'all'){
   checkmate::assert_character(functionName)
@@ -479,19 +480,20 @@ funArgsV <- function(functionNameVector, whichArgs = 'all'){
 #' @return x when it is numeric and not NA, else returns Inf
 #'
 #' @examples
-#' blnAssertUpper(2)
-#' blnAssertUpper('')
-#' blnAssertUpper(NA_real_)
+#' \dontrun{
+#' BLN:::blnAssertUpper(2)
+#' BLN:::blnAssertUpper('')
+#' BLN:::blnAssertUpper(NA_real_)
 #'
 #' # example in context
 #' A_SOM_LOI <- 5
+#' arg.length = length(A_SOM_LOI)
 #' checkmate::assert_numeric(A_SOM_LOI,
 #' any.missing = FALSE, len = arg.length,
-#' lower = BLN::bln_parms[code == 'A_SOM_LOI', value_min],
-#' upper = blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI', value_max])
+#' upper = BLN:::blnAssertUpper(BLN::bln_parms[code == 'A_SOM_LOI', value_max])
 #' )
-#'
-#' @export
+#'}
+#' @keywords internal
 blnAssertUpper <- function(x){
   out <- NULL
   if(is.numeric(x) & !is.na(x)){out <- x} else{out <- Inf}
@@ -507,11 +509,20 @@ blnAssertUpper <- function(x){
 #' @return x when it is numeric and not NA, else returns -Inf
 #'
 #' @examples
-#' blnAssertLower(2)
-#' blnAssertLower('')
-#' blnAssertLower(NA_real_)
+#' \dontrun{
+#' BLN:::blnAssertLower(2)
+#' BLN:::blnAssertLower('')
+#' BLN:::blnAssertLower(NA_real_)
 #'
-#' @export
+#' # example in context
+#' A_SOM_LOI <- 5
+#' arg.length = length(A_SOM_LOI)
+#' checkmate::assert_numeric(A_SOM_LOI,
+#' any.missing = FALSE, len = arg.length,
+#' lower = BLN:::blnAssertLower(BLN::bln_parms[code == 'A_SOM_LOI', value_min])
+#' )
+#'}
+#' @keywords internal
 blnAssertLower <- function(x){
   out <- NULL
   if(is.numeric(x) & !is.na(x)){out <- x} else{out <- -Inf}

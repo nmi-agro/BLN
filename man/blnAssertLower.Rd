@@ -16,8 +16,18 @@ x when it is numeric and not NA, else returns -Inf
 Checks whether x is numeric and not NA. If so, returns x, else returns -Inf
 }
 \examples{
-blnAssertLower(2)
-blnAssertLower('')
-blnAssertLower(NA_real_)
+\dontrun{
+BLN:::blnAssertLower(2)
+BLN:::blnAssertLower('')
+BLN:::blnAssertLower(NA_real_)
 
+# example in context
+A_SOM_LOI <- 5
+arg.length = length(A_SOM_LOI)
+checkmate::assert_numeric(A_SOM_LOI,
+any.missing = FALSE, len = arg.length,
+lower = BLN:::blnAssertLower(BLN::bln_parms[code == 'A_SOM_LOI', value_min])
+)
 }
+}
+\keyword{internal}
