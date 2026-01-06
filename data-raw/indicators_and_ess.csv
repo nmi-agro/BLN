@@ -1,0 +1,37 @@
+﻿naam;Rfun;variabele;esd_thema;sub_groep
+NLV;BLN::bln_c_nitrogen;i_c_n;esd_prod;chemistry
+P beschikbaarheid;BLN::bln_c_posphor;i_c_p;esd_prod;chemistry
+K beschikbaarheid;BLN::bln_c_potassium;i_c_k;esd_prod;chemistry
+Mg beschikbaarheid beoordeling;BLN::bln_c_magnesium;i_c_mg;esd_prod;chemistry
+Zwavel levering;BLN::bln_c_sulfur;i_c_s;esd_prod;chemistry
+Waardering delta pH;OBIC::ind_ph;I_C_PH;esd_prod;chemistry
+Waardering delta pH;BLN::bln_c_ph;i_c_ph;esd_prod;chemistry
+Verslempingsrisico waardering;OBIC::ind_sealing;i_p_se;esd_prod;physics
+Droogtestresindex;OBIC::ind_waterstersindex;i_p_ds;esd_prod;physics
+Natte stresindex;OBIC::ind_waterstersindex;i_p_ws;esd_prod;physics
+Erodibiliteitsfactor index;BLN::bln_p_winderosion;i_p_du;esd_prod;physics
+Ondergrondverdichtingscore;BLN::bln_p_compaction;i_p_co;esd_prod;physics
+Ondergrondverdichtingscore;OBIC::ind_compaction;i_p_co;esd_prod;physics
+Water holding capacity;BLN::bln_p_whc;i_p_whc;esd_prod;physics
+Water holding capacity;OBIC_ind_waterretention;i_p_whc;esd_prod;physics
+Aggregaatstabiliteitsindex;BLN::bln_p_aggstability;i_p_as;esd_prod;physics
+Bewerkbaarheidsindex;OBIC::ind_workability;i_p_wo;esd_prod;physics
+Ziektewerendheid index;OBIC::ind_resistance;i_b_di;esd_prod;biology
+Mineraliseerbaar stikstof index;OBIC::ind_pmn;i_b_sf;esd_prod;biology
+Grondwateraanvulling index;OBIC::ind_gw_target;i_e_gwr;esd_water;gw_quantity
+Soil water content capacity;BLN::bln_bbwp_bw;i_gw_wb;esd_water;gw_quality
+Weerstand tegen nitraatuitspoeling naar grondwater;BLN::bln_bbwp_ngw;i_gw_ngw;esd_water;gw_quality
+Risico op pesticide uitspoeling;BLN::bln_wat_pesticide;i_gw_pest;esd_water;sw_quality
+Het tegengaan van uitspoeling van toegediende stikstof naar grondwater;OBIC::ind_n_efficiency;i_e_gw_nlea;esd_water;gw_quality
+Het tegengaan van uitspoeling van toegediende stikstof naar oppervlaktewater;OBIC::ind_n_efficiency;i_e_sw_nlea;esd_water;sw_quality
+Voorkomen van stikstofuitspoeling uit de bodem;OBIC::ind_n_retention;i_e_gw_nret;esd_water;gw_quality
+Voorkomen van stikstofuitspoeling uit de bodem;OBIC::ind_n_retention;i_e_sw_nret;esd_water;sw_quality
+Stikstofreinigend vermogen naar oppervlaktewater;BLN::bln_bbwp_nsw;i_sw_nsw;esd_water;sw_quality
+Fosfaatreinigend vermogen naar oppervlaktewater;BLN::bln_bbwp_psw;i_sw_psw;esd_water;sw_quality
+Organischestof balans;OBIC::calc_sombalance;i_clim_osb;esd_climate;climate
+Koolstofvastlegging;BLN::bln_clim_rothc;i_clim_rothc;esd_climate;climate
+Veenafbraak;BLN::bln_clim_somers;i_clim_somers;esd_climate;climate
+NUE-N;BLN::i_nut_nitrogen;i_nut_n;esd_nutcycle;macronutrient
+NUE-P;BLN::i_nut_phosphorus;i_nut_p;esd_nutcycle;macronutrient
+NUE-K;BLN::i_nut_potassium;i_nut_k;esd_nutcycle;macronutrient
+NUE;bln_nut_nue;i_nut_nue;esd_nutcycle;macronutrient
