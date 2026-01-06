@@ -1,0 +1,11 @@
+omschrijving,thema,effect_omschrijving,bodem_gerelateerd,esd,effect,reductie_nh3,recuctie_ch4,reductie_n2o,daling_no3_(mg/l),esd_prod,esd_water_quant,esd_water_qual,esd_nutcycle,esd_climate,esd_biodiv,landgebruik,bodemtype,chemistry,physics,biology,gw_quantity,gw_quality,sw_quantity,sw_quality,climate,macronutrient
+"Maximaliseer de inzet van vanggewassen na alle akker- en tuibouwteelten, met uitzondering na suikerbiet, zetmeelaardappel, lelie en voorafgaand aan wintergraan, en corrigeer de N-gift van het volggewas.",Grondwaterkwaliteit,"","",,++,"","","",1-24,0,0,2,0-1,1,1,"","",0,0,0,-1,2,-1,2,0,0-1
+"Maximaliseer de inzet van vanggewassen na alle akker- en tuibouwteelten, met uitzondering na suikerbiet, zetmeelaardappel, lelie en voorafgaand aan wintergraan, en zonder correctie gebruiksnorm volggewas",Grondwaterkwaliteit,"","",,+,"","","",0-16,0,0,1,0-1,1,1,"","",0,0,0,-1,1,-1,1,0,0-1
+Vaste rijpaden,"","","",,"","","","","",0-2,1-2,0-1,0-1,0-1,1,BLD,Zand,0,1,0,0,0,0,0,0,0-1
+Onderzaai,"","","",,"","","","","",-1-1,0-1,0-2,0-2,0-1,1,BLD,Zand,0,0,0,-1,2,-1,2,0,0-2
+Gewasresten achterlaten (stro),"","","",,"","","","","",0,0-1,-1-1,0-1,1-2,1,BLD,Zand,0,0,0,0,-1-0,0,-1-0,1,0-1
+Gebruikt dierlijke mest niet/nauwlijks in najaar,"","","",,"","","","","",0-1,0-1,0-1,0-1,0,0,GLD,Zand,0,0,0,0,0,0,0,0,0-1
+Vaste rijpaden,"","","",,"","","","","",0-2,1-2,0-1,0-1,0-1,1,BLD,Klei,0,1,0,0,0,0,0,0,0-1
+Onderzaai,"","","",,"","","","","",-2,-2,1,0-2,?,?,BLD,Klei,0,0,0,-1,2,-1,2,0,0-2
+Gewasresten achterlaten (stro),"","","",,"","","","","",0,0-1,-1-1,0-1,1-2,1,BLD,Klei,0,0,0,0,-1-0,0,-1-0,1,0-1
+Gebruikt dierlijke mest niet/nauwlijks in najaar,"","","",,"","","","","",0,?,0-1,0-1,0,0,GLD,Klei,0,0,0,0,0,0,0,0,0-1
