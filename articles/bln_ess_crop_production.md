@@ -15,7 +15,7 @@ addition, (regional) governments, banks, agricultural laboratories and
 other stakeholders are using this framework to monitor soil health and
 valorise appropriate soil management measures. For more information on
 the OSI, see: [the OBIC
-package](https://agrocares.github.io/BLN/articles/%5BOBIC%5D).
+package](https://nmi-agro.github.io/BLN/articles/%5BOBIC%5D).
 
 #### The Soil Assessment Framework
 
@@ -73,7 +73,7 @@ soil properties from 11 agricultural fields being owned by a research
 farm of the Wageningen University and Research, with all properties
 being estimated by data from the `National Agricultural Soil Archive` of
 the NMI, and is documented in
-[`?bln_farm_hf`](https://agrocares.github.io/BLN/reference/bln_farm_hf.md).
+[`?bln_farm_hf`](https://nmi-agro.github.io/BLN/reference/bln_farm_hf.md).
 
 For each field, the following properties are available for a 10 year
 period:
@@ -164,14 +164,14 @@ prints a selection of the dataset and calculations done on a data.table
 are extremely fast. You can learn more about data.tables at [this
 link](https://CRAN.R-project.org/package=data.table/vignettes/datatable-intro.html);
 in particular you can convert data frames to data.tables with
-[`data.table::as.data.table()`](https://rdatatable.gitlab.io/data.table/reference/as.data.table.html).
+[`data.table::as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html).
 
 ##### Running BLN for a single field
 
 The main function to evaluate the quality of the soil is
-[`bln_field()`](https://agrocares.github.io/BLN/reference/bln_field.md)
+[`bln_field()`](https://nmi-agro.github.io/BLN/reference/bln_field.md)
 as well as
-[`bln_field_dt()`](https://agrocares.github.io/BLN/reference/bln_field_dt.md).
+[`bln_field_dt()`](https://nmi-agro.github.io/BLN/reference/bln_field_dt.md).
 Both are wrappers around the the following steps (where the latter
 requires a data.table as input and the former does not):
 
@@ -315,7 +315,7 @@ The N supplying capacity is assessed via the BLN function
 crop code, the soil type, the organic matter content, the total N
 content and the CN ratio of the organic matter. For more information,
 see
-[`?bln_c_nitrogen`](https://agrocares.github.io/BLN/reference/bln_c_nitrogen.md).
+[`?bln_c_nitrogen`](https://nmi-agro.github.io/BLN/reference/bln_c_nitrogen.md).
 
 An example of this function is illustrated below for a maize and
 grassland field (crop code maize is 259, grassland is 266) with varying
@@ -374,7 +374,7 @@ lactate (A_P_AL) and either water (A_P_WA) for arable cultivation or
 0.01M CaCl₂ (A_P_CC) for grass and maize cultivations.
 
 For more details, see
-[`?bln_c_posphor`](https://agrocares.github.io/BLN/reference/bln_c_posphor.md).
+[`?bln_c_posphor`](https://nmi-agro.github.io/BLN/reference/bln_c_posphor.md).
 
 An example of this function is illustrated below for both an arable and
 a grassland field with one level of A_P_AL (being sufficient for crop
@@ -420,7 +420,7 @@ the CEC with potassium (%) and the directly available concentration of K
 as determined with a soil extraction with 0.01M CaCl₂.
 
 For more details, see
-[`?bln_c_potassium`](https://agrocares.github.io/BLN/reference/bln_c_potassium.md).
+[`?bln_c_potassium`](https://nmi-agro.github.io/BLN/reference/bln_c_potassium.md).
 
 An example of this function is illustrated below for both an arable and
 a grassland field, with a sandy texture, a fixed CEC and a fixed
@@ -460,7 +460,7 @@ Netherlands (used to estimate default S deposition rates), the organic
 matter content, and the total S content of the soil.
 
 For more details, see
-[`?bln_c_sulfur`](https://agrocares.github.io/BLN/reference/bln_c_sulfur.md).
+[`?bln_c_sulfur`](https://nmi-agro.github.io/BLN/reference/bln_c_sulfur.md).
 
 An example of this function is illustrated below for both an arable and
 a grassland field.
@@ -489,7 +489,7 @@ the CEC with potassium (%) and the directly available concentration of
 both Mg and K as determined with a soil extraction with 0.01M CaCl₂.
 
 For more details, see
-[`?bln_c_magnesium`](https://agrocares.github.io/BLN/reference/bln_c_magnesium.md).
+[`?bln_c_magnesium`](https://nmi-agro.github.io/BLN/reference/bln_c_magnesium.md).
 
 An example of this function is illustrated below for both an arable and
 a grassland field.
@@ -522,7 +522,7 @@ use (B_LU_BRP), soil type (B_SOILTYPE_AGR), soil organic matter
 (A_PH_CC).
 
 For more details, see
-[`?bln_c_ph`](https://agrocares.github.io/BLN/reference/bln_c_ph.md).
+[`?bln_c_ph`](https://nmi-agro.github.io/BLN/reference/bln_c_ph.md).
 
 An example of this function is illustrated below for both an arable and
 a grassland field over a predefined range in initial pH from 3 to 7.
@@ -563,7 +563,7 @@ unique combinations of soil type and geohydrological conditions
 controlling water availability), crop type, and groundwater level.
 
 For more details, see `bln_p_droughtstress` and
-[`?bln_p_wetnessstress`](https://agrocares.github.io/BLN/reference/bln_p_wetnessstress.md).
+[`?bln_p_wetnessstress`](https://nmi-agro.github.io/BLN/reference/bln_p_wetnessstress.md).
 
 An example of this function is illustrated below for six different soils
 varying in soil texture and prefixed variation in the groundwater
@@ -609,9 +609,9 @@ topsoil whereas the risk for sealing depends on the clay content as well
 as the organic matter content of the soil.
 
 For more details, see
-[`?bln_p_sealing`](https://agrocares.github.io/BLN/reference/bln_p_sealing.md)
+[`?bln_p_sealing`](https://nmi-agro.github.io/BLN/reference/bln_p_sealing.md)
 and
-[`?bln_p_windererosion`](https://agrocares.github.io/BLN/reference/bln_p_windererosion.md).
+[`?bln_p_windererosion`](https://nmi-agro.github.io/BLN/reference/bln_p_windererosion.md).
 
 An example of these functions is illustrated below for an arable soil
 with variable clay content for both an cropland (with organic matter
@@ -645,9 +645,9 @@ assessed using `bln_p_crumbleability` and `bln_p_aggstability` Verweij
 et al. (2023).
 
 For more details, see
-[`?bln_p_crumbleability`](https://agrocares.github.io/BLN/reference/bln_p_crumbleability.md)
+[`?bln_p_crumbleability`](https://nmi-agro.github.io/BLN/reference/bln_p_crumbleability.md)
 and
-[`?bln_p_aggstability`](https://agrocares.github.io/BLN/reference/bln_p_aggstability.md).
+[`?bln_p_aggstability`](https://nmi-agro.github.io/BLN/reference/bln_p_aggstability.md).
 
 To illustrate how both functions are evaluated, we firstly show the
 dependency of the crumbleability to varying clay content using a
@@ -800,7 +800,7 @@ For more details, see
 [`?OBIC::calc_waterretention`](https://rdrr.io/pkg/OBIC/man/calc_waterretention.html).
 Functions are copied into `bln_helpers.R`. For the implementation of the
 WHC assessment, see
-[`?bln_p_whc`](https://agrocares.github.io/BLN/reference/bln_p_whc.md).
+[`?bln_p_whc`](https://nmi-agro.github.io/BLN/reference/bln_p_whc.md).
 
 ``` r
   # estimate the plant available water in topsoil
@@ -837,7 +837,7 @@ shorter growing season and or more shallow soil working depth, the score
 can be improved.
 
 For more information of the function, see
-[`?bln_p_workability`](https://agrocares.github.io/BLN/reference/bln_p_workability.md).
+[`?bln_p_workability`](https://nmi-agro.github.io/BLN/reference/bln_p_workability.md).
 
 ##### Bulk density
 
@@ -848,7 +848,7 @@ penetration resistance, the bulk density is assessed using the function
 function commonly applied in the Netherlands. It requires as input the
 soil organic matter content (A_SOM_LOI), the clay content (A_CLAY_MI).
 For more information, see
-[`?bln_p_density`](https://agrocares.github.io/BLN/reference/bln_p_density.md).
+[`?bln_p_density`](https://nmi-agro.github.io/BLN/reference/bln_p_density.md).
 
 #### 3.3 Biological soil functions
 
@@ -871,7 +871,7 @@ bacteria and fungi, which, together with some labile organic matter, are
 decomposed by anaerobic soil microbes.
 
 For more information see
-[`?bln_b_pmn`](https://agrocares.github.io/BLN/reference/bln_b_pmn.md).
+[`?bln_b_pmn`](https://nmi-agro.github.io/BLN/reference/bln_b_pmn.md).
 
 ``` r
   # calculate the index for the potential mineralizable nitrogen pool
@@ -911,7 +911,7 @@ to soil life is negligible. A soil organic matter concentration between
 resistance.
 
 For more information see
-[`?bln_b_diseaseresistance`](https://agrocares.github.io/BLN/reference/bln_b_diseaseresistance.md).
+[`?bln_b_diseaseresistance`](https://nmi-agro.github.io/BLN/reference/bln_b_diseaseresistance.md).
 
 ![](bln_ess_crop_production_files/figure-html/unnamed-chunk-19-1.png)
 
@@ -1001,4 +1001,4 @@ Behoeve van Het Waternood-Instrumentarium*. STOWA Rapportnummer 2005-16,
 
 **Verweij S**, **Ros G**, **Fujita Y**, & **Riechelman B** (2023).
 *OBIC: Calculate the Open Bodem Index (OBI) Score*.
-<https://github.com/AgroCares/Open-Bodem-Index-Calculator>.
+<https://github.com/nmi-agro/Open-Bodem-Index-Calculator>.

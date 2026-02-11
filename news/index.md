@@ -1,5 +1,11 @@
 # Changelog
 
+## BLN 0.10.2 2026-02-11
+
+### Changed
+
+- Rename organization to `nmi-agro`
+
 ## BLN 0.10.1 2025-12-19
 
 ### Fixed
@@ -28,7 +34,7 @@
 ### Added
 
 - function
-  [`bln_format_gtclass()`](https://agrocares.github.io/BLN/reference/bln_format_gtclass.md)
+  [`bln_format_gtclass()`](https://nmi-agro.github.io/BLN/reference/bln_format_gtclass.md)
   which can be used to determine a value for B_GWL_CLASS using B_GWL_GHG
   and B_GWL_GLG
 - Dutch crop codes from BRP 2025: “Riet in een subsidiabele sloot”

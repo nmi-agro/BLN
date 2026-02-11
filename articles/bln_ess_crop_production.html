@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BLN</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AgroCares/BLN/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/nmi-agro/BLN/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -63,9 +63,9 @@
                         <h4 data-toc-skip class="author">Gerard H.
 Ros</h4>
             
-            <h4 data-toc-skip class="date">2025-12-19</h4>
+            <h4 data-toc-skip class="date">2026-02-11</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/AgroCares/BLN/blob/main/vignettes/bln_ess_crop_production.Rmd" class="external-link"><code>vignettes/bln_ess_crop_production.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/nmi-agro/BLN/blob/main/vignettes/bln_ess_crop_production.Rmd" class="external-link"><code>vignettes/bln_ess_crop_production.Rmd</code></a></small>
       <div class="d-none name"><code>bln_ess_crop_production.Rmd</code></div>
     </div>
 
@@ -593,7 +593,7 @@ because it only prints a selection of the dataset and calculations done
 on a data.table are extremely fast. You can learn more about data.tables
 at <a href="https://CRAN.R-project.org/package=data.table/vignettes/datatable-intro.html" class="external-link">this
 link</a>; in particular you can convert data frames to data.tables with
-<code><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">data.table::as.data.table()</a></code>.</p>
+<code><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">data.table::as.data.table()</a></code>.</p>
 </div>
 <div class="section level5">
 <h5 id="running-bln-for-a-single-field">Running BLN for a single field<a class="anchor" aria-label="anchor" href="#running-bln-for-a-single-field"></a>
@@ -770,7 +770,7 @@ increases with the total N present in the soil. The N supplying capacity
 at a given total N level is higher in grassland fields compared to
 arable fields.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="672"></p>
 <p>The total N supply is evaluated via a parabolic scoring function with
 an optimum of 100 kg N / ha in arable fields and 140 kg N / ha in
 grassland fields.</p>
@@ -821,7 +821,7 @@ cultivations.</p>
 and a grassland field with one level of A_P_AL (being sufficient for
 crop growth) en varying levels of A_P_CC.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="potassium-supply">Potassium supply<a class="anchor" aria-label="anchor" href="#potassium-supply"></a>
@@ -866,7 +866,7 @@ occupation of the CEC and a variable plant available K level. Note that
 the grassland yield quicker responds to the plant available levels of K
 with also a lower target value.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="sulfur-supply">Sulfur supply<a class="anchor" aria-label="anchor" href="#sulfur-supply"></a>
@@ -898,7 +898,7 @@ soil.</p>
 <p>An example of this function is illustrated below for both an arable
 and a grassland field.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="magnesium-supply">Magnesium supply<a class="anchor" aria-label="anchor" href="#magnesium-supply"></a>
@@ -924,7 +924,7 @@ concentration of both Mg and K as determined with a soil extraction with
 <p>An example of this function is illustrated below for both an arable
 and a grassland field.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="soil-acidity">Soil Acidity<a class="anchor" aria-label="anchor" href="#soil-acidity"></a>
@@ -953,7 +953,7 @@ CaCl<sub>2</sub> (A_PH_CC).</p>
 and a grassland field over a predefined range in initial pH from 3 to
 7.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="obic-indicators-not-used">OBIC indicators not used<a class="anchor" aria-label="anchor" href="#obic-indicators-not-used"></a>
@@ -998,7 +998,7 @@ levels. This is illustrated for both drought and wetness stress.
 Increasing the groundwater depth results in more drought stress
 (depending on soil texture) and less wetness stress.</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="sealing-soil-surface-and-wind-erodibility">Sealing Soil Surface and Wind Erodibility<a class="anchor" aria-label="anchor" href="#sealing-soil-surface-and-wind-erodibility"></a>
@@ -1038,7 +1038,7 @@ with variable clay content for both an cropland (with organic matter
 levels of 3.5%) and a grassland soil (with organic matter levels of
 5%).</p>
 <p><br></p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="aggregate-stability-and-crumbleability">Aggregate Stability and Crumbleability<a class="anchor" aria-label="anchor" href="#aggregate-stability-and-crumbleability"></a>
@@ -1077,7 +1077,7 @@ a soil where 100% of the CEC is occupied with a variable contribution of
 the three cations. The highest aggregate stability is found when the
 distance to the optimum is the lowest, being around a Ca occupation of
 about 85% of the CEC.</p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="subsoil-compaction">Subsoil compaction<a class="anchor" aria-label="anchor" href="#subsoil-compaction"></a>
@@ -1157,7 +1157,7 @@ stability index is corrected to the maximum index a soil can retrieve
 (the value 1). In contrast, when field observations support the
 conclusion of serious bottlenecks for aggregate stability, then the
 index declines to almost zero.</p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="water-retention-in-topsoil">Water retention in topsoil<a class="anchor" aria-label="anchor" href="#water-retention-in-topsoil"></a>
@@ -1230,7 +1230,7 @@ implementation of the WHC assessment, see <code><a href="../reference/bln_p_whc.
 changes with clay content, sand content, silt content and soil organic
 matter content. All other soil properties are assumed to be
 constant.</p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="workability">Workability<a class="anchor" aria-label="anchor" href="#workability"></a>
@@ -1286,7 +1286,7 @@ matter, are decomposed by anaerobic soil microbes.</p>
 overestimated. Therefore, a land-use dependent correction factor is
 used. The PMN index is capped at 500. Below an example of this function
 is given.</p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="disease-resistance">Disease resistance<a class="anchor" aria-label="anchor" href="#disease-resistance"></a>
@@ -1313,7 +1313,7 @@ matter to soil life is negligible. A soil organic matter concentration
 between 4% and 10% likely creates the best environment for good disease
 resistance.</p>
 <p>For more information see <code><a href="../reference/bln_b_diseaseresistance.html">?bln_b_diseaseresistance</a></code>.</p>
-<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" width="672"></p>
+<p><img src="bln_ess_crop_production_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level5">
 <h5 id="plant-parasitic-nematodes">Plant Parasitic Nematodes<a class="anchor" aria-label="anchor" href="#plant-parasitic-nematodes"></a>
@@ -1421,7 +1421,7 @@ Waternood-Instrumentarium</em>. STOWA Rapportnummer 2005-16, 61.
 Y</strong>, &amp; <strong>Riechelman B</strong> (2023).
 <em><span>OBIC</span>: <span>Calculate</span> the <span>Open</span>
 <span>Bodem</span> <span>Index</span> (<span>OBI</span>)
-<span>Score</span></em>. <a href="https://github.com/AgroCares/Open-Bodem-Index-Calculator" class="external-link">https://github.com/AgroCares/Open-Bodem-Index-Calculator</a>.
+<span>Score</span></em>. <a href="https://github.com/nmi-agro/Open-Bodem-Index-Calculator" class="external-link">https://github.com/nmi-agro/Open-Bodem-Index-Calculator</a>.
 </div>
 </div>
 </div>

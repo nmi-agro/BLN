@@ -82,13 +82,13 @@ p1
 
 The dataset contains soil properties from 29 agricultural fields and is
 documented in
-[`?bln_farm_hf`](https://agrocares.github.io/BLN/reference/bln_farm_hf.md).
+[`?bln_farm_hf`](https://nmi-agro.github.io/BLN/reference/bln_farm_hf.md).
 An overview of all variables is given below. When interested, look to
 the `summary` of the `bln_farm_hf` object.
 
 More information on the input and ouput variables are documented in a
 separate vignette
-[`vignette("bln_column_description")`](https://agrocares.github.io/BLN/articles/bln_column_description.md).
+[`vignette("bln_column_description")`](https://nmi-agro.github.io/BLN/articles/bln_column_description.md).
 
 ``` r
 
@@ -135,7 +135,7 @@ the first field given a crop rotation scheme for 11 years. This is
 basically a subset of the farm and contains all soil and field
 properties for the last 11 years, from 2012 up to 2022. We subsequently
 use the function
-[`bln_field()`](https://agrocares.github.io/BLN/reference/bln_field.md)
+[`bln_field()`](https://nmi-agro.github.io/BLN/reference/bln_field.md)
 to calculate the different soil indicators and soil scores. Note that
 here all the possible inputs are given whereas all the visual soil
 assessment observations (ending with “\_bsc”) and the management
@@ -274,13 +274,13 @@ categorial input variables for BLN.
 
 To simplify, one can also use a data.table as input. In that case use
 the function
-[`bln_field_dt()`](https://agrocares.github.io/BLN/reference/bln_field_dt.md).
+[`bln_field_dt()`](https://nmi-agro.github.io/BLN/reference/bln_field_dt.md).
 The function checks whether all desired input variables are present. By
 default is the option to calculate the C saturation with RothC switched
 off. Again, the illustration below shows the use of `bln_field_dt` to
 retrieve the BLN indicators. For the interpretation of each of the 35
 soil indicators, one can have a look at the
-[`vignette("bln_column_description")`](https://agrocares.github.io/BLN/articles/bln_column_description.md)
+[`vignette("bln_column_description")`](https://nmi-agro.github.io/BLN/articles/bln_column_description.md)
 
 ``` r
 

@@ -3,10 +3,10 @@
 ## BLN input variables
 
 The main function of the package
-[`bln_field()`](https://agrocares.github.io/BLN/reference/bln_field.md)
+[`bln_field()`](https://nmi-agro.github.io/BLN/reference/bln_field.md)
 requires as input a series of soil properties required to assess the
 soil quality. The required input columns are specified in
-[`BLN::bln_input_description`](https://agrocares.github.io/BLN/reference/bln_input_description.md)
+[`BLN::bln_input_description`](https://nmi-agro.github.io/BLN/reference/bln_input_description.md)
 and can also be seen in the table below.
 
 Note that not all parameters are required. Optional parameters incude:
