@@ -7,7 +7,7 @@ the BLN framework has been developed to evaluate the quality of soils in view of
 ## Installation
 ```R
 # Install the development version from GitHub
-remotes::install_github("https://github.com/AgroCares/BLN")
+remotes::install_github("https://github.com/nmi-agro/BLN")
 
 # Load the BLN package in your script
 library("BLN")

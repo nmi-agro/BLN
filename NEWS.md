@@ -1,3 +1,7 @@
+# BLN 0.10.2 2026-02-11
+## Changed
+* Rename organization to `nmi-agro`
+
 # BLN 0.10.1 2025-12-19
 ## Fixed
 * A function call with deprecated arguments OBIC::ind_gw_recharge()
