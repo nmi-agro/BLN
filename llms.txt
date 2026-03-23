@@ -15,7 +15,7 @@ framework can be found in the publication of [Ros et al.,
 
 ``` r
 # Install the development version from GitHub
-remotes::install_github("https://github.com/nmi-agro/BLN")
+remotes::install_github("https://github.com/AgroCares/BLN")
 
 # Load the BLN package in your script
 library("BLN")
@@ -37,212 +37,213 @@ Logo of NMI
 
 ## All functions
 
-- [`bln_add_management()`](https://nmi-agro.github.io/BLN/reference/bln_add_management.md)
+- [`bln_add_management()`](https://agrocares.github.io/BLN/reference/bln_add_management.md)
   : Estimate default values for management
-- [`bln_b_diseaseresistance()`](https://nmi-agro.github.io/BLN/reference/bln_b_diseaseresistance.md)
+- [`bln_b_diseaseresistance()`](https://agrocares.github.io/BLN/reference/bln_b_diseaseresistance.md)
   : Calculate indicator for soil resistance for soil based diseases
-- [`bln_b_pmn()`](https://nmi-agro.github.io/BLN/reference/bln_b_pmn.md)
+- [`bln_b_pmn()`](https://agrocares.github.io/BLN/reference/bln_b_pmn.md)
   : Calculate and evaluate the index for the microbial biological
   activity in the Netherlands
-- [`bln_bbwp_bw()`](https://nmi-agro.github.io/BLN/reference/bln_bbwp_bw.md)
+- [`bln_bbwp_bw()`](https://agrocares.github.io/BLN/reference/bln_bbwp_bw.md)
   : Function to calculate and evaluate the water buffering capacity of
   soils in view of water retention in soil
-- [`bln_bbwp_ngw()`](https://nmi-agro.github.io/BLN/reference/bln_bbwp_ngw.md)
+- [`bln_bbwp_ngw()`](https://agrocares.github.io/BLN/reference/bln_bbwp_ngw.md)
   : Function to calculate and evaluate the N buffering capacity of soils
   in view of water purification for groundwater quality
-- [`bln_bbwp_nsw()`](https://nmi-agro.github.io/BLN/reference/bln_bbwp_nsw.md)
+- [`bln_bbwp_nsw()`](https://agrocares.github.io/BLN/reference/bln_bbwp_nsw.md)
   : Function to calculate and evaluate the N buffering capacity of soils
   in view of water purification for surface quality
-- [`bln_bbwp_psw()`](https://nmi-agro.github.io/BLN/reference/bln_bbwp_psw.md)
+- [`bln_bbwp_psw()`](https://agrocares.github.io/BLN/reference/bln_bbwp_psw.md)
   : Function to calculate and evaluate the P buffering capacity of soils
   in view of water purification for surface quality
-- [`bln_c_cec()`](https://nmi-agro.github.io/BLN/reference/bln_c_cec.md)
+- [`bln_c_cec()`](https://agrocares.github.io/BLN/reference/bln_c_cec.md)
   : Calculate and evaluate the soil fertility based on the CEC
-- [`bln_c_magnesium()`](https://nmi-agro.github.io/BLN/reference/bln_c_magnesium.md)
+- [`bln_c_magnesium()`](https://agrocares.github.io/BLN/reference/bln_c_magnesium.md)
   : Calculate the capacity of soils to supply Magnesium for the BLN
   production function
-- [`bln_c_nitrogen()`](https://nmi-agro.github.io/BLN/reference/bln_c_nitrogen.md)
+- [`bln_c_nitrogen()`](https://agrocares.github.io/BLN/reference/bln_c_nitrogen.md)
   : Calculate the soil nitrogen supplying capacity in the Netherlands
-- [`bln_c_ph()`](https://nmi-agro.github.io/BLN/reference/bln_c_ph.md) :
-  Calculate the distance for target for soil pH in view of the BLN
+- [`bln_c_ph()`](https://agrocares.github.io/BLN/reference/bln_c_ph.md)
+  : Calculate the distance for target for soil pH in view of the BLN
   production function
-- [`bln_c_posphor()`](https://nmi-agro.github.io/BLN/reference/bln_c_posphor.md)
+- [`bln_c_posphor()`](https://agrocares.github.io/BLN/reference/bln_c_posphor.md)
   : Calculate the phosphate availability index in the Netherlands
-- [`bln_c_potassium()`](https://nmi-agro.github.io/BLN/reference/bln_c_potassium.md)
+- [`bln_c_potassium()`](https://agrocares.github.io/BLN/reference/bln_c_potassium.md)
   : Calculate the K availability index for the Netherlands
-- [`bln_c_sulfur()`](https://nmi-agro.github.io/BLN/reference/bln_c_sulfur.md)
+- [`bln_c_sulfur()`](https://agrocares.github.io/BLN/reference/bln_c_sulfur.md)
   : Calculate the capacity of soils to supply sulfur for the BLN
   production function
-- [`bln_calc_psp()`](https://nmi-agro.github.io/BLN/reference/bln_calc_psp.md)
+- [`bln_calc_psp()`](https://agrocares.github.io/BLN/reference/bln_calc_psp.md)
   : Calculate the precipitation surplus
-- [`bln_clim_cbalance()`](https://nmi-agro.github.io/BLN/reference/bln_clim_cbalance.md)
+- [`bln_clim_cbalance()`](https://agrocares.github.io/BLN/reference/bln_clim_cbalance.md)
   : Function to calculate and evaluate a default SOM balance
-- [`bln_clim_csat()`](https://nmi-agro.github.io/BLN/reference/bln_clim_csat.md)
+- [`bln_clim_csat()`](https://agrocares.github.io/BLN/reference/bln_clim_csat.md)
   : Function to evaluate the carbon saturation via max C saturation
   potential estimated via ML modelling
-- [`bln_clim_rothc()`](https://nmi-agro.github.io/BLN/reference/bln_clim_rothc.md)
+- [`bln_clim_rothc()`](https://agrocares.github.io/BLN/reference/bln_clim_rothc.md)
   : Function to evaluate the carbon saturation via RothC simulation
-- [`bln_clim_somers()`](https://nmi-agro.github.io/BLN/reference/bln_clim_somers.md)
+- [`bln_clim_somers()`](https://agrocares.github.io/BLN/reference/bln_clim_somers.md)
   : Function to evaluate the carbon saturation via SOMERS simulation on
   peat soils
-- [`bln_crops`](https://nmi-agro.github.io/BLN/reference/bln_crops.md) :
-  Linking table between crops and different functions in OBIC
-- [`bln_evaluate_logistic()`](https://nmi-agro.github.io/BLN/reference/bln_evaluate_logistic.md)
+- [`bln_crops`](https://agrocares.github.io/BLN/reference/bln_crops.md)
+  : Linking table between crops and different functions in OBIC
+- [`bln_evaluate_logistic()`](https://agrocares.github.io/BLN/reference/bln_evaluate_logistic.md)
   : Evaluate a soil quality function using the general logistic function
-- [`bln_evaluate_logistic_gaus_down()`](https://nmi-agro.github.io/BLN/reference/bln_evaluate_logistic_gaus_down.md)
+- [`bln_evaluate_logistic_gaus_down()`](https://agrocares.github.io/BLN/reference/bln_evaluate_logistic_gaus_down.md)
   : Evaluate logistically initially and gausian eventually
-- [`bln_evaluate_parabolic()`](https://nmi-agro.github.io/BLN/reference/bln_evaluate_parabolic.md)
+- [`bln_evaluate_parabolic()`](https://agrocares.github.io/BLN/reference/bln_evaluate_parabolic.md)
   : Evaluate a soil quality function using a parabolic function
-- [`bln_farm_hf`](https://nmi-agro.github.io/BLN/reference/bln_farm_hf.md)
+- [`bln_farm_hf`](https://agrocares.github.io/BLN/reference/bln_farm_hf.md)
   : An example dataset with all BLN input prepared for de Marke farm
-- [`bln_field()`](https://nmi-agro.github.io/BLN/reference/bln_field.md)
+- [`bln_field()`](https://agrocares.github.io/BLN/reference/bln_field.md)
   : Calculate the BLN score for one field
-- [`bln_field_dt()`](https://nmi-agro.github.io/BLN/reference/bln_field_dt.md)
+- [`bln_field_dt()`](https://agrocares.github.io/BLN/reference/bln_field_dt.md)
   : Calculate the BLN score for one field using a data.table as input
-- [`bln_field_optimiser()`](https://nmi-agro.github.io/BLN/reference/bln_field_optimiser.md)
+- [`bln_field_optimiser()`](https://agrocares.github.io/BLN/reference/bln_field_optimiser.md)
   : Optimize the crop rotation plan for soil quality improvement
-- [`bln_format_aer()`](https://nmi-agro.github.io/BLN/reference/bln_format_aer.md)
+- [`bln_format_aer()`](https://agrocares.github.io/BLN/reference/bln_format_aer.md)
   : Convert possible B_AER_CBS values to standardized values
-- [`bln_format_gtclass()`](https://nmi-agro.github.io/BLN/reference/bln_format_gtclass.md)
+- [`bln_format_gtclass()`](https://agrocares.github.io/BLN/reference/bln_format_gtclass.md)
   : Determine groundwater table class based on highest and lowest mean
   groundwater levels
-- [`bln_input_description`](https://nmi-agro.github.io/BLN/reference/bln_input_description.md)
+- [`bln_input_description`](https://agrocares.github.io/BLN/reference/bln_input_description.md)
   : A dataset with all input variables required by the BLN package
-- [`bln_lsw`](https://nmi-agro.github.io/BLN/reference/bln_lsw.md) :
+- [`bln_lsw`](https://agrocares.github.io/BLN/reference/bln_lsw.md) :
   Local Surface Water properties needed for BBWP functions
-- [`bln_lsw_farm_hf`](https://nmi-agro.github.io/BLN/reference/bln_lsw_farm_hf.md)
+- [`bln_lsw_farm_hf`](https://agrocares.github.io/BLN/reference/bln_lsw_farm_hf.md)
   : An example dataset with all LSW properties related to the fields of
   the Marke farm
-- [`bln_makkink`](https://nmi-agro.github.io/BLN/reference/bln_makkink.md)
+- [`bln_makkink`](https://agrocares.github.io/BLN/reference/bln_makkink.md)
   : Makkink correction factor table
-- [`bln_nut_nitrogen()`](https://nmi-agro.github.io/BLN/reference/bln_nut_nitrogen.md)
+- [`bln_nut_nitrogen()`](https://agrocares.github.io/BLN/reference/bln_nut_nitrogen.md)
   : Function to calculate and evaluate the nitrogen use efficiency in
   view of the soils' function to improve nutrient recycling
-- [`bln_nut_nue()`](https://nmi-agro.github.io/BLN/reference/bln_nut_nue.md)
+- [`bln_nut_nue()`](https://agrocares.github.io/BLN/reference/bln_nut_nue.md)
   : Function to calculate and evaluate the NUE
-- [`bln_nut_phosphorus()`](https://nmi-agro.github.io/BLN/reference/bln_nut_phosphorus.md)
+- [`bln_nut_phosphorus()`](https://agrocares.github.io/BLN/reference/bln_nut_phosphorus.md)
   : Function to calculate and evaluate the phosphorus use efficiency in
   view of the soils' function to improve nutrient recycling
-- [`bln_nut_potassium()`](https://nmi-agro.github.io/BLN/reference/bln_nut_potassium.md)
+- [`bln_nut_potassium()`](https://agrocares.github.io/BLN/reference/bln_nut_potassium.md)
   : Function to calculate and evaluate the potassium use efficiency in
   view of the soils' function to improve nutrient recycling
-- [`bln_output_description`](https://nmi-agro.github.io/BLN/reference/bln_output_description.md)
+- [`bln_output_description`](https://agrocares.github.io/BLN/reference/bln_output_description.md)
   : A dataset with all output variables generated by the BLN package
-- [`bln_p_aggstability()`](https://nmi-agro.github.io/BLN/reference/bln_p_aggstability.md)
+- [`bln_p_aggstability()`](https://agrocares.github.io/BLN/reference/bln_p_aggstability.md)
   : Calculate and evaluates the aggregate stability index based on
   occupation CEC
-- [`bln_p_compaction()`](https://nmi-agro.github.io/BLN/reference/bln_p_compaction.md)
+- [`bln_p_compaction()`](https://agrocares.github.io/BLN/reference/bln_p_compaction.md)
   : Calculate and evaluates the risk for subsoil compaction
-- [`bln_p_crumbleability()`](https://nmi-agro.github.io/BLN/reference/bln_p_crumbleability.md)
+- [`bln_p_crumbleability()`](https://agrocares.github.io/BLN/reference/bln_p_crumbleability.md)
   : Calculate and evaluate the crumbleability in view of the soils
   production function
-- [`bln_p_density()`](https://nmi-agro.github.io/BLN/reference/bln_p_density.md)
+- [`bln_p_density()`](https://agrocares.github.io/BLN/reference/bln_p_density.md)
   : Calculate the bulk density
-- [`bln_p_droughtstress()`](https://nmi-agro.github.io/BLN/reference/bln_p_droughtstress.md)
+- [`bln_p_droughtstress()`](https://agrocares.github.io/BLN/reference/bln_p_droughtstress.md)
   : Calculate and evaluate the yield depression due to drought in view
   of the capacity of soils to produce food
-- [`bln_p_sealing()`](https://nmi-agro.github.io/BLN/reference/bln_p_sealing.md)
+- [`bln_p_sealing()`](https://agrocares.github.io/BLN/reference/bln_p_sealing.md)
   : Calculate and evaluate the soil sealing risk
-- [`bln_p_waterstress()`](https://nmi-agro.github.io/BLN/reference/bln_p_waterstress.md)
+- [`bln_p_waterstress()`](https://agrocares.github.io/BLN/reference/bln_p_waterstress.md)
   : Calculate and evaluate the yield depression due to drought or
   wetness in view of the capacity of soils to produce food
-- [`bln_p_wetnessstress()`](https://nmi-agro.github.io/BLN/reference/bln_p_wetnessstress.md)
+- [`bln_p_wetnessstress()`](https://agrocares.github.io/BLN/reference/bln_p_wetnessstress.md)
   : Calculate and evaluate the yield depression due to wet conditions in
   view of the capacity of soils to produce food
-- [`bln_p_whc()`](https://nmi-agro.github.io/BLN/reference/bln_p_whc.md)
+- [`bln_p_whc()`](https://agrocares.github.io/BLN/reference/bln_p_whc.md)
   : Calculate indicators for water holding capacity in the topsoil
-- [`bln_p_windererosion()`](https://nmi-agro.github.io/BLN/reference/bln_p_windererosion.md)
+- [`bln_p_windererosion()`](https://agrocares.github.io/BLN/reference/bln_p_windererosion.md)
   : Calculate and evaluate the indicator for wind erodibility in view of
   food production
-- [`bln_p_workability()`](https://nmi-agro.github.io/BLN/reference/bln_p_workability.md)
+- [`bln_p_workability()`](https://agrocares.github.io/BLN/reference/bln_p_workability.md)
   : Calculate and evaluate the soil health for workability
-- [`bln_parms`](https://nmi-agro.github.io/BLN/reference/bln_parms.md) :
-  Table with BLN parameters being used in the package
-- [`bln_rothc()`](https://nmi-agro.github.io/BLN/reference/bln_rothc.md)
+- [`bln_parms`](https://agrocares.github.io/BLN/reference/bln_parms.md)
+  : Table with BLN parameters being used in the package
+- [`bln_rothc()`](https://agrocares.github.io/BLN/reference/bln_rothc.md)
   : RothC calculation motor
-- [`bln_rothc_event()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_event.md)
+- [`bln_rothc_event()`](https://agrocares.github.io/BLN/reference/bln_rothc_event.md)
   : Combine all EVENT data needed for RothC modelling for the
   Netherlands
-- [`bln_rothc_event_amendment()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_event_amendment.md)
+- [`bln_rothc_event_amendment()`](https://agrocares.github.io/BLN/reference/bln_rothc_event_amendment.md)
   : Calculate the monthly timing of carbon inputs for different
   fertilizer strategies for the Netherlands
-- [`bln_rothc_event_crop()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_event_crop.md)
+- [`bln_rothc_event_crop()`](https://agrocares.github.io/BLN/reference/bln_rothc_event_crop.md)
   : Calculate the crop rotation related C inputs of a field on monthly
   basis for the Netherlands
-- [`bln_rothc_field()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_field.md)
+- [`bln_rothc_field()`](https://agrocares.github.io/BLN/reference/bln_rothc_field.md)
   : Function for simple RothC simulation for grassland and cropland
   field
-- [`bln_rothc_input_amendment()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_input_amendment.md)
+- [`bln_rothc_input_amendment()`](https://agrocares.github.io/BLN/reference/bln_rothc_input_amendment.md)
   : Do check and expand amendment input table for RothC for the
   Netherlands
-- [`bln_rothc_input_crop()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_input_crop.md)
+- [`bln_rothc_input_crop()`](https://agrocares.github.io/BLN/reference/bln_rothc_input_crop.md)
   : Do check and expand crop input table for RothC for the Netherlands
-- [`bln_rothc_input_rmf()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_input_rmf.md)
+- [`bln_rothc_input_rmf()`](https://agrocares.github.io/BLN/reference/bln_rothc_input_rmf.md)
   : Estimate the rate modifying factors for the RothC modelling
-- [`bln_rothc_multicore()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_multicore.md)
+- [`bln_rothc_multicore()`](https://agrocares.github.io/BLN/reference/bln_rothc_multicore.md)
   : Function to evaluate the carbon saturation via RothC simulation on
   multiple fields using multicore processing
-- [`bln_rothc_sim()`](https://nmi-agro.github.io/BLN/reference/bln_rothc_sim.md)
+- [`bln_rothc_sim()`](https://agrocares.github.io/BLN/reference/bln_rothc_sim.md)
   : Simulate SOC evolution using Roth-C for the Netherlands
-- [`bln_scen_croprotation`](https://nmi-agro.github.io/BLN/reference/bln_scen_croprotation.md)
+- [`bln_scen_croprotation`](https://agrocares.github.io/BLN/reference/bln_scen_croprotation.md)
   : A dataset with potential crop rotation scenarios per agricultural
   economic region
-- [`bln_soiltype`](https://nmi-agro.github.io/BLN/reference/bln_soiltype.md)
+- [`bln_soiltype`](https://agrocares.github.io/BLN/reference/bln_soiltype.md)
   : Table with country specific soil types being used to evaluate soil
   quality
-- [`bln_somers`](https://nmi-agro.github.io/BLN/reference/bln_somers.md)
+- [`bln_somers`](https://agrocares.github.io/BLN/reference/bln_somers.md)
   : A dataset with meta-model results from SOMERS per unique base
   combination peat soil
-- [`bln_thresholds`](https://nmi-agro.github.io/BLN/reference/bln_thresholds.md)
+- [`bln_thresholds`](https://agrocares.github.io/BLN/reference/bln_thresholds.md)
   : Table with country specific threshold values to evaluate
   soilquality'
-- [`bln_wat_groundwater_recharge()`](https://nmi-agro.github.io/BLN/reference/bln_wat_groundwater_recharge.md)
+- [`bln_wat_groundwater_recharge()`](https://agrocares.github.io/BLN/reference/bln_wat_groundwater_recharge.md)
   : Function to calculate and evaluate the groundwater recharge in view
   of the soils' function to retain water
-- [`bln_wat_nretention_gw()`](https://nmi-agro.github.io/BLN/reference/bln_wat_nretention_gw.md)
+- [`bln_wat_nretention_gw()`](https://agrocares.github.io/BLN/reference/bln_wat_nretention_gw.md)
   : Function to calculate and evaluate the N retention in soils in view
   of water purification for groundwater quality
-- [`bln_wat_nretention_sw()`](https://nmi-agro.github.io/BLN/reference/bln_wat_nretention_sw.md)
+- [`bln_wat_nretention_sw()`](https://agrocares.github.io/BLN/reference/bln_wat_nretention_sw.md)
   : Function to calculate and evaluate the N retention in soils in view
   of water purification for surface quality
-- [`bln_wat_nrisk_gw()`](https://nmi-agro.github.io/BLN/reference/bln_wat_nrisk_gw.md)
+- [`bln_wat_nrisk_gw()`](https://agrocares.github.io/BLN/reference/bln_wat_nrisk_gw.md)
   : Function to calculate and evaluate the N leaching risks in soils in
   view of water purification for groundwater quality
-- [`bln_wat_nrunoff()`](https://nmi-agro.github.io/BLN/reference/bln_wat_nrunoff.md)
+- [`bln_wat_nrunoff()`](https://agrocares.github.io/BLN/reference/bln_wat_nrunoff.md)
   : Function to calculate and evaluate the N leaching risk in soils in
   view of water purification for surface water quality
-- [`bln_wat_pesticide()`](https://nmi-agro.github.io/BLN/reference/bln_wat_pesticide.md)
+- [`bln_wat_pesticide()`](https://agrocares.github.io/BLN/reference/bln_wat_pesticide.md)
   : Function to calculate and evaluate the pesticide retention in soils
   in view of water purification for groundwater water quality
-- [`cf_ind_importance()`](https://nmi-agro.github.io/BLN/reference/cf_ind_importance.md)
+- [`cf_ind_importance()`](https://agrocares.github.io/BLN/reference/cf_ind_importance.md)
   : Helper function to weight and correct the risk and scores
-- [`checkvar()`](https://nmi-agro.github.io/BLN/reference/checkvar.md) :
-  Select the correct boundary values (min and max) for a given parameter
-- [`ind_workability()`](https://nmi-agro.github.io/BLN/reference/ind_workability.md)
+- [`checkvar()`](https://agrocares.github.io/BLN/reference/checkvar.md)
+  : Select the correct boundary values (min and max) for a given
+  parameter
+- [`ind_workability()`](https://agrocares.github.io/BLN/reference/ind_workability.md)
   : Calculate indicator for workability
-- [`pF_curve()`](https://nmi-agro.github.io/BLN/reference/pF_curve.md) :
-  Water retention curve
-- [`pFpara_class()`](https://nmi-agro.github.io/BLN/reference/pFpara_class.md)
+- [`pF_curve()`](https://agrocares.github.io/BLN/reference/pF_curve.md)
+  : Water retention curve
+- [`pFpara_class()`](https://agrocares.github.io/BLN/reference/pFpara_class.md)
   : Parameter estimation based on class of Staringreeks (Tabel 3, Wosten
   2001)
-- [`pFpara_ptf_Wosten1999()`](https://nmi-agro.github.io/BLN/reference/pFpara_ptf_Wosten1999.md)
+- [`pFpara_ptf_Wosten1999()`](https://agrocares.github.io/BLN/reference/pFpara_ptf_Wosten1999.md)
   : Estimate water retention curve parameters based on Wosten 1999
-- [`pFpara_ptf_Wosten2001()`](https://nmi-agro.github.io/BLN/reference/pFpara_ptf_Wosten2001.md)
+- [`pFpara_ptf_Wosten2001()`](https://agrocares.github.io/BLN/reference/pFpara_ptf_Wosten2001.md)
   : Estimate water retention curve parameters based on Wosten 2001
-- [`plot_bln_boxplot()`](https://nmi-agro.github.io/BLN/reference/plot_bln_boxplot.md)
+- [`plot_bln_boxplot()`](https://agrocares.github.io/BLN/reference/plot_bln_boxplot.md)
   : Plot boxplots for BLN indicators and scores for a group of fields
-- [`plot_bln_map()`](https://nmi-agro.github.io/BLN/reference/plot_bln_map.md)
+- [`plot_bln_map()`](https://agrocares.github.io/BLN/reference/plot_bln_map.md)
   : Plot a BLN score or indicator on a map
-- [`plot_bln_rothc_ts()`](https://nmi-agro.github.io/BLN/reference/plot_bln_rothc_ts.md)
+- [`plot_bln_rothc_ts()`](https://agrocares.github.io/BLN/reference/plot_bln_rothc_ts.md)
   : Function to plot simple RothC simulation time series for a single
   field
-- [`rothc_initialise()`](https://nmi-agro.github.io/BLN/reference/rothc_initialise.md)
+- [`rothc_initialise()`](https://agrocares.github.io/BLN/reference/rothc_initialise.md)
   : Function for initializing the RothC model
-- [`rothc_parallel()`](https://nmi-agro.github.io/BLN/reference/rothc_parallel.md)
+- [`rothc_parallel()`](https://agrocares.github.io/BLN/reference/rothc_parallel.md)
   : function to run RothC parallel for a series of fields
-- [`rothc_scenario()`](https://nmi-agro.github.io/BLN/reference/rothc_scenario.md)
+- [`rothc_scenario()`](https://agrocares.github.io/BLN/reference/rothc_scenario.md)
   : Function to prepare inputs for various scenarios with RothC
-- [`wf()`](https://nmi-agro.github.io/BLN/reference/wf.md) : Helper
+- [`wf()`](https://agrocares.github.io/BLN/reference/wf.md) : Helper
   function to weight and correct the risk and scores
 
 # Articles
@@ -250,9 +251,9 @@ Logo of NMI
 ### All vignettes
 
 - [Description of the input and output for
-  BLN](https://nmi-agro.github.io/BLN/articles/bln_column_description.md):
+  BLN](https://agrocares.github.io/BLN/articles/bln_column_description.md):
 - [BLN assessment for crop
-  production](https://nmi-agro.github.io/BLN/articles/bln_ess_crop_production.md):
-- [bln_ess_groundwater](https://nmi-agro.github.io/BLN/articles/bln_ess_groundwater.md):
+  production](https://agrocares.github.io/BLN/articles/bln_ess_crop_production.md):
+- [bln_ess_groundwater](https://agrocares.github.io/BLN/articles/bln_ess_groundwater.md):
 - [BLN
-  introduction](https://nmi-agro.github.io/BLN/articles/bln_intro.md):
+  introduction](https://agrocares.github.io/BLN/articles/bln_intro.md):

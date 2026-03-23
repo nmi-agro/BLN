@@ -82,13 +82,13 @@ p1
 
 The dataset contains soil properties from 29 agricultural fields and is
 documented in
-[`?bln_farm_hf`](https://nmi-agro.github.io/BLN/reference/bln_farm_hf.md).
+[`?bln_farm_hf`](https://agrocares.github.io/BLN/reference/bln_farm_hf.md).
 An overview of all variables is given below. When interested, look to
 the `summary` of the `bln_farm_hf` object.
 
 More information on the input and ouput variables are documented in a
 separate vignette
-[`vignette("bln_column_description")`](https://nmi-agro.github.io/BLN/articles/bln_column_description.md).
+[`vignette("bln_column_description")`](https://agrocares.github.io/BLN/articles/bln_column_description.md).
 
 ``` r
 
@@ -135,7 +135,7 @@ the first field given a crop rotation scheme for 11 years. This is
 basically a subset of the farm and contains all soil and field
 properties for the last 11 years, from 2012 up to 2022. We subsequently
 use the function
-[`bln_field()`](https://nmi-agro.github.io/BLN/reference/bln_field.md)
+[`bln_field()`](https://agrocares.github.io/BLN/reference/bln_field.md)
 to calculate the different soil indicators and soil scores. Note that
 here all the possible inputs are given whereas all the visual soil
 assessment observations (ending with “\_bsc”) and the management
@@ -274,13 +274,13 @@ categorial input variables for BLN.
 
 To simplify, one can also use a data.table as input. In that case use
 the function
-[`bln_field_dt()`](https://nmi-agro.github.io/BLN/reference/bln_field_dt.md).
+[`bln_field_dt()`](https://agrocares.github.io/BLN/reference/bln_field_dt.md).
 The function checks whether all desired input variables are present. By
 default is the option to calculate the C saturation with RothC switched
 off. Again, the illustration below shows the use of `bln_field_dt` to
 retrieve the BLN indicators. For the interpretation of each of the 35
 soil indicators, one can have a look at the
-[`vignette("bln_column_description")`](https://nmi-agro.github.io/BLN/articles/bln_column_description.md)
+[`vignette("bln_column_description")`](https://agrocares.github.io/BLN/articles/bln_column_description.md)
 
 ``` r
 
@@ -375,14 +375,14 @@ knitr::kable(out.melt[,.(ID,ESS = soil_ESD,description=tsoil_ESD,score = shi)],
 |   1 | s_bln_esd_clim    | ESS climate mitigation    |  0.73 |
 |   1 | s_bln_esd_nut     | ESS nutrient cycling      |  0.63 |
 |   1 | s_bln_esd_prod    | ESS crop production       |  0.79 |
-|   1 | s_bln_esd_water   | ESS water                 |  0.50 |
+|   1 | s_bln_esd_water   | ESS water                 |  0.46 |
 |   1 | s_bln_prod_b      | crop production biology   |  1.00 |
 |   1 | s_bln_prod_c      | crop production chemistry |  0.69 |
-|   1 | s_bln_gw_quality  | groundwater quality       |  0.41 |
+|   1 | s_bln_gw_quality  | groundwater quality       |  0.28 |
 |   1 | s_bln_gw_quantity | groundwater quantity      |  0.29 |
 |   1 | s_bln_prod_p      | crop production physics   |  0.77 |
 |   1 | s_bln_sw_quality  | surfacewater quality      |  0.77 |
-|   1 | s_bln_total       | BLN total score           |  0.66 |
+|   1 | s_bln_total       | BLN total score           |  0.65 |
 
 BLN scores for field 1
 

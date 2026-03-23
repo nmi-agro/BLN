@@ -95,6 +95,6 @@ B_N_RT = NA_real_,
 B_N_RT_SD = NA_real_,
 penalty = TRUE
 )
-#> [1] 0.46
+#> [1] 0.43
 
 ```
