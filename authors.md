@@ -19,17 +19,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/AgroCares/BLN/blob/v0.10.1/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/nmi-agro/BLN/blob/main/DESCRIPTION)
 
 Ros G, Verweij S, Fujita Y, van Dam N, Riechelman B (2026). *BLN:
 Calculate the Soil Quality Assessment Score using the Dutch BLN
-framework*. R package version 0.10.1,
-<https://github.com/AgroCares/BLN>.
+framework*. R package version 0.10.3, <https://github.com/nmi-agro/BLN>.
 
     @Manual{,
       title = {BLN: Calculate the Soil Quality Assessment Score using the Dutch BLN framework},
       author = {Gerard Ros and Sven Verweij and Yuki Fujita and Noud {van Dam} and Brent Riechelman},
       year = {2026},
-      note = {R package version 0.10.1},
-      url = {https://github.com/AgroCares/BLN},
+      note = {R package version 0.10.3},
+      url = {https://github.com/nmi-agro/BLN},
     }

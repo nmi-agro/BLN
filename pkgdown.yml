@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
@@ -6,7 +6,7 @@ articles:
   bln_ess_crop_production: bln_ess_crop_production.html
   bln_ess_groundwater: bln_ess_groundwater.html
   bln_intro: bln_intro.html
-last_built: 2026-03-23T09:43Z
+last_built: 2026-07-03T08:52Z
 urls:
-  reference: https://agrocares.github.io/BLN/reference
-  article: https://agrocares.github.io/BLN/articles
+  reference: https://nmi-agro.github.io/BLN/reference
+  article: https://nmi-agro.github.io/BLN/articles

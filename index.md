@@ -14,8 +14,9 @@ framework can be found in the publication of [Ros et al.,
 ## Installation
 
 ``` r
+
 # Install the development version from GitHub
-remotes::install_github("https://github.com/AgroCares/BLN")
+remotes::install_github("https://github.com/nmi-agro/BLN")
 
 # Load the BLN package in your script
 library("BLN")

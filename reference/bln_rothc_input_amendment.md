@@ -30,5 +30,5 @@ properties involved.
 To run this function, the dt requires as input:"P_NAME",
 "year","month","P_OM","P_HC","p_p2o5", and "P_DOSE" if dt is NULL, then
 the amendment input will be prepared using function
-[rothc_scenario](https://agrocares.github.io/BLN/reference/rothc_scenario.md)
+[rothc_scenario](https://nmi-agro.github.io/BLN/reference/rothc_scenario.md)
 using scenario 'BAU'

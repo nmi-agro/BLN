@@ -11,7 +11,10 @@ bln_crops
 
 ## Format
 
-A data.frame with 521 rows and 8 columns:
+An object of class `data.table` (inherits from `data.frame`) with 532
+rows and 10 columns.
+
+## Details
 
 - crop_code:
 

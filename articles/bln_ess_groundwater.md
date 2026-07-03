@@ -47,6 +47,7 @@ HELP codes relate to the water needs of types of landuse.
 See examples of these BLN functions below.
 
 ``` r
+
 water_recharge <- bln_wat_groundwater_recharge(
       ID = 15,
       B_LU_BRP = 259,
@@ -121,7 +122,7 @@ Because this function scores a risk, a poor score does not necessarily
 mean that groundwater is or will be contaminated as the function does
 not take management or actual precipitation into account. The function
 uses
-[`BLN::bln_calc_psp`](https://agrocares.github.io/BLN/reference/bln_calc_psp.md)
+[`BLN::bln_calc_psp`](https://nmi-agro.github.io/BLN/reference/bln_calc_psp.md)
 to determine a precipitation surplus, this depends on the cultivated
 crop and whether green manure was grown. The other driving variable for
 this indicator is soil organic matter content. van den Dool et al.
@@ -134,8 +135,7 @@ described by Tiktak et al. (2006).
 ## References
 
 **Ros G** & **Verweij S** (2023). *Calculator for BedrijfsBodemWaterPlan
-(BBWP)*.
-<https://github.com/AgroCares/BedrijfsBodemWaterPlanCalculator>.
+(BBWP)*. <https://github.com/nmi-agro/BedrijfsBodemWaterPlanCalculator>.
 
 **Tiktak A**, **Boesten JJTI**, **Linden AMA van der**, & **Vanclooster
 M** (2006). *[Mapping Ground Water Vulnerability to Pesticide Leaching
@@ -156,4 +156,4 @@ Nutriënten Management Instituut BV.
 
 **Verweij S**, **Ros G**, **Fujita Y**, & **Riechelman B** (2023).
 *OBIC: Calculate the Open Bodem Index (OBI) Score*.
-<https://github.com/AgroCares/Open-Bodem-Index-Calculator>.
+<https://github.com/nmi-agro/Open-Bodem-Index-Calculator>.

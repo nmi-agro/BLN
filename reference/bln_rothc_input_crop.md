@@ -37,5 +37,5 @@ matter content, kg/ha), B_LU_EOM_RESIDUE (the effective organic matter
 content for crop residues, kg/ha), and the B_LU_HC (the humification
 coeffient,-). if dt is NULL, then the crop input will be prepared using
 function
-[rothc_scenario](https://agrocares.github.io/BLN/reference/rothc_scenario.md)
+[rothc_scenario](https://nmi-agro.github.io/BLN/reference/rothc_scenario.md)
 using scenario 'BAU'

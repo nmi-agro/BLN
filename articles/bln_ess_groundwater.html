@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>bln_ess_groundwater • BLN</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="bln_ess_groundwater">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BLN</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AgroCares/BLN/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/nmi-agro/BLN/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -62,7 +62,7 @@
       <h1>bln_ess_groundwater</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AgroCares/BLN/blob/v0.10.1/vignettes/bln_ess_groundwater.Rmd" class="external-link"><code>vignettes/bln_ess_groundwater.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/nmi-agro/BLN/blob/main/vignettes/bln_ess_groundwater.Rmd" class="external-link"><code>vignettes/bln_ess_groundwater.Rmd</code></a></small>
       <div class="d-none name"><code>bln_ess_groundwater.Rmd</code></div>
     </div>
 
@@ -185,11 +185,9 @@ function does not take management or actual precipitation into account.
 The function uses <code><a href="../reference/bln_calc_psp.html">BLN::bln_calc_psp</a></code> to determine a
 precipitation surplus, this depends on the cultivated crop and whether
 green manure was grown. The other driving variable for this indicator is
-soil organic matter content. <span class="citation">van den Dool et al.
-(2021)</span> describe the function in more detail and describe a
-demonstration in practice. They based the development of the function on
-the formula described by <span class="citation">Tiktak et al.
-(2006)</span>.</p>
+soil organic matter content. <span class="citation"><span class="nocase">van den Dool et al.</span> (2021)</span> describe the
+function in more detail and describe a demonstration in practice. They
+based the development of the function on the formula described by <span class="citation">Tiktak et al. (2006)</span>.</p>
 <p><img src="bln_ess_groundwater_files/figure-html/pesticide_demo-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2 unnumbered">
@@ -199,7 +197,7 @@ the formula described by <span class="citation">Tiktak et al.
 <div id="ref-bbwp2023" class="csl-entry">
 <strong>Ros G</strong> &amp; <strong>Verweij S</strong> (2023).
 <em>Calculator for <span>BedrijfsBodemWaterPlan</span>
-(<span>BBWP</span>)</em>. <a href="https://github.com/AgroCares/BedrijfsBodemWaterPlanCalculator" class="external-link">https://github.com/AgroCares/BedrijfsBodemWaterPlanCalculator</a>.
+(<span>BBWP</span>)</em>. <a href="https://github.com/nmi-agro/BedrijfsBodemWaterPlanCalculator" class="external-link">https://github.com/nmi-agro/BedrijfsBodemWaterPlanCalculator</a>.
 </div>
 <div id="ref-Tiktak2006" class="csl-entry">
 <strong>Tiktak A</strong>, <strong>Boesten JJTI</strong>, <strong>Linden
@@ -216,8 +214,9 @@ de <span>HELP</span>-Tabellen Ten Behoeve van Het
 Waternood-Instrumentarium</em>. STOWA Rapportnummer 2005-16, 61.
 </div>
 <div id="ref-vandenDool2021" class="csl-entry">
-<strong>van den Dool K</strong>, <strong>Ros GH</strong>, <strong>Geurts
-JJ</strong>, &amp; <strong>Loon AH van</strong> (2021). <em><a href="https://www.nmi-agro.nl/2022/07/18/pilot-open-bodemindex/" class="external-link">Pilot
+<span class="nocase"><strong>van den Dool K</strong>, <strong>Ros
+GH</strong>, <strong>Geurts JJ</strong>, &amp; <strong>Loon AH
+van</strong></span> (2021). <em><a href="https://www.nmi-agro.nl/2022/07/18/pilot-open-bodemindex/" class="external-link">Pilot
 Open Bodemindex: Een Verkenning Naar de Bijdrage van de Bodem Aan
 Grondwaterkwaliteit</a></em>. Nutriënten Management Instituut BV.
 </div>
@@ -226,7 +225,7 @@ Grondwaterkwaliteit</a></em>. Nutriënten Management Instituut BV.
 Y</strong>, &amp; <strong>Riechelman B</strong> (2023).
 <em><span>OBIC</span>: <span>Calculate</span> the <span>Open</span>
 <span>Bodem</span> <span>Index</span> (<span>OBI</span>)
-<span>Score</span></em>. <a href="https://github.com/AgroCares/Open-Bodem-Index-Calculator" class="external-link">https://github.com/AgroCares/Open-Bodem-Index-Calculator</a>.
+<span>Score</span></em>. <a href="https://github.com/nmi-agro/Open-Bodem-Index-Calculator" class="external-link">https://github.com/nmi-agro/Open-Bodem-Index-Calculator</a>.
 </div>
 </div>
 </div>
