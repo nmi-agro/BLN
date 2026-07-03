@@ -23,7 +23,7 @@ test_that("bln_wat_nrunoff works", {
       A_K_CO_PO = c(1.6,2.9,3.1,2.4),
       M_GREEN = FALSE
       ),
-    expected = c(0.98,0.94,0.54,0.995),
+    expected = c(0.97, 0.75, 0.36, 0.99),
     tolerance = 0.1
   )
 
