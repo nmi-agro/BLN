@@ -53,8 +53,4 @@ test_that("bln_wat_nrunoff works", {
     expected = c(0.976,0.91,0.65,0.99),
     tolerance = 0.1
   )
-
-
-
-
 })

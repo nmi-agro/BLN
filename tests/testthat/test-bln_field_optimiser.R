@@ -150,7 +150,7 @@ test_that("bln_field works", {
 
   # test for colnames
   expect_named(
-   object = d1[c(1, 25, 37, 85, 125, 155)],
+   object = d1[,c(1, 25, 37, 85, 125, 155)],
    expected = c("ID", "bld_arable_int_s_esd_nut_hs", "bld_arable_prot_s_esd_clim_hs",
             "bld_int_s_bln_prod_c_hs", "current_s_bln_prod_p_hs", 
             "sms_permanent_s_esd_nut_hs")
