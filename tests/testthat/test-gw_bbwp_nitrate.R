@@ -57,7 +57,7 @@ test_that("bln_bbwp_ngw works", {
       B_N_RT_SD = NA_real_,
       penalty = TRUE
     ),
-    expected = c(0.51,0.5,0.49,0.46,0.44,0.4,0.38,0.36,0.34,0.33),
+    expected = c(0.48, 0.47, 0.46, 0.44, 0.42, 0.39, 0.37, 0.35, 0.33, 0.32),
     tolerance = 0.01
   )
 
@@ -76,7 +76,7 @@ test_that("bln_bbwp_ngw works", {
       B_N_RT_SD = NA_real_,
       penalty = TRUE
     ),
-    expected = c(0.32,0.28,0.21,0.14,0.10,0.08,0.08,0.08,0.08,0.52),
+    expected = c(0.31, 0.27, 0.21, 0.14, 0.10, 0.08, 0.08, 0.08, 0.08, 0.52),
     tolerance = 0.01
   )
 

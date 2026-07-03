@@ -1,3 +1,17 @@
+# BLN 0.10.3 2026-07-03
+## Added
+* New cultivation codes for BRP 2026:
+  * Anna Paulowna (7136)
+  * Notenbomen, hazelnoot (7139)
+  * Notenbomen, walnoot (7193)
+  * Notenbomen, Overig (7194)
+  * Bosui (7195)
+  * Lente-ui (7196)
+  * Bamboe (7197)
+
+## Changed
+* Adjusted unit test expectatoins to match with updates to `OBIC::nleach_table`
+
 # BLN 0.10.2 2026-02-11
 ## Changed
 * Rename organization to `nmi-agro`

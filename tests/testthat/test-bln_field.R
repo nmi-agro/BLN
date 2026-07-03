@@ -147,23 +147,31 @@ test_that("bln_field works", {
                   mc = FALSE)
 
   # test for dimensions dataset
-  expect_equal(dim(d1), expected = c(5,49), tolerance = 0.1 )
+  expect_shape(d1, dim = c(5, 49))
 
   # test for colnames
-  cols <- c("ID","i_b_di","i_b_sf","i_c_k","i_c_mg","i_c_n","i_c_p","i_c_ph","i_c_s","i_clim_csat"  ,"i_clim_osb","i_clim_rothc", "i_gw_gwr","i_gw_ngw","i_gw_nlea","i_gw_nret","i_gw_pest",
-            "i_gw_wb","i_nut_k","i_nut_n","i_nut_nue","i_nut_p","i_p_as","i_p_co","i_p_cr","i_p_ds","i_p_du","i_p_ro","i_p_se","i_p_whc","i_p_wo","i_p_ws","i_sw_nret","i_sw_nro",
-            "i_sw_nsw","i_sw_psw",'s_bln_esd_clim','s_bln_esd_nut', 's_bln_esd_prod', 's_bln_esd_water', 's_bln_prod_b', 's_bln_prod_c', 's_bln_clim',
-            's_bln_gw_quality', 's_bln_gw_quantity', 's_bln_nut', 's_bln_prod_p', 's_bln_sw_quality', 's_bln_total')
-  expect_equal(colnames(d1), expected = cols, tolerance = 0.1 )
+  expect_named(
+    object = d1,
+     expected = c("ID", "i_b_di", "i_b_sf", "i_c_k", "i_c_mg", "i_c_n", "i_c_p",
+      "i_c_ph", "i_c_s", "i_clim_csat"  , "i_clim_osb", "i_clim_rothc",
+      "i_gw_gwr", "i_gw_ngw", "i_gw_nlea", "i_gw_nret", "i_gw_pest",
+      "i_gw_wb", "i_nut_k", "i_nut_n", "i_nut_nue", "i_nut_p", "i_p_as",
+      "i_p_co", "i_p_cr", "i_p_ds", "i_p_du", "i_p_ro", "i_p_se", "i_p_whc",
+      "i_p_wo", "i_p_ws", "i_sw_nret", "i_sw_nro", "i_sw_nsw", "i_sw_psw",
+      's_bln_esd_clim','s_bln_esd_nut', 's_bln_esd_prod', 's_bln_esd_water',
+      's_bln_prod_b', 's_bln_prod_c', 's_bln_clim', 's_bln_gw_quality',
+      's_bln_gw_quantity', 's_bln_nut', 's_bln_prod_p', 's_bln_sw_quality',
+      's_bln_total')
+          )
 
   # test BLN score
-  expect_equal(d1$s_bln_total, expected = c(0.74,0.75,0.72,0.61,0.68), tolerance = 0.01)
+  expect_equal(d1$s_bln_total, expected = c(0.74, 0.74, 0.72, 0.61, 0.67), tolerance = 0.01)
 
   # test BLN soil quality score ESD production
   expect_equal(d1$s_bln_esd_prod, expected = c(0.8,0.8,0.82,0.8,0.79), tolerance = 0.01)
 
   # test BLN soil quality score ESD water quality
-  expect_equal(d1$s_bln_esd_water, expected = c(0.72,0.68,0.56,0.35,0.50), tolerance = 0.01)
+  expect_equal(d1$s_bln_esd_water, expected = c(0.69, 0.65, 0.53, 0.33, 0.46), tolerance = 0.01)
 
   # test BLN soil quality score ESD climate
   expect_equal(d1$s_bln_esd_clim, expected = c(0.88,0.88,0.87,0.73,0.83), tolerance = 0.01)

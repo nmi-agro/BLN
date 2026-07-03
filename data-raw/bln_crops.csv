@@ -522,5 +522,12 @@ crop_code,crop_name,crop_cat1,bln_country,B_LU,B_LU_EOM,B_LU_EOM_RESIDUE,B_LU_HC
 7131,"rogge, groenbemesting, vanggewas",arable,NL,nl_7131,850,0,0.31,granen,bladrammenas
 7134,"riet in water, anders dan een subsidiabele sloot",nature,NL,nl_7134,0,0,0.31,grasland met herinzaai,overig
 7135,riet in een subsidiabele sloot,nature,NL,nl_7135,0,0,0.31,grasland met herinzaai,overig
+7136,anna paulowna,arable,NL,nl_7136,0,0,0.81,boomteelt,overig
 7137,"bonen, overig",arable,NL,nl_7137,650,0,0.24,zomergroenten,tuinbonen
 7138,palmkool,arable,NL,nl_7138,850,0,0.32,zomergroenten,bloemkool
+7139,"notenbomen, hazelnoot",arable,NL,nl_7139,0,0,0.81,boomteelt,fruit
+7193,"notenbomen, walnoot",arable,NL,nl_7193,0,0,0.81,boomteelt,fruit
+7194,"notenbomen, overig",arable,NL,nl_7194,0,0,0.81,boomteelt,fruit
+7195,bosui,arable,NL,nl_7195,300,0,0.24,zomergroenten,zaaiuien
+7196,lente-ui,arable,NL,nl_7196,300,0,0.24,zomergroenten,zaaiuien
+7197,bamboe,arable,NL,nl_7197,0,0,0.81,overig boomteelt,grasland

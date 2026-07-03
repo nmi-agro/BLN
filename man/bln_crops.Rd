@@ -5,7 +5,15 @@
 \alias{bln_crops}
 \title{Linking table between crops and different functions in OBIC}
 \format{
-A data.frame with 521 rows and 8 columns:
+An object of class \code{data.table} (inherits from \code{data.frame}) with 532 rows and 10 columns.
+}
+\usage{
+bln_crops
+}
+\description{
+This table helps to link the different crops in the OBIC functions with the crops selected by the user
+}
+\details{
 \describe{
   \item{crop_code}{The BRP gewascode of the crop}
   \item{crop_name}{The name of the crop, in lower case}
@@ -18,11 +26,5 @@ A data.frame with 521 rows and 8 columns:
   \item{B_LU_WATERSTRESS_OBIC}{A crop category used in OBIC to express sensitivity to water stress}
   \item{B_LU_MAKKINK}{A crop category used to link crop to Makkink correction factor to estimate actual evaporation}
 }
-}
-\usage{
-bln_crops
-}
-\description{
-This table helps to link the different crops in the OBIC functions with the crops selected by the user
 }
 \keyword{datasets}
