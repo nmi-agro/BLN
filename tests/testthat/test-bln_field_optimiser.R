@@ -146,12 +146,15 @@ test_that("bln_field works", {
                             foptim = list(scenarios = NULL, b_lu_brp = NULL, outputtype = 'scores',mc = TRUE,runrothc = TRUE))
 
   # test for dimensions dataset
-  expect_equal(dim(d1), expected = c(1,157), tolerance = 0.1 )
+  expect_shape(d1, dim = c(1, 157))
 
   # test for colnames
-  cols <- c("ID","bld_arable_int_s_esd_nut_hs","bld_arable_prot_s_esd_clim_hs",
-            "bld_int_s_bln_prod_c_hs","current_s_bln_prod_p_hs","sms_permanent_s_esd_nut_hs")
-  expect_equal(colnames(d1)[c(1,25,37,85,125,155)], expected = cols, tolerance = 0.1 )
+  expect_named(
+   object = d1[c(1, 25, 37, 85, 125, 155)],
+   expected = c("ID", "bld_arable_int_s_esd_nut_hs", "bld_arable_prot_s_esd_clim_hs",
+            "bld_int_s_bln_prod_c_hs", "current_s_bln_prod_p_hs", 
+            "sms_permanent_s_esd_nut_hs")
+  )
 
   # test BLN score
   expect_equal(d1$bld_arable_int_s_bln_total_hs, expected = c(0.66), tolerance = 0.01)
@@ -216,17 +219,18 @@ test_that("bln_field works", {
                             foptim = list(scenarios = NULL, b_lu_brp = NULL, outputtype = 'rotation',mc = TRUE,runrothc = TRUE))
 
   # test for dimensions dataset
-  expect_equal(dim(d1), expected = c(1,14), tolerance = 0.1 )
+  expect_shape(d1, dim = c(1, 14))
 
   # test for colnames
-  cols <- c("ID",  "s_bln_clim_blu","s_bln_esd_clim_blu","s_bln_esd_nut_blu",
-            "s_bln_esd_prod_blu","s_bln_esd_water_blu","s_bln_gw_quality_blu" , "s_bln_gw_quantity_blu",
-            "s_bln_nut_blu","s_bln_prod_b_blu","s_bln_prod_c_blu","s_bln_prod_p_blu",
-            "s_bln_sw_quality_blu" , "s_bln_total_blu"  )
-  expect_equal(colnames(d1), expected = cols, tolerance = 0.1 )
+  expect_named(
+    object = d1,
+     expected = c("ID", "s_bln_clim_blu", "s_bln_esd_clim_blu", "s_bln_esd_nut_blu",
+            "s_bln_esd_prod_blu", "s_bln_esd_water_blu", "s_bln_gw_quality_blu",
+            "s_bln_gw_quantity_blu", "s_bln_nut_blu", "s_bln_prod_b_blu",
+            "s_bln_prod_c_blu", "s_bln_prod_p_blu", "s_bln_sw_quality_blu",
+            "s_bln_total_blu")
+          )
 
   # test BLN score
-  expect_equal(d1$s_bln_prod_c_blu , expected = c('sms_permanent'), tolerance = 0.01)
-
-
+  expect_equal(d1$s_bln_prod_c_blu, expected = c('sms_permanent'))
 })
