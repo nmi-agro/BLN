@@ -62,9 +62,6 @@
                                    B_LU_MAKKINK
                                    )]
 
-  # replace löss with loess
-  bln_crops[grepl('löss',crop_name), crop_name := gsub('löss','loess',crop_name)]
-
   # switch to english categories
   bln_crops[crop_cat1=='akkerbouw', crop_cat1 := 'arable']
   bln_crops[crop_cat1=='mais', crop_cat1 := 'maize']
