@@ -9,6 +9,9 @@
   * Lente-ui (7196)
   * Bamboe (7197)
 
+## Changed
+* Adjusted unit test expectatoins to match with updates to `OBIC::nleach_table`
+
 # BLN 0.10.2 2026-02-11
 ## Changed
 * Rename organization to `nmi-agro`
